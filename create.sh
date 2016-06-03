@@ -16,10 +16,17 @@ function create {
 		CONFIG="-c ruby.json"
 		;;
 	go)		
+		CONFIG="-t modules/swagger-codegen/src/main/resources/go"
 		ADD_PARAMS="-DpackageName=graphhopper"
 		;;
 	swift)
 		CONFIG="-c swift.json"
+		;;
+	javascript)
+		CONFIG="-t modules/swagger-codegen/src/main/resources/Javascript"
+		;;
+	haskell)
+		CONFIG="-t modules/swagger-codegen/src/main/resources/haskell-servant"
 		;;
   	*)
 		;;  
@@ -40,6 +47,7 @@ else
   create java
   create php
   create ruby
+  create sinatra
   create python
   create perl
   create scala
@@ -47,8 +55,13 @@ else
   create csharp
   create swift
   create objc
-  
+  create dart
+  create nodejs
+  create qt5cpp
+    
   # cannot make it working?
+  # create javascript
   # create go
-  # create nodejs-server
+  # create clojure
+  # create haskell
 fi
