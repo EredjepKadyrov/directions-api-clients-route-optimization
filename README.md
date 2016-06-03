@@ -5,7 +5,7 @@ This project creates API clients automatically from [our swagger specification](
 Please see the successfully created one in the subfolders.
 
 language  |  tested? | alternative
-----------:----------:-------------
+:---------|:---------|:-------------
 java      |  no      | [official client](https://github.com/graphhopper/directions-api-java-client)
 javascript|  no      | [official client](https://github.com/graphhopper/directions-api-js-client)
 python    |  no      |
@@ -19,10 +19,10 @@ objc      |  no      |
 tizen     |  no      |
 
 
-# Update all clients
+### Update all clients
 
 ./create.sh
 
-# Update one client of your choice
+### Update one client of your choice
 
 ./create.sh [yourlanguage]
