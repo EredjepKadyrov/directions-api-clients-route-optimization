@@ -28,6 +28,7 @@ void
 SWGService::init() {
     id = new QString("");
     type = new QString("");
+    priority = 0;
     name = new QString("");
     address = new SWGAddress();
     duration = 0L;
@@ -46,6 +47,7 @@ SWGService::cleanup() {
     if(type != NULL) {
         delete type;
     }
+    
     if(name != NULL) {
         delete name;
     }
@@ -91,6 +93,7 @@ void
 SWGService::fromJsonObject(QJsonObject &pJson) {
     setValue(&id, pJson["id"], "QString", "QString");
     setValue(&type, pJson["type"], "QString", "QString");
+    setValue(&priority, pJson["priority"], "qint32", "");
     setValue(&name, pJson["name"], "QString", "QString");
     setValue(&address, pJson["address"], "SWGAddress", "SWGAddress");
     setValue(&duration, pJson["duration"], "qint64", "");
@@ -126,6 +129,7 @@ SWGService::asJsonObject() {
     
     
     
+    obj->insert("priority", QJsonValue(priority));
     
     
     toJsonValue(QString("name"), name, obj, QString("QString"));
@@ -188,6 +192,15 @@ SWGService::getType() {
 void
 SWGService::setType(QString* type) {
     this->type = type;
+}
+
+qint32
+SWGService::getPriority() {
+    return priority;
+}
+void
+SWGService::setPriority(qint32 priority) {
+    this->priority = priority;
 }
 
 QString*

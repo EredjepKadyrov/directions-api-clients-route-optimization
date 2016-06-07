@@ -10,13 +10,13 @@
 #include <QJsonObject>
 
 
-#include <QList>
-#include "SWGVehicleType.h"
-#include "SWGService.h"
-#include "SWGRelation.h"
 #include "SWGAlgorithm.h"
+#include "SWGRelation.h"
+#include "SWGService.h"
 #include "SWGShipment.h"
 #include "SWGVehicle.h"
+#include "SWGVehicleType.h"
+#include <QList>
 
 #include "SWGObject.h"
 

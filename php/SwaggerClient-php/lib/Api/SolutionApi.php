@@ -103,6 +103,23 @@ class SolutionApi
      */
     public function getSolution($key, $job_id)
     {
+        list($response, $statusCode, $httpHeader) = $this->getSolutionWithHttpInfo ($key, $job_id);
+        return $response; 
+    }
+
+
+    /**
+     * getSolutionWithHttpInfo
+     *
+     * Return the solution associated to the jobId
+     *
+     * @param string $key your API key (required)
+     * @param string $job_id Request solution with jobId (required)
+     * @return Array of \Swagger\Client\Model\Response, HTTP status code, HTTP response headers (array of strings)
+     * @throws \Swagger\Client\ApiException on non-2xx response
+     */
+    public function getSolutionWithHttpInfo($key, $job_id)
+    {
         
         // verify the required parameter 'key' is set
         if ($key === null) {
@@ -128,11 +145,13 @@ class SolutionApi
         $headerParams['Content-Type'] = ApiClient::selectHeaderContentType(array('application/json'));
   
         // query params
+        
         if ($key !== null) {
             $queryParams['key'] = $this->apiClient->getSerializer()->toQueryValue($key);
         }
         
         // path params
+        
         if ($job_id !== null) {
             $resourcePath = str_replace(
                 "{" . "jobId" . "}",
@@ -146,31 +165,30 @@ class SolutionApi
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
-        } else if (count($formParams) > 0) {
+        } elseif (count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
         
+        // this endpoint requires API key authentication
         $apiKey = $this->apiClient->getApiKeyWithPrefix('key');
-        if (isset($apiKey)) {
+        if (strlen($apiKey) !== 0) {
             $queryParams['key'] = $apiKey;
         }
         
         
-        
         // make the API Call
-        try
-        {
-            list($response, $httpHeader) = $this->apiClient->callApi(
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
                 $resourcePath, $method,
                 $queryParams, $httpBody,
                 $headerParams, '\Swagger\Client\Model\Response'
             );
             
             if (!$response) {
-                return null;
+                return array(null, $statusCode, $httpHeader);
             }
 
-            return $this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\Response', $httpHeader);
+            return array($this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\Response', $httpHeader), $statusCode, $httpHeader);
             
         } catch (ApiException $e) {
             switch ($e->getCode()) { 
@@ -182,9 +200,6 @@ class SolutionApi
   
             throw $e;
         }
-        
-        return null;
-        
     }
     
 }

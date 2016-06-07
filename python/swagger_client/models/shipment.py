@@ -39,6 +39,7 @@ class Shipment(object):
         self.swagger_types = {
             'id': 'str',
             'name': 'str',
+            'priority': 'int',
             'pickup': 'Stop',
             'delivery': 'Stop',
             'size': 'list[int]',
@@ -49,6 +50,7 @@ class Shipment(object):
         self.attribute_map = {
             'id': 'id',
             'name': 'name',
+            'priority': 'priority',
             'pickup': 'pickup',
             'delivery': 'delivery',
             'size': 'size',
@@ -58,6 +60,7 @@ class Shipment(object):
 
         self._id = None
         self._name = None
+        self._priority = None
         self._pickup = None
         self._delivery = None
         self._size = None
@@ -107,6 +110,28 @@ class Shipment(object):
         :type: str
         """
         self._name = name
+
+    @property
+    def priority(self):
+        """
+        Gets the priority of this Shipment.
+        priority of service, i.e. 1 = high, 2 = normal, 3 = low. default is 2.
+
+        :return: The priority of this Shipment.
+        :rtype: int
+        """
+        return self._priority
+
+    @priority.setter
+    def priority(self, priority):
+        """
+        Sets the priority of this Shipment.
+        priority of service, i.e. 1 = high, 2 = normal, 3 = low. default is 2.
+
+        :param priority: The priority of this Shipment.
+        :type: int
+        """
+        self._priority = priority
 
     @property
     def pickup(self):
@@ -249,3 +274,16 @@ class Shipment(object):
         For `print` and `pprint`
         """
         return self.to_str()
+
+    def __eq__(self, other): 
+        """
+        Returns true if both objects are equal
+        """
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """ 
+        Returns true if both objects are not equal
+        """
+        return not self == other
+

@@ -18,6 +18,8 @@ public class Break: JSONEncodable {
     public var duration: Int?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()

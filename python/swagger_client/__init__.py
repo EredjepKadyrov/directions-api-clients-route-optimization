@@ -17,6 +17,7 @@ from .models.response import Response
 from .models.solution import Solution
 from .models.route import Route
 from .models.activity import Activity
+from .models.solution_unassigned import SolutionUnassigned
 
 # import apis into sdk package
 from .apis.vrp_api import VrpApi

@@ -32,16 +32,16 @@ public:
 
     QString* getLocationId();
     void setLocationId(QString* location_id);
-    double* getLon();
-    void setLon(double* lon);
-    double* getLat();
-    void setLat(double* lat);
+    double getLon();
+    void setLon(double lon);
+    double getLat();
+    void setLat(double lat);
     
 
 private:
     QString* location_id;
-    double* lon;
-    double* lat;
+    double lon;
+    double lat;
     
 };
 

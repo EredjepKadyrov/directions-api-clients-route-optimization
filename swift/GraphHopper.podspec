@@ -9,5 +9,5 @@ Pod::Spec.new do |s|
   s.homepage = 'https://github.com/graphhopper/directions-api-clients'
   s.summary = 'GraphHopper Directions API swift client'
   s.source_files = 'GraphHopper/Classes/Swaggers/**/*.swift'
-  s.dependency 'Alamofire', '~> 2.0.0'
+  s.dependency 'Alamofire', '~> 3.1.4'
 end

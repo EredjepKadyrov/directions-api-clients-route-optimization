@@ -30,11 +30,14 @@ use Log::Any qw($log);
 use WWW::SwaggerClient::ApiClient;
 use WWW::SwaggerClient::Configuration;
 
+use base "Class::Data::Inheritable";
+
+__PACKAGE__->mk_classdata('method_documentation' => {});
+
 sub new {
     my $class   = shift;
-    my $default_api_client = $WWW::SwaggerClient::Configuration::api_client ? $WWW::SwaggerClient::Configuration::api_client  : WWW::SwaggerClient::ApiClient->new;
     my (%self) = (
-        'api_client' => $default_api_client,
+        'api_client' => WWW::SwaggerClient::ApiClient->instance,
         @_
     );
 
@@ -47,6 +50,7 @@ sub new {
 
 }
 
+
 #
 # post_vrp
 #
@@ -54,6 +58,25 @@ sub new {
 # 
 # @param string $key your API key (required)
 # @param Request $body Request object that contains the problem to be solved (required)
+{
+    my $params = {
+    'key' => {
+        data_type => 'string',
+        description => 'your API key',
+        required => '1',
+    },
+    'body' => {
+        data_type => 'Request',
+        description => 'Request object that contains the problem to be solved',
+        required => '1',
+    },
+    };
+    __PACKAGE__->method_documentation->{ post_vrp } = { 
+    	summary => 'Solves large routing problems',
+        params => $params,
+        returns => 'JobId',
+        };
+}
 # @return JobId
 #
 sub post_vrp {
@@ -101,7 +124,7 @@ sub post_vrp {
     }
 
     # authentication setting, if any
-    my $auth_settings = ['api_key'];
+    my $auth_settings = [qw(api_key )];
 
     # make the API Call
     my $response = $self->{api_client}->call_api($_resource_path, $_method,

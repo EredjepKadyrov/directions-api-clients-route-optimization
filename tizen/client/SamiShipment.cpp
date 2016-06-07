@@ -24,6 +24,7 @@ void
 SamiShipment::init() {
     pId = null;
     pName = null;
+    pPriority = null;
     pPickup = null;
     pDelivery = null;
     pSize = null;
@@ -43,6 +44,11 @@ SamiShipment::cleanup() {
         
         delete pName;
         pName = null;
+    }
+    if(pPriority != null) {
+        
+        delete pPriority;
+        pPriority = null;
     }
     if(pPickup != null) {
         
@@ -125,6 +131,15 @@ SamiShipment::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pName, pNameVal, L"String", L"String");
         }
         delete pNameKey;
+        JsonString* pPriorityKey = new JsonString(L"priority");
+        IJsonValue* pPriorityVal = null;
+        pJsonObject->GetValue(pPriorityKey, pPriorityVal);
+        if(pPriorityVal != null) {
+            
+            pPriority = new Integer();
+            jsonToValue(pPriority, pPriorityVal, L"Integer", L"Integer");
+        }
+        delete pPriorityKey;
         JsonString* pPickupKey = new JsonString(L"pickup");
         IJsonValue* pPickupVal = null;
         pJsonObject->GetValue(pPickupKey, pPickupVal);
@@ -230,6 +245,10 @@ SamiShipment::asJsonObject() {
     pJsonObject->Add(pNameKey, toJson(getPName(), "String", ""));
 
     
+    JsonString *pPriorityKey = new JsonString(L"priority");
+    pJsonObject->Add(pPriorityKey, toJson(getPPriority(), "Integer", ""));
+
+    
     JsonString *pPickupKey = new JsonString(L"pickup");
     pJsonObject->Add(pPickupKey, toJson(getPPickup(), "SamiStop", ""));
 
@@ -269,6 +288,15 @@ SamiShipment::getPName() {
 void
 SamiShipment::setPName(String* pName) {
     this->pName = pName;
+}
+
+Integer*
+SamiShipment::getPPriority() {
+    return pPriority;
+}
+void
+SamiShipment::setPPriority(Integer* pPriority) {
+    this->pPriority = pPriority;
 }
 
 SamiStop*

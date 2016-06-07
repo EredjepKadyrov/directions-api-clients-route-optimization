@@ -8,6 +8,8 @@ case class Service (
   id: String,
   /* type of service */
   _type: String,
+  /* priority of service, i.e. 1 = high, 2 = normal, 3 = low. default is 2. */
+  priority: Integer,
   /* name of service */
   name: String,
   address: Address,

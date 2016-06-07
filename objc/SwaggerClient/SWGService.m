@@ -2,13 +2,24 @@
 
 @implementation SWGService
 
+- (instancetype)init {
+  self = [super init];
+
+  if (self) {
+    // initalise property's default value, if any
+    
+  }
+
+  return self;
+}
+
 /**
  * Maps json key to property name.
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper
 {
-  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"id": @"_id", @"type": @"type", @"name": @"name", @"address": @"address", @"duration": @"duration", @"time_windows": @"timeWindows", @"size": @"size", @"required_skills": @"requiredSkills", @"allowed_vehicles": @"allowedVehicles" }];
+  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"id": @"_id", @"type": @"type", @"priority": @"priority", @"name": @"name", @"address": @"address", @"duration": @"duration", @"time_windows": @"timeWindows", @"size": @"size", @"required_skills": @"requiredSkills", @"allowed_vehicles": @"allowedVehicles" }];
 }
 
 /**
@@ -18,7 +29,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName
 {
-  NSArray *optionalProperties = @[@"_id", @"type", @"name", @"address", @"duration", @"timeWindows", @"size", @"requiredSkills", @"allowedVehicles"];
+  NSArray *optionalProperties = @[@"_id", @"type", @"priority", @"name", @"address", @"duration", @"timeWindows", @"size", @"requiredSkills", @"allowedVehicles"];
 
   if ([optionalProperties containsObject:propertyName]) {
     return YES;

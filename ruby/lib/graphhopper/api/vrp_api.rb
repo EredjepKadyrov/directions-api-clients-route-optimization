@@ -4,8 +4,8 @@ module GraphHopper
   class VrpApi
     attr_accessor :api_client
 
-    def initialize(api_client = nil)
-      @api_client = api_client || Configuration.api_client
+    def initialize(api_client = ApiClient.default)
+      @api_client = api_client
     end
 
     # Solves large routing problems
@@ -15,8 +15,19 @@ module GraphHopper
     # @param [Hash] opts the optional parameters
     # @return [JobId]
     def post_vrp(key, body, opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: VrpApi#post_vrp ..."
+      data, status_code, headers = post_vrp_with_http_info(key, body, opts)
+      return data
+    end
+
+    # Solves large routing problems
+    # This endpoint solves large problems, i.e. traveling salesman or vehicle routing problems, and returns the solution.
+    # @param key your API key
+    # @param body Request object that contains the problem to be solved
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(JobId, Fixnum, Hash)>] JobId data, response status code and response headers
+    def post_vrp_with_http_info(key, body, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: VrpApi#post_vrp ..."
       end
       
       # verify the required parameter 'key' is set
@@ -51,17 +62,17 @@ module GraphHopper
       
 
       auth_names = ['api_key']
-      result = @api_client.call_api(:POST, path,
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
         :return_type => 'JobId')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: VrpApi#post_vrp. Result: #{result.inspect}"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: VrpApi#post_vrp\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
   end
 end

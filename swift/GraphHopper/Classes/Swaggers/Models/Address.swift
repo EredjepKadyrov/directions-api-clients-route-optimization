@@ -18,6 +18,8 @@ public class Address: JSONEncodable {
     public var lat: Double?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()

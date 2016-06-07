@@ -10,9 +10,9 @@
 #include <QJsonObject>
 
 
+#include "SWGActivity.h"
 #include <QList>
 #include <QString>
-#include "SWGActivity.h"
 
 #include "SWGObject.h"
 

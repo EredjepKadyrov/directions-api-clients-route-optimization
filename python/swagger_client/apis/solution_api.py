@@ -66,12 +66,6 @@ class SolutionApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        # verify the required parameter 'key' is set
-        if key is None:
-            raise ValueError("Missing the required parameter `key` when calling `get_solution`")
-        # verify the required parameter 'job_id' is set
-        if job_id is None:
-            raise ValueError("Missing the required parameter `job_id` when calling `get_solution`")
 
         all_params = ['key', 'job_id']
         all_params.append('callback')
@@ -85,6 +79,13 @@ class SolutionApi(object):
                 )
             params[key] = val
         del params['kwargs']
+
+        # verify the required parameter 'key' is set
+        if ('key' not in params) or (params['key'] is None):
+            raise ValueError("Missing the required parameter `key` when calling `get_solution`")
+        # verify the required parameter 'job_id' is set
+        if ('job_id' not in params) or (params['job_id'] is None):
+            raise ValueError("Missing the required parameter `job_id` when calling `get_solution`")
 
         resource_path = '/solution/{jobId}'.replace('{format}', 'json')
         method = 'GET'

@@ -19,7 +19,7 @@ class Solution {
   List<Route> routes = [];
   
   
-  Object unassigned = null;
+  SolutionUnassigned unassigned = null;
   
   
   Solution();

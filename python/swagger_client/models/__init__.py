@@ -17,3 +17,4 @@ from .response import Response
 from .solution import Solution
 from .route import Route
 from .activity import Activity
+from .solution_unassigned import SolutionUnassigned

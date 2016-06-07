@@ -17,11 +17,11 @@
 using namespace Tizen::Web::Json;
 
 
-using Tizen::Base::Long;
-#include "SamiObject.h"
 #include "SamiRoute.h"
+#include "SamiSolution_unassigned.h"
 using Tizen::Base::Collection::IList;
 using Tizen::Base::Integer;
+using Tizen::Base::Long;
 
 
 namespace Swagger {
@@ -60,8 +60,8 @@ public:
     IList* getPRoutes();
     void setPRoutes(IList* pRoutes);
     
-    SamiObject* getPUnassigned();
-    void setPUnassigned(SamiObject* pUnassigned);
+    SamiSolution_unassigned* getPUnassigned();
+    void setPUnassigned(SamiSolution_unassigned* pUnassigned);
     
 
 private:
@@ -70,7 +70,7 @@ private:
     Long* pTime;
     Integer* pNo_unassigned;
     IList* pRoutes;
-    SamiObject* pUnassigned;
+    SamiSolution_unassigned* pUnassigned;
     
 };
 

@@ -28,6 +28,7 @@
 #import "SWGSolution.h"
 #import "SWGRoute.h"
 #import "SWGActivity.h"
+#import "SWGSolutionUnassigned.h"
 
 
 @class SWGConfiguration;

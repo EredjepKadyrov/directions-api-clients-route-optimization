@@ -35,3 +35,4 @@ part 'model/response.dart';
 part 'model/solution.dart';
 part 'model/route.dart';
 part 'model/activity.dart';
+part 'model/solutionUnassigned.dart';

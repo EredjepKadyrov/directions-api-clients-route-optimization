@@ -31,7 +31,7 @@ SWGSolution::init() {
     time = 0L;
     no_unassigned = 0;
     routes = new QList<SWGRoute*>();
-    unassigned = NULL;
+    unassigned = new SWGSolution_unassigned();
     
 }
 
@@ -70,7 +70,7 @@ SWGSolution::fromJsonObject(QJsonObject &pJson) {
     setValue(&time, pJson["time"], "qint64", "");
     setValue(&no_unassigned, pJson["no_unassigned"], "qint32", "");
     setValue(&routes, pJson["routes"], "QList", "SWGRoute");
-    setValue(&unassigned, pJson["unassigned"], "SWGObject", "SWGObject");
+    setValue(&unassigned, pJson["unassigned"], "SWGSolution_unassigned", "SWGSolution_unassigned");
     
 }
 
@@ -102,7 +102,7 @@ SWGSolution::asJsonObject() {
     
     
     
-    toJsonValue(QString("unassigned"), unassigned, obj, QString("SWGObject"));
+    toJsonValue(QString("unassigned"), unassigned, obj, QString("SWGSolution_unassigned"));
     
     
     
@@ -156,12 +156,12 @@ SWGSolution::setRoutes(QList<SWGRoute*>* routes) {
     this->routes = routes;
 }
 
-SWGObject*
+SWGSolution_unassigned*
 SWGSolution::getUnassigned() {
     return unassigned;
 }
 void
-SWGSolution::setUnassigned(SWGObject* unassigned) {
+SWGSolution::setUnassigned(SWGSolution_unassigned* unassigned) {
     this->unassigned = unassigned;
 }
 

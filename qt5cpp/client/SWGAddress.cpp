@@ -37,12 +37,8 @@ SWGAddress::cleanup() {
     if(location_id != NULL) {
         delete location_id;
     }
-    if(lon != NULL) {
-        delete lon;
-    }
-    if(lat != NULL) {
-        delete lat;
-    }
+    
+    
     
 }
 
@@ -58,8 +54,8 @@ SWGAddress::fromJson(QString &json) {
 void
 SWGAddress::fromJsonObject(QJsonObject &pJson) {
     setValue(&location_id, pJson["location_id"], "QString", "QString");
-    setValue(&lon, pJson["lon"], "double", "double");
-    setValue(&lat, pJson["lat"], "double", "double");
+    setValue(&lon, pJson["lon"], "double", "");
+    setValue(&lat, pJson["lat"], "double", "");
     
 }
 
@@ -82,18 +78,8 @@ SWGAddress::asJsonObject() {
     
     
     
-    
-    
-    toJsonValue(QString("lon"), lon, obj, QString("double"));
-    
-    
-    
-    
-    
-    toJsonValue(QString("lat"), lat, obj, QString("double"));
-    
-    
-    
+    obj->insert("lon", QJsonValue(lon));
+    obj->insert("lat", QJsonValue(lat));
     
 
     return obj;
@@ -108,21 +94,21 @@ SWGAddress::setLocationId(QString* location_id) {
     this->location_id = location_id;
 }
 
-double*
+double
 SWGAddress::getLon() {
     return lon;
 }
 void
-SWGAddress::setLon(double* lon) {
+SWGAddress::setLon(double lon) {
     this->lon = lon;
 }
 
-double*
+double
 SWGAddress::getLat() {
     return lat;
 }
 void
-SWGAddress::setLat(double* lat) {
+SWGAddress::setLat(double lat) {
     this->lat = lat;
 }
 

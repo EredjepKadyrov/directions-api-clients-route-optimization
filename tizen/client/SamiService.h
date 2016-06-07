@@ -17,12 +17,12 @@
 using namespace Tizen::Web::Json;
 
 
-using Tizen::Base::Long;
 #include "SamiAddress.h"
-using Tizen::Base::String;
 #include "SamiTimeWindow.h"
 using Tizen::Base::Collection::IList;
 using Tizen::Base::Integer;
+using Tizen::Base::Long;
+using Tizen::Base::String;
 
 
 namespace Swagger {
@@ -52,6 +52,9 @@ public:
     String* getPType();
     void setPType(String* pType);
     
+    Integer* getPPriority();
+    void setPPriority(Integer* pPriority);
+    
     String* getPName();
     void setPName(String* pName);
     
@@ -77,6 +80,7 @@ public:
 private:
     String* pId;
     String* pType;
+    Integer* pPriority;
     String* pName;
     SamiAddress* pAddress;
     Long* pDuration;

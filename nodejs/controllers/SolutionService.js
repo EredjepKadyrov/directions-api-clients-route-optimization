@@ -1,8 +1,13 @@
 'use strict';
 
-exports.getSolution = function(key, jobId) {
+exports.getSolution = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+   * key (String)
+   * jobId (String)
+   **/
 
-  var examples = {};
+var examples = {};
   
   examples['application/json'] = {
   "waiting_in_queue" : 123456789,
@@ -11,7 +16,10 @@ exports.getSolution = function(key, jobId) {
   "solution" : {
     "time" : 123456789,
     "distance" : 123,
-    "unassigned" : "{}",
+    "unassigned" : {
+      "services" : [ "aeiou" ],
+      "shipments" : [ "aeiou" ]
+    },
     "routes" : [ {
       "activities" : [ {
         "id" : "aeiou",
@@ -30,7 +38,13 @@ exports.getSolution = function(key, jobId) {
   
 
   
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
   
 }

@@ -14,8 +14,8 @@ public class Activity: JSONEncodable {
         case Start = "start"
         case End = "end"
         case Service = "service"
-        case PickupShipment = "pickupShipment"
-        case DeliverShipment = "deliverShipment"
+        case Pickupshipment = "pickupShipment"
+        case Delivershipment = "deliverShipment"
     }
     
     /** type of activity */
@@ -29,6 +29,8 @@ public class Activity: JSONEncodable {
     /** end time of and thus departure time at this activity */
     public var end_time: Int?
     
+
+    public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {

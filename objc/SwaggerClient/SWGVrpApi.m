@@ -108,7 +108,7 @@ static SWGVrpApi* singletonAPI = nil;
     
 
     NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
-    if(key != nil) {
+    if (key != nil) {
         
         queryParams[@"key"] = key;
     }

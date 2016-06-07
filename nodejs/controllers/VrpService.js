@@ -1,8 +1,13 @@
 'use strict';
 
-exports.postVrp = function(key, body) {
+exports.postVrp = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+   * key (String)
+   * body (Request)
+   **/
 
-  var examples = {};
+var examples = {};
   
   examples['application/json'] = {
   "job_id" : "aeiou"
@@ -10,7 +15,13 @@ exports.postVrp = function(key, body) {
   
 
   
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
   
 }

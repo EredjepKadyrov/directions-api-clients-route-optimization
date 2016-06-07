@@ -1,7 +1,7 @@
 require 'json'
 
 
-MyApp.add_route('GET', '/solution/{jobId}', {
+MyApp.add_route('GET', '/api/1/vrp/solution/{jobId}', {
   "resourcePath" => "/Solution",
   "summary" => "Return the solution associated to the jobId",
   "nickname" => "get_solution", 

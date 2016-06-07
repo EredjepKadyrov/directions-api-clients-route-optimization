@@ -16,6 +16,8 @@ public class TimeWindow: JSONEncodable {
     public var latest: Int?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()

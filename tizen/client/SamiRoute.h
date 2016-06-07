@@ -18,8 +18,8 @@ using namespace Tizen::Web::Json;
 
 
 #include "SamiActivity.h"
-using Tizen::Base::String;
 using Tizen::Base::Collection::IList;
+using Tizen::Base::String;
 
 
 namespace Swagger {

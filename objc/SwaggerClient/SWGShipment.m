@@ -2,13 +2,24 @@
 
 @implementation SWGShipment
 
+- (instancetype)init {
+  self = [super init];
+
+  if (self) {
+    // initalise property's default value, if any
+    
+  }
+
+  return self;
+}
+
 /**
  * Maps json key to property name.
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper
 {
-  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"id": @"_id", @"name": @"name", @"pickup": @"pickup", @"delivery": @"delivery", @"size": @"size", @"required_skills": @"requiredSkills", @"allowed_vehicles": @"allowedVehicles" }];
+  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"id": @"_id", @"name": @"name", @"priority": @"priority", @"pickup": @"pickup", @"delivery": @"delivery", @"size": @"size", @"required_skills": @"requiredSkills", @"allowed_vehicles": @"allowedVehicles" }];
 }
 
 /**
@@ -18,7 +29,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName
 {
-  NSArray *optionalProperties = @[@"_id", @"name", @"pickup", @"delivery", @"size", @"requiredSkills", @"allowedVehicles"];
+  NSArray *optionalProperties = @[@"_id", @"name", @"priority", @"pickup", @"delivery", @"size", @"requiredSkills", @"allowedVehicles"];
 
   if ([optionalProperties containsObject:propertyName]) {
     return YES;

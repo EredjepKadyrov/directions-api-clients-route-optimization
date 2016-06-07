@@ -17,9 +17,9 @@
 using namespace Tizen::Web::Json;
 
 
+#include "SamiSolution.h"
 using Tizen::Base::Long;
 using Tizen::Base::String;
-#include "SamiSolution.h"
 
 
 namespace Swagger {

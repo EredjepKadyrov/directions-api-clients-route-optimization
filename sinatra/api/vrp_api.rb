@@ -1,7 +1,7 @@
 require 'json'
 
 
-MyApp.add_route('POST', '/optimize', {
+MyApp.add_route('POST', '/api/1/vrp/optimize', {
   "resourcePath" => "/Vrp",
   "summary" => "Solves large routing problems",
   "nickname" => "post_vrp", 

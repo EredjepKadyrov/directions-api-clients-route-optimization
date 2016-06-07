@@ -9,6 +9,9 @@ class Shipment {
   /* name of shipment */
   String name = null;
   
+  /* priority of service, i.e. 1 = high, 2 = normal, 3 = low. default is 2. */
+  int priority = null;
+  
   
   Stop pickup = null;
   
@@ -29,7 +32,7 @@ class Shipment {
 
   @override
   String toString()  {
-    return 'Shipment[id=$id, name=$name, pickup=$pickup, delivery=$delivery, size=$size, requiredSkills=$requiredSkills, allowedVehicles=$allowedVehicles, ]';
+    return 'Shipment[id=$id, name=$name, priority=$priority, pickup=$pickup, delivery=$delivery, size=$size, requiredSkills=$requiredSkills, allowedVehicles=$allowedVehicles, ]';
   }
 
 }

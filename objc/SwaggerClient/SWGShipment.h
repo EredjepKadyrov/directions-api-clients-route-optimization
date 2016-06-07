@@ -21,6 +21,9 @@
 /* name of shipment [optional]
  */
 @property(nonatomic) NSString* name;
+/* priority of service, i.e. 1 = high, 2 = normal, 3 = low. default is 2. [optional]
+ */
+@property(nonatomic) NSNumber* priority;
 
 @property(nonatomic) SWGStop* pickup;
 

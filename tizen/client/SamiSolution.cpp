@@ -151,8 +151,8 @@ SamiSolution::fromJsonObject(IJsonValue* pJson) {
         pJsonObject->GetValue(pUnassignedKey, pUnassignedVal);
         if(pUnassignedVal != null) {
             
-            pUnassigned = null;
-            jsonToValue(pUnassigned, pUnassignedVal, L"SamiObject", L"SamiObject");
+            pUnassigned = new SamiSolution_unassigned();
+            jsonToValue(pUnassigned, pUnassignedVal, L"SamiSolution_unassigned", L"SamiSolution_unassigned");
         }
         delete pUnassignedKey;
         
@@ -228,7 +228,7 @@ SamiSolution::asJsonObject() {
 
     
     JsonString *pUnassignedKey = new JsonString(L"unassigned");
-    pJsonObject->Add(pUnassignedKey, toJson(getPUnassigned(), "SamiObject", ""));
+    pJsonObject->Add(pUnassignedKey, toJson(getPUnassigned(), "SamiSolution_unassigned", ""));
 
     
     return pJsonObject;
@@ -279,12 +279,12 @@ SamiSolution::setPRoutes(IList* pRoutes) {
     this->pRoutes = pRoutes;
 }
 
-SamiObject*
+SamiSolution_unassigned*
 SamiSolution::getPUnassigned() {
     return pUnassigned;
 }
 void
-SamiSolution::setPUnassigned(SamiObject* pUnassigned) {
+SamiSolution::setPUnassigned(SamiSolution_unassigned* pUnassigned) {
     this->pUnassigned = pUnassigned;
 }
 

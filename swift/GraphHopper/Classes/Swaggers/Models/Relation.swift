@@ -18,6 +18,8 @@ public class Relation: JSONEncodable {
     public var vehicle_id: String?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()

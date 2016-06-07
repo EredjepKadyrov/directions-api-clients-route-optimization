@@ -20,8 +20,10 @@ public class Solution: JSONEncodable {
     public var no_unassigned: Int?
     /** An array of routes */
     public var routes: [Route]?
-    public var unassigned: String?
+    public var unassigned: Solution_unassigned?
     
+
+    public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
@@ -31,7 +33,7 @@ public class Solution: JSONEncodable {
         nillableDictionary["time"] = self.time
         nillableDictionary["no_unassigned"] = self.no_unassigned
         nillableDictionary["routes"] = self.routes?.encodeToJSON()
-        nillableDictionary["unassigned"] = self.unassigned
+        nillableDictionary["unassigned"] = self.unassigned?.encodeToJSON()
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

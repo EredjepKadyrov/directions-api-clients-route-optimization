@@ -17,6 +17,8 @@ public class Stop: JSONEncodable {
     public var time_windows: [TimeWindow]?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()

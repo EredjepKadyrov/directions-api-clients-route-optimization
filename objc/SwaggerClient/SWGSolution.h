@@ -8,6 +8,7 @@
  */
 
 #import "SWGRoute.h"
+#import "SWGSolutionUnassigned.h"
 
 
 @protocol SWGSolution
@@ -31,6 +32,6 @@
  */
 @property(nonatomic) NSArray<SWGRoute>* routes;
 
-@property(nonatomic) NSObject* unassigned;
+@property(nonatomic) SWGSolutionUnassigned* unassigned;
 
 @end

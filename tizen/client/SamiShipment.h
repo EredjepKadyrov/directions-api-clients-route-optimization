@@ -17,10 +17,10 @@
 using namespace Tizen::Web::Json;
 
 
-using Tizen::Base::String;
-using Tizen::Base::Collection::IList;
 #include "SamiStop.h"
+using Tizen::Base::Collection::IList;
 using Tizen::Base::Integer;
+using Tizen::Base::String;
 
 
 namespace Swagger {
@@ -50,6 +50,9 @@ public:
     String* getPName();
     void setPName(String* pName);
     
+    Integer* getPPriority();
+    void setPPriority(Integer* pPriority);
+    
     SamiStop* getPPickup();
     void setPPickup(SamiStop* pPickup);
     
@@ -69,6 +72,7 @@ public:
 private:
     String* pId;
     String* pName;
+    Integer* pPriority;
     SamiStop* pPickup;
     SamiStop* pDelivery;
     IList* pSize;

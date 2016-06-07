@@ -10,10 +10,10 @@
 #include <QJsonObject>
 
 
+#include "SWGAddress.h"
+#include "SWGTimeWindow.h"
 #include <QList>
 #include <QString>
-#include "SWGTimeWindow.h"
-#include "SWGAddress.h"
 
 #include "SWGObject.h"
 
@@ -37,6 +37,8 @@ public:
     void setId(QString* id);
     QString* getType();
     void setType(QString* type);
+    qint32 getPriority();
+    void setPriority(qint32 priority);
     QString* getName();
     void setName(QString* name);
     SWGAddress* getAddress();
@@ -56,6 +58,7 @@ public:
 private:
     QString* id;
     QString* type;
+    qint32 priority;
     QString* name;
     SWGAddress* address;
     qint64 duration;

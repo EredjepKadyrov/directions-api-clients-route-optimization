@@ -18,7 +18,7 @@ public class VehicleType: JSONEncodable {
         case Motorcycle = "motorcycle"
         case Racingbike = "racingbike"
         case Truck = "truck"
-        case Small_truck = "small_truck"
+        case SmallTruck = "small_truck"
         case Bus = "bus"
     }
     
@@ -33,6 +33,8 @@ public class VehicleType: JSONEncodable {
     /** service time factor of vehicle type */
     public var service_time_factor: Double?
     
+
+    public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {

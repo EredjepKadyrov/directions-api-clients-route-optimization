@@ -37,18 +37,18 @@ public:
     void setProfile(QString* profile);
     QList<qint32>* getCapacity();
     void setCapacity(QList<qint32>* capacity);
-    double* getSpeedFactor();
-    void setSpeedFactor(double* speed_factor);
-    double* getServiceTimeFactor();
-    void setServiceTimeFactor(double* service_time_factor);
+    double getSpeedFactor();
+    void setSpeedFactor(double speed_factor);
+    double getServiceTimeFactor();
+    void setServiceTimeFactor(double service_time_factor);
     
 
 private:
     QString* type_id;
     QString* profile;
     QList<qint32>* capacity;
-    double* speed_factor;
-    double* service_time_factor;
+    double speed_factor;
+    double service_time_factor;
     
 };
 

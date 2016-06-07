@@ -53,6 +53,7 @@ class Shipment implements ArrayAccess
     static $swaggerTypes = array(
         'id' => 'string',
         'name' => 'string',
+        'priority' => 'int',
         'pickup' => '\Swagger\Client\Model\Stop',
         'delivery' => '\Swagger\Client\Model\Stop',
         'size' => 'int[]',
@@ -67,6 +68,7 @@ class Shipment implements ArrayAccess
     static $attributeMap = array(
         'id' => 'id',
         'name' => 'name',
+        'priority' => 'priority',
         'pickup' => 'pickup',
         'delivery' => 'delivery',
         'size' => 'size',
@@ -81,6 +83,7 @@ class Shipment implements ArrayAccess
     static $setters = array(
         'id' => 'setId',
         'name' => 'setName',
+        'priority' => 'setPriority',
         'pickup' => 'setPickup',
         'delivery' => 'setDelivery',
         'size' => 'setSize',
@@ -95,6 +98,7 @@ class Shipment implements ArrayAccess
     static $getters = array(
         'id' => 'getId',
         'name' => 'getName',
+        'priority' => 'getPriority',
         'pickup' => 'getPickup',
         'delivery' => 'getDelivery',
         'size' => 'getSize',
@@ -114,6 +118,12 @@ class Shipment implements ArrayAccess
       * @var string
       */
     protected $name;
+    
+    /**
+      * $priority priority of service, i.e. 1 = high, 2 = normal, 3 = low. default is 2.
+      * @var int
+      */
+    protected $priority;
     
     /**
       * $pickup 
@@ -155,6 +165,7 @@ class Shipment implements ArrayAccess
         if ($data != null) {
             $this->id = $data["id"];
             $this->name = $data["name"];
+            $this->priority = $data["priority"];
             $this->pickup = $data["pickup"];
             $this->delivery = $data["delivery"];
             $this->size = $data["size"];
@@ -202,6 +213,27 @@ class Shipment implements ArrayAccess
     {
         
         $this->name = $name;
+        return $this;
+    }
+    
+    /**
+     * Gets priority
+     * @return int
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+  
+    /**
+     * Sets priority
+     * @param int $priority priority of service, i.e. 1 = high, 2 = normal, 3 = low. default is 2.
+     * @return $this
+     */
+    public function setPriority($priority)
+    {
+        
+        $this->priority = $priority;
         return $this;
     }
     

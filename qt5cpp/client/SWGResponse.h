@@ -10,8 +10,8 @@
 #include <QJsonObject>
 
 
-#include <QString>
 #include "SWGSolution.h"
+#include <QString>
 
 #include "SWGObject.h"
 

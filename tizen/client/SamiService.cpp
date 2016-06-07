@@ -24,6 +24,7 @@ void
 SamiService::init() {
     pId = null;
     pType = null;
+    pPriority = null;
     pName = null;
     pAddress = null;
     pDuration = null;
@@ -45,6 +46,11 @@ SamiService::cleanup() {
         
         delete pType;
         pType = null;
+    }
+    if(pPriority != null) {
+        
+        delete pPriority;
+        pPriority = null;
     }
     if(pName != null) {
         
@@ -137,6 +143,15 @@ SamiService::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pType, pTypeVal, L"String", L"String");
         }
         delete pTypeKey;
+        JsonString* pPriorityKey = new JsonString(L"priority");
+        IJsonValue* pPriorityVal = null;
+        pJsonObject->GetValue(pPriorityKey, pPriorityVal);
+        if(pPriorityVal != null) {
+            
+            pPriority = new Integer();
+            jsonToValue(pPriority, pPriorityVal, L"Integer", L"Integer");
+        }
+        delete pPriorityKey;
         JsonString* pNameKey = new JsonString(L"name");
         IJsonValue* pNameVal = null;
         pJsonObject->GetValue(pNameKey, pNameVal);
@@ -260,6 +275,10 @@ SamiService::asJsonObject() {
     pJsonObject->Add(pTypeKey, toJson(getPType(), "String", ""));
 
     
+    JsonString *pPriorityKey = new JsonString(L"priority");
+    pJsonObject->Add(pPriorityKey, toJson(getPPriority(), "Integer", ""));
+
+    
     JsonString *pNameKey = new JsonString(L"name");
     pJsonObject->Add(pNameKey, toJson(getPName(), "String", ""));
 
@@ -307,6 +326,15 @@ SamiService::getPType() {
 void
 SamiService::setPType(String* pType) {
     this->pType = pType;
+}
+
+Integer*
+SamiService::getPPriority() {
+    return pPriority;
+}
+void
+SamiService::setPPriority(Integer* pPriority) {
+    this->pPriority = pPriority;
 }
 
 String*

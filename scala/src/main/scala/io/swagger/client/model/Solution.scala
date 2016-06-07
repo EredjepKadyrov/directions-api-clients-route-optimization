@@ -14,5 +14,5 @@ case class Solution (
   no_unassigned: Integer,
   /* An array of routes */
   routes: List[Route],
-  unassigned: Any)
+  unassigned: Solution_unassigned)
   

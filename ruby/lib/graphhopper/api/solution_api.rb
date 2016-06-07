@@ -4,8 +4,8 @@ module GraphHopper
   class SolutionApi
     attr_accessor :api_client
 
-    def initialize(api_client = nil)
-      @api_client = api_client || Configuration.api_client
+    def initialize(api_client = ApiClient.default)
+      @api_client = api_client
     end
 
     # Return the solution associated to the jobId
@@ -15,8 +15,19 @@ module GraphHopper
     # @param [Hash] opts the optional parameters
     # @return [Response]
     def get_solution(key, job_id, opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: SolutionApi#get_solution ..."
+      data, status_code, headers = get_solution_with_http_info(key, job_id, opts)
+      return data
+    end
+
+    # Return the solution associated to the jobId
+    # This endpoint returns the solution of a large problems. You can fetch it with the job_id, you have been sent.
+    # @param key your API key
+    # @param job_id Request solution with jobId
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Response, Fixnum, Hash)>] Response data, response status code and response headers
+    def get_solution_with_http_info(key, job_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: SolutionApi#get_solution ..."
       end
       
       # verify the required parameter 'key' is set
@@ -51,17 +62,17 @@ module GraphHopper
       
 
       auth_names = ['api_key']
-      result = @api_client.call_api(:GET, path,
+      data, status_code, headers = @api_client.call_api(:GET, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
         :return_type => 'Response')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: SolutionApi#get_solution. Result: #{result.inspect}"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: SolutionApi#get_solution\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
   end
 end

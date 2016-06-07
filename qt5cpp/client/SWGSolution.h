@@ -11,8 +11,8 @@
 
 
 #include "SWGRoute.h"
+#include "SWGSolution_unassigned.h"
 #include <QList>
-#include "SWGObject.h"
 
 #include "SWGObject.h"
 
@@ -42,8 +42,8 @@ public:
     void setNoUnassigned(qint32 no_unassigned);
     QList<SWGRoute*>* getRoutes();
     void setRoutes(QList<SWGRoute*>* routes);
-    SWGObject* getUnassigned();
-    void setUnassigned(SWGObject* unassigned);
+    SWGSolution_unassigned* getUnassigned();
+    void setUnassigned(SWGSolution_unassigned* unassigned);
     
 
 private:
@@ -52,7 +52,7 @@ private:
     qint64 time;
     qint32 no_unassigned;
     QList<SWGRoute*>* routes;
-    SWGObject* unassigned;
+    SWGSolution_unassigned* unassigned;
     
 };
 

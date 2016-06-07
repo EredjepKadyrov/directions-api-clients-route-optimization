@@ -5,7 +5,6 @@ require 'graphhopper/version'
 require 'graphhopper/configuration'
 
 # Models
-require 'graphhopper/models/base_object'
 require 'graphhopper/models/job_id'
 require 'graphhopper/models/request'
 require 'graphhopper/models/vehicle'
@@ -22,6 +21,7 @@ require 'graphhopper/models/response'
 require 'graphhopper/models/solution'
 require 'graphhopper/models/route'
 require 'graphhopper/models/activity'
+require 'graphhopper/models/solution_unassigned'
 
 # APIs
 require 'graphhopper/api/vrp_api'
@@ -29,17 +29,17 @@ require 'graphhopper/api/solution_api'
 
 module GraphHopper
   class << self
-    # Configure sdk using block.
-    # GraphHopper.configure do |config|
-    #   config.username = "xxx"
-    #   config.password = "xxx"
-    # end
-    # If no block given, return the configuration singleton instance.
+    # Customize default settings for the SDK using block.
+    #   GraphHopper.configure do |config|
+    #     config.username = "xxx"
+    #     config.password = "xxx"
+    #   end
+    # If no block given, return the default Configuration object.
     def configure
       if block_given?
-        yield Configuration.instance
+        yield(Configuration.default)
       else
-        Configuration.instance
+        Configuration.default
       end
     end
   end

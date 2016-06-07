@@ -10,9 +10,9 @@
 #include <QJsonObject>
 
 
+#include "SWGStop.h"
 #include <QList>
 #include <QString>
-#include "SWGStop.h"
 
 #include "SWGObject.h"
 
@@ -36,6 +36,8 @@ public:
     void setId(QString* id);
     QString* getName();
     void setName(QString* name);
+    qint32 getPriority();
+    void setPriority(qint32 priority);
     SWGStop* getPickup();
     void setPickup(SWGStop* pickup);
     SWGStop* getDelivery();
@@ -51,6 +53,7 @@ public:
 private:
     QString* id;
     QString* name;
+    qint32 priority;
     SWGStop* pickup;
     SWGStop* delivery;
     QList<qint32>* size;

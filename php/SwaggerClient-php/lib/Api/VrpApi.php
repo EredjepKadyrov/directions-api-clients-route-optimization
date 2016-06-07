@@ -103,6 +103,23 @@ class VrpApi
      */
     public function postVrp($key, $body)
     {
+        list($response, $statusCode, $httpHeader) = $this->postVrpWithHttpInfo ($key, $body);
+        return $response; 
+    }
+
+
+    /**
+     * postVrpWithHttpInfo
+     *
+     * Solves large routing problems
+     *
+     * @param string $key your API key (required)
+     * @param \Swagger\Client\Model\Request $body Request object that contains the problem to be solved (required)
+     * @return Array of \Swagger\Client\Model\JobId, HTTP status code, HTTP response headers (array of strings)
+     * @throws \Swagger\Client\ApiException on non-2xx response
+     */
+    public function postVrpWithHttpInfo($key, $body)
+    {
         
         // verify the required parameter 'key' is set
         if ($key === null) {
@@ -128,6 +145,7 @@ class VrpApi
         $headerParams['Content-Type'] = ApiClient::selectHeaderContentType(array('application/json'));
   
         // query params
+        
         if ($key !== null) {
             $queryParams['key'] = $this->apiClient->getSerializer()->toQueryValue($key);
         }
@@ -143,31 +161,30 @@ class VrpApi
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
-        } else if (count($formParams) > 0) {
+        } elseif (count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
         
+        // this endpoint requires API key authentication
         $apiKey = $this->apiClient->getApiKeyWithPrefix('key');
-        if (isset($apiKey)) {
+        if (strlen($apiKey) !== 0) {
             $queryParams['key'] = $apiKey;
         }
         
         
-        
         // make the API Call
-        try
-        {
-            list($response, $httpHeader) = $this->apiClient->callApi(
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
                 $resourcePath, $method,
                 $queryParams, $httpBody,
                 $headerParams, '\Swagger\Client\Model\JobId'
             );
             
             if (!$response) {
-                return null;
+                return array(null, $statusCode, $httpHeader);
             }
 
-            return $this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\JobId', $httpHeader);
+            return array($this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\JobId', $httpHeader), $statusCode, $httpHeader);
             
         } catch (ApiException $e) {
             switch ($e->getCode()) { 
@@ -179,9 +196,6 @@ class VrpApi
   
             throw $e;
         }
-        
-        return null;
-        
     }
     
 }

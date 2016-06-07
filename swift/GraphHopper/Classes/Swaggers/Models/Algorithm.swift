@@ -12,17 +12,19 @@ public class Algorithm: JSONEncodable {
 
     public enum Problem_type: String { 
         case Min = "min"
-        case Min-max = "min-max"
+        case MinMax = "min-max"
     }
     
     public enum Objective: String { 
-        case Transport_time = "transport_time"
-        case Completion_time = "completion_time"
+        case TransportTime = "transport_time"
+        case CompletionTime = "completion_time"
     }
     
     public var problem_type: Problem_type?
     public var objective: Objective?
     
+
+    public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {

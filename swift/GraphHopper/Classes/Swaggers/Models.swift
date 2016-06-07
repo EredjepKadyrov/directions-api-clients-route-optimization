@@ -118,6 +118,10 @@ class Decoders {
                 fatalError("formatter failed to parse \(sourceString)")
             } 
 
+			// Decoder for [JobId]
+            Decoders.addDecoder(clazz: [JobId].self) { (source: AnyObject) -> [JobId] in
+                return Decoders.decode(clazz: [JobId].self, source: source)
+            }
 			// Decoder for JobId
             Decoders.addDecoder(clazz: JobId.self) { (source: AnyObject) -> JobId in
                 let sourceDictionary = source as! [NSObject:AnyObject]
@@ -127,6 +131,10 @@ class Decoders {
             }
 			
 
+			// Decoder for [Request]
+            Decoders.addDecoder(clazz: [Request].self) { (source: AnyObject) -> [Request] in
+                return Decoders.decode(clazz: [Request].self, source: source)
+            }
 			// Decoder for Request
             Decoders.addDecoder(clazz: Request.self) { (source: AnyObject) -> Request in
                 let sourceDictionary = source as! [NSObject:AnyObject]
@@ -141,6 +149,10 @@ class Decoders {
             }
 			
 
+			// Decoder for [Vehicle]
+            Decoders.addDecoder(clazz: [Vehicle].self) { (source: AnyObject) -> [Vehicle] in
+                return Decoders.decode(clazz: [Vehicle].self, source: source)
+            }
 			// Decoder for Vehicle
             Decoders.addDecoder(clazz: Vehicle.self) { (source: AnyObject) -> Vehicle in
                 let sourceDictionary = source as! [NSObject:AnyObject]
@@ -158,6 +170,10 @@ class Decoders {
             }
 			
 
+			// Decoder for [Algorithm]
+            Decoders.addDecoder(clazz: [Algorithm].self) { (source: AnyObject) -> [Algorithm] in
+                return Decoders.decode(clazz: [Algorithm].self, source: source)
+            }
 			// Decoder for Algorithm
             Decoders.addDecoder(clazz: Algorithm.self) { (source: AnyObject) -> Algorithm in
                 let sourceDictionary = source as! [NSObject:AnyObject]
@@ -168,6 +184,10 @@ class Decoders {
             }
 			
 
+			// Decoder for [Address]
+            Decoders.addDecoder(clazz: [Address].self) { (source: AnyObject) -> [Address] in
+                return Decoders.decode(clazz: [Address].self, source: source)
+            }
 			// Decoder for Address
             Decoders.addDecoder(clazz: Address.self) { (source: AnyObject) -> Address in
                 let sourceDictionary = source as! [NSObject:AnyObject]
@@ -179,6 +199,10 @@ class Decoders {
             }
 			
 
+			// Decoder for [Break]
+            Decoders.addDecoder(clazz: [Break].self) { (source: AnyObject) -> [Break] in
+                return Decoders.decode(clazz: [Break].self, source: source)
+            }
 			// Decoder for Break
             Decoders.addDecoder(clazz: Break.self) { (source: AnyObject) -> Break in
                 let sourceDictionary = source as! [NSObject:AnyObject]
@@ -190,6 +214,10 @@ class Decoders {
             }
 			
 
+			// Decoder for [VehicleType]
+            Decoders.addDecoder(clazz: [VehicleType].self) { (source: AnyObject) -> [VehicleType] in
+                return Decoders.decode(clazz: [VehicleType].self, source: source)
+            }
 			// Decoder for VehicleType
             Decoders.addDecoder(clazz: VehicleType.self) { (source: AnyObject) -> VehicleType in
                 let sourceDictionary = source as! [NSObject:AnyObject]
@@ -203,12 +231,17 @@ class Decoders {
             }
 			
 
+			// Decoder for [Service]
+            Decoders.addDecoder(clazz: [Service].self) { (source: AnyObject) -> [Service] in
+                return Decoders.decode(clazz: [Service].self, source: source)
+            }
 			// Decoder for Service
             Decoders.addDecoder(clazz: Service.self) { (source: AnyObject) -> Service in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Service()
                 instance.id = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["id"])
                 instance.type = (sourceDictionary["type"] as? String).map { Service.SwaggerType(rawValue: $0)! } 
+                instance.priority = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["priority"])
                 instance.name = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["name"])
                 instance.address = Decoders.decodeOptional(clazz: Address.self, source: sourceDictionary["address"])
                 instance.duration = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["duration"])
@@ -220,12 +253,17 @@ class Decoders {
             }
 			
 
+			// Decoder for [Shipment]
+            Decoders.addDecoder(clazz: [Shipment].self) { (source: AnyObject) -> [Shipment] in
+                return Decoders.decode(clazz: [Shipment].self, source: source)
+            }
 			// Decoder for Shipment
             Decoders.addDecoder(clazz: Shipment.self) { (source: AnyObject) -> Shipment in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Shipment()
                 instance.id = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["id"])
                 instance.name = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["name"])
+                instance.priority = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["priority"])
                 instance.pickup = Decoders.decodeOptional(clazz: Stop.self, source: sourceDictionary["pickup"])
                 instance.delivery = Decoders.decodeOptional(clazz: Stop.self, source: sourceDictionary["delivery"])
                 instance.size = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["size"])
@@ -235,6 +273,10 @@ class Decoders {
             }
 			
 
+			// Decoder for [Stop]
+            Decoders.addDecoder(clazz: [Stop].self) { (source: AnyObject) -> [Stop] in
+                return Decoders.decode(clazz: [Stop].self, source: source)
+            }
 			// Decoder for Stop
             Decoders.addDecoder(clazz: Stop.self) { (source: AnyObject) -> Stop in
                 let sourceDictionary = source as! [NSObject:AnyObject]
@@ -246,6 +288,10 @@ class Decoders {
             }
 			
 
+			// Decoder for [TimeWindow]
+            Decoders.addDecoder(clazz: [TimeWindow].self) { (source: AnyObject) -> [TimeWindow] in
+                return Decoders.decode(clazz: [TimeWindow].self, source: source)
+            }
 			// Decoder for TimeWindow
             Decoders.addDecoder(clazz: TimeWindow.self) { (source: AnyObject) -> TimeWindow in
                 let sourceDictionary = source as! [NSObject:AnyObject]
@@ -256,6 +302,10 @@ class Decoders {
             }
 			
 
+			// Decoder for [Relation]
+            Decoders.addDecoder(clazz: [Relation].self) { (source: AnyObject) -> [Relation] in
+                return Decoders.decode(clazz: [Relation].self, source: source)
+            }
 			// Decoder for Relation
             Decoders.addDecoder(clazz: Relation.self) { (source: AnyObject) -> Relation in
                 let sourceDictionary = source as! [NSObject:AnyObject]
@@ -267,6 +317,10 @@ class Decoders {
             }
 			
 
+			// Decoder for [Response]
+            Decoders.addDecoder(clazz: [Response].self) { (source: AnyObject) -> [Response] in
+                return Decoders.decode(clazz: [Response].self, source: source)
+            }
 			// Decoder for Response
             Decoders.addDecoder(clazz: Response.self) { (source: AnyObject) -> Response in
                 let sourceDictionary = source as! [NSObject:AnyObject]
@@ -280,6 +334,10 @@ class Decoders {
             }
 			
 
+			// Decoder for [Solution]
+            Decoders.addDecoder(clazz: [Solution].self) { (source: AnyObject) -> [Solution] in
+                return Decoders.decode(clazz: [Solution].self, source: source)
+            }
 			// Decoder for Solution
             Decoders.addDecoder(clazz: Solution.self) { (source: AnyObject) -> Solution in
                 let sourceDictionary = source as! [NSObject:AnyObject]
@@ -289,11 +347,15 @@ class Decoders {
                 instance.time = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["time"])
                 instance.no_unassigned = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["no_unassigned"])
                 instance.routes = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["routes"])
-                instance.unassigned = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["unassigned"])
+                instance.unassigned = Decoders.decodeOptional(clazz: Solution_unassigned.self, source: sourceDictionary["unassigned"])
                 return instance
             }
 			
 
+			// Decoder for [Route]
+            Decoders.addDecoder(clazz: [Route].self) { (source: AnyObject) -> [Route] in
+                return Decoders.decode(clazz: [Route].self, source: source)
+            }
 			// Decoder for Route
             Decoders.addDecoder(clazz: Route.self) { (source: AnyObject) -> Route in
                 let sourceDictionary = source as! [NSObject:AnyObject]
@@ -304,6 +366,10 @@ class Decoders {
             }
 			
 
+			// Decoder for [Activity]
+            Decoders.addDecoder(clazz: [Activity].self) { (source: AnyObject) -> [Activity] in
+                return Decoders.decode(clazz: [Activity].self, source: source)
+            }
 			// Decoder for Activity
             Decoders.addDecoder(clazz: Activity.self) { (source: AnyObject) -> Activity in
                 let sourceDictionary = source as! [NSObject:AnyObject]
@@ -313,6 +379,20 @@ class Decoders {
                 instance.location_id = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["location_id"])
                 instance.arr_time = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["arr_time"])
                 instance.end_time = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["end_time"])
+                return instance
+            }
+			
+
+			// Decoder for [Solution_unassigned]
+            Decoders.addDecoder(clazz: [Solution_unassigned].self) { (source: AnyObject) -> [Solution_unassigned] in
+                return Decoders.decode(clazz: [Solution_unassigned].self, source: source)
+            }
+			// Decoder for Solution_unassigned
+            Decoders.addDecoder(clazz: Solution_unassigned.self) { (source: AnyObject) -> Solution_unassigned in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = Solution_unassigned()
+                instance.services = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["services"])
+                instance.shipments = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["shipments"])
                 return instance
             }
 			

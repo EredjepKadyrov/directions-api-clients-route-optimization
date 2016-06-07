@@ -17,12 +17,12 @@
 using namespace Tizen::Web::Json;
 
 
-using Tizen::Base::Long;
 #include "SamiAddress.h"
 #include "SamiBreak.h"
-using Tizen::Base::String;
-using Tizen::Base::Collection::IList;
 using Tizen::Base::Boolean;
+using Tizen::Base::Collection::IList;
+using Tizen::Base::Long;
+using Tizen::Base::String;
 
 
 namespace Swagger {

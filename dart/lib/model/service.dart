@@ -9,6 +9,9 @@ class Service {
   /* type of service */
   String type = null;
   //enum typeEnum {  service,  pickup,  delivery,  };
+  /* priority of service, i.e. 1 = high, 2 = normal, 3 = low. default is 2. */
+  int priority = null;
+  
   /* name of service */
   String name = null;
   
@@ -35,7 +38,7 @@ class Service {
 
   @override
   String toString()  {
-    return 'Service[id=$id, type=$type, name=$name, address=$address, duration=$duration, timeWindows=$timeWindows, size=$size, requiredSkills=$requiredSkills, allowedVehicles=$allowedVehicles, ]';
+    return 'Service[id=$id, type=$type, priority=$priority, name=$name, address=$address, duration=$duration, timeWindows=$timeWindows, size=$size, requiredSkills=$requiredSkills, allowedVehicles=$allowedVehicles, ]';
   }
 
 }

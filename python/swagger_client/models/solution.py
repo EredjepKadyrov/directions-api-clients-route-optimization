@@ -42,7 +42,7 @@ class Solution(object):
             'time': 'int',
             'no_unassigned': 'int',
             'routes': 'list[Route]',
-            'unassigned': 'object'
+            'unassigned': 'SolutionUnassigned'
         }
 
         self.attribute_map = {
@@ -178,7 +178,7 @@ class Solution(object):
 
 
         :return: The unassigned of this Solution.
-        :rtype: object
+        :rtype: SolutionUnassigned
         """
         return self._unassigned
 
@@ -189,7 +189,7 @@ class Solution(object):
 
 
         :param unassigned: The unassigned of this Solution.
-        :type: object
+        :type: SolutionUnassigned
         """
         self._unassigned = unassigned
 
@@ -224,3 +224,16 @@ class Solution(object):
         For `print` and `pprint`
         """
         return self.to_str()
+
+    def __eq__(self, other): 
+        """
+        Returns true if both objects are equal
+        """
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """ 
+        Returns true if both objects are not equal
+        """
+        return not self == other
+

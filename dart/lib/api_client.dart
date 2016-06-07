@@ -141,6 +141,11 @@ class ApiClient {
         return isMap ? dson.map(json, new Activity()) : dson.decode(json, new Activity());
       
       
+      
+      case SolutionUnassigned:
+        return isMap ? dson.map(json, new SolutionUnassigned()) : dson.decode(json, new SolutionUnassigned());
+      
+      
       default:
         throw new ApiException(500, 'Could not find a suitable class for deserialization');
     }

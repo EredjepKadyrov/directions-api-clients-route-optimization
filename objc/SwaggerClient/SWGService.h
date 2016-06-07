@@ -7,8 +7,8 @@
  * Do not edit the class manually.
  */
 
-#import "SWGTimeWindow.h"
 #import "SWGAddress.h"
+#import "SWGTimeWindow.h"
 
 
 @protocol SWGService
@@ -22,6 +22,9 @@
 /* type of service [optional]
  */
 @property(nonatomic) NSString* type;
+/* priority of service, i.e. 1 = high, 2 = normal, 3 = low. default is 2. [optional]
+ */
+@property(nonatomic) NSNumber* priority;
 /* name of service [optional]
  */
 @property(nonatomic) NSString* name;

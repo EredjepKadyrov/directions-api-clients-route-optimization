@@ -17,13 +17,13 @@
 using namespace Tizen::Web::Json;
 
 
-#include "SamiVehicle.h"
 #include "SamiAlgorithm.h"
 #include "SamiRelation.h"
-#include "SamiVehicleType.h"
-using Tizen::Base::Collection::IList;
 #include "SamiService.h"
 #include "SamiShipment.h"
+#include "SamiVehicle.h"
+#include "SamiVehicleType.h"
+using Tizen::Base::Collection::IList;
 
 
 namespace Swagger {

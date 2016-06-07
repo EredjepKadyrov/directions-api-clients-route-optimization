@@ -14,6 +14,8 @@ public class Shipment: JSONEncodable {
     public var id: String?
     /** name of shipment */
     public var name: String?
+    /** priority of service, i.e. 1 = high, 2 = normal, 3 = low. default is 2. */
+    public var priority: Int?
     public var pickup: Stop?
     public var delivery: Stop?
     /** array of capacity dimensions */
@@ -24,11 +26,14 @@ public class Shipment: JSONEncodable {
     public var allowed_vehicles: [String]?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["id"] = self.id
         nillableDictionary["name"] = self.name
+        nillableDictionary["priority"] = self.priority
         nillableDictionary["pickup"] = self.pickup?.encodeToJSON()
         nillableDictionary["delivery"] = self.delivery?.encodeToJSON()
         nillableDictionary["size"] = self.size?.encodeToJSON()

@@ -72,6 +72,7 @@ class Configuration(object):
         # Password for HTTP basic authentication
         self.password = ""
 
+
         # Logging Settings
         self.logger = {}
         self.logger["package_logger"] = logging.getLogger("swagger_client")
@@ -220,6 +221,7 @@ class Configuration(object):
                     'key': 'key',
                     'value': self.get_api_key_with_prefix('key')
                 },
+
         }
 
     def to_debug_report(self):

@@ -7,8 +7,8 @@
  * Do not edit the class manually.
  */
 
-#import "SWGTimeWindow.h"
 #import "SWGAddress.h"
+#import "SWGTimeWindow.h"
 
 
 @protocol SWGStop

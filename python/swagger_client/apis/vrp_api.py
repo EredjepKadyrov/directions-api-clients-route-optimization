@@ -66,12 +66,6 @@ class VrpApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        # verify the required parameter 'key' is set
-        if key is None:
-            raise ValueError("Missing the required parameter `key` when calling `post_vrp`")
-        # verify the required parameter 'body' is set
-        if body is None:
-            raise ValueError("Missing the required parameter `body` when calling `post_vrp`")
 
         all_params = ['key', 'body']
         all_params.append('callback')
@@ -85,6 +79,13 @@ class VrpApi(object):
                 )
             params[key] = val
         del params['kwargs']
+
+        # verify the required parameter 'key' is set
+        if ('key' not in params) or (params['key'] is None):
+            raise ValueError("Missing the required parameter `key` when calling `post_vrp`")
+        # verify the required parameter 'body' is set
+        if ('body' not in params) or (params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `post_vrp`")
 
         resource_path = '/optimize'.replace('{format}', 'json')
         method = 'POST'

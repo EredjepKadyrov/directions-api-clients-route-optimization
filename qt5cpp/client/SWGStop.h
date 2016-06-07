@@ -10,9 +10,9 @@
 #include <QJsonObject>
 
 
-#include <QList>
-#include "SWGTimeWindow.h"
 #include "SWGAddress.h"
+#include "SWGTimeWindow.h"
+#include <QList>
 
 #include "SWGObject.h"
 

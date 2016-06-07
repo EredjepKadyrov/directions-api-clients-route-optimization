@@ -20,6 +20,8 @@ public class Service: JSONEncodable {
     public var id: String?
     /** type of service */
     public var type: SwaggerType?
+    /** priority of service, i.e. 1 = high, 2 = normal, 3 = low. default is 2. */
+    public var priority: Int?
     /** name of service */
     public var name: String?
     public var address: Address?
@@ -35,11 +37,14 @@ public class Service: JSONEncodable {
     public var allowed_vehicles: [String]?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["id"] = self.id
         nillableDictionary["type"] = self.type?.rawValue
+        nillableDictionary["priority"] = self.priority
         nillableDictionary["name"] = self.name
         nillableDictionary["address"] = self.address?.encodeToJSON()
         nillableDictionary["duration"] = self.duration

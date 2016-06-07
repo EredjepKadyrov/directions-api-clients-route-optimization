@@ -11,7 +11,7 @@ import Foundation
 public class Response: JSONEncodable {
 
     public enum Status: String { 
-        case Waiting_in_queue = "waiting_in_queue"
+        case WaitingInQueue = "waiting_in_queue"
         case Processing = "processing"
         case Finished = "finished"
     }
@@ -27,6 +27,8 @@ public class Response: JSONEncodable {
     /** the solution. only available if status field indicates finished */
     public var solution: Solution?
     
+
+    public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {

@@ -39,6 +39,7 @@ class Service(object):
         self.swagger_types = {
             'id': 'str',
             'type': 'str',
+            'priority': 'int',
             'name': 'str',
             'address': 'Address',
             'duration': 'int',
@@ -51,6 +52,7 @@ class Service(object):
         self.attribute_map = {
             'id': 'id',
             'type': 'type',
+            'priority': 'priority',
             'name': 'name',
             'address': 'address',
             'duration': 'duration',
@@ -62,6 +64,7 @@ class Service(object):
 
         self._id = None
         self._type = None
+        self._priority = None
         self._name = None
         self._address = None
         self._duration = None
@@ -119,6 +122,28 @@ class Service(object):
                 .format(allowed_values)
             )
         self._type = type
+
+    @property
+    def priority(self):
+        """
+        Gets the priority of this Service.
+        priority of service, i.e. 1 = high, 2 = normal, 3 = low. default is 2.
+
+        :return: The priority of this Service.
+        :rtype: int
+        """
+        return self._priority
+
+    @priority.setter
+    def priority(self, priority):
+        """
+        Sets the priority of this Service.
+        priority of service, i.e. 1 = high, 2 = normal, 3 = low. default is 2.
+
+        :param priority: The priority of this Service.
+        :type: int
+        """
+        self._priority = priority
 
     @property
     def name(self):
@@ -305,3 +330,16 @@ class Service(object):
         For `print` and `pprint`
         """
         return self.to_str()
+
+    def __eq__(self, other): 
+        """
+        Returns true if both objects are equal
+        """
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """ 
+        Returns true if both objects are not equal
+        """
+        return not self == other
+

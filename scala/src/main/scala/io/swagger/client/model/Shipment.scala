@@ -8,6 +8,8 @@ case class Shipment (
   id: String,
   /* name of shipment */
   name: String,
+  /* priority of service, i.e. 1 = high, 2 = normal, 3 = low. default is 2. */
+  priority: Integer,
   pickup: Stop,
   delivery: Stop,
   /* array of capacity dimensions */

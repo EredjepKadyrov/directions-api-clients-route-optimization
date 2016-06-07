@@ -27,7 +27,10 @@ extension GraphHopperAPI {
   "solution" : {
     "time" : 123456789,
     "distance" : 123,
-    "unassigned" : "{}",
+    "unassigned" : {
+      "services" : [ "aeiou" ],
+      "shipments" : [ "aeiou" ]
+    },
     "routes" : [ {
       "activities" : [ {
         "id" : "aeiou",

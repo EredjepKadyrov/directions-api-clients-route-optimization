@@ -43,12 +43,8 @@ SWGVehicleType::cleanup() {
         delete profile;
     }
     
-    if(speed_factor != NULL) {
-        delete speed_factor;
-    }
-    if(service_time_factor != NULL) {
-        delete service_time_factor;
-    }
+    
+    
     
 }
 
@@ -66,8 +62,8 @@ SWGVehicleType::fromJsonObject(QJsonObject &pJson) {
     setValue(&type_id, pJson["type_id"], "QString", "QString");
     setValue(&profile, pJson["profile"], "QString", "QString");
     setValue(&capacity, pJson["capacity"], "QList", "");
-    setValue(&speed_factor, pJson["speed_factor"], "double", "double");
-    setValue(&service_time_factor, pJson["service_time_factor"], "double", "double");
+    setValue(&speed_factor, pJson["speed_factor"], "double", "");
+    setValue(&service_time_factor, pJson["service_time_factor"], "double", "");
     
 }
 
@@ -97,18 +93,8 @@ SWGVehicleType::asJsonObject() {
     
     
     obj->insert("capacity", QJsonValue(capacity));
-    
-    
-    toJsonValue(QString("speed_factor"), speed_factor, obj, QString("double"));
-    
-    
-    
-    
-    
-    toJsonValue(QString("service_time_factor"), service_time_factor, obj, QString("double"));
-    
-    
-    
+    obj->insert("speed_factor", QJsonValue(speed_factor));
+    obj->insert("service_time_factor", QJsonValue(service_time_factor));
     
 
     return obj;
@@ -141,21 +127,21 @@ SWGVehicleType::setCapacity(QList<qint32>* capacity) {
     this->capacity = capacity;
 }
 
-double*
+double
 SWGVehicleType::getSpeedFactor() {
     return speed_factor;
 }
 void
-SWGVehicleType::setSpeedFactor(double* speed_factor) {
+SWGVehicleType::setSpeedFactor(double speed_factor) {
     this->speed_factor = speed_factor;
 }
 
-double*
+double
 SWGVehicleType::getServiceTimeFactor() {
     return service_time_factor;
 }
 void
-SWGVehicleType::setServiceTimeFactor(double* service_time_factor) {
+SWGVehicleType::setServiceTimeFactor(double service_time_factor) {
     this->service_time_factor = service_time_factor;
 }
 

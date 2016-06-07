@@ -17,10 +17,10 @@
 using namespace Tizen::Web::Json;
 
 
-using Tizen::Base::Long;
 #include "SamiAddress.h"
 #include "SamiTimeWindow.h"
 using Tizen::Base::Collection::IList;
+using Tizen::Base::Long;
 
 
 namespace Swagger {

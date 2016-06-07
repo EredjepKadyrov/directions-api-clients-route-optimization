@@ -10,10 +10,10 @@
 #include <QJsonObject>
 
 
-#include <QList>
-#include <QString>
 #include "SWGAddress.h"
 #include "SWGBreak.h"
+#include <QList>
+#include <QString>
 
 #include "SWGObject.h"
 

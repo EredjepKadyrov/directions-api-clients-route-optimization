@@ -23,6 +23,8 @@ public class Request: JSONEncodable {
     public var algorithm: Algorithm?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()

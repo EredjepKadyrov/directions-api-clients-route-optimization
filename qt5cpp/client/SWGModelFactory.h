@@ -18,6 +18,7 @@
 #include "SWGSolution.h"
 #include "SWGRoute.h"
 #include "SWGActivity.h"
+#include "SWGSolution_unassigned.h"
 
 namespace Swagger {
   inline void* create(QString type) {
@@ -68,6 +69,9 @@ namespace Swagger {
     }
     if(QString("SWGActivity").compare(type) == 0) {
       return new SWGActivity();
+    }
+    if(QString("SWGSolution_unassigned").compare(type) == 0) {
+      return new SWGSolution_unassigned();
     }
     
     return NULL;

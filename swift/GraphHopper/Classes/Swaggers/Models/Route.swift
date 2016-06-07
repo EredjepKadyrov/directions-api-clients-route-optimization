@@ -16,6 +16,8 @@ public class Route: JSONEncodable {
     public var activities: [Activity]?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()

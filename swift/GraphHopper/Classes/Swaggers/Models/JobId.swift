@@ -14,6 +14,8 @@ public class JobId: JSONEncodable {
     public var job_id: String?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()

@@ -19,6 +19,7 @@
 #include "SamiSolution.h"
 #include "SamiRoute.h"
 #include "SamiActivity.h"
+#include "SamiSolution_unassigned.h"
 
 namespace Swagger {
   void*
@@ -70,6 +71,9 @@ namespace Swagger {
     }
     if(type.Equals(L"SamiActivity", true)) {
       return new SamiActivity();
+    }
+    if(type.Equals(L"SamiSolution_unassigned", true)) {
+      return new SamiSolution_unassigned();
     }
     
     if(type.Equals(L"String", true)) {

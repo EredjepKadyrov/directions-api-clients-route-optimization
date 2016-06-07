@@ -56,7 +56,7 @@ class Solution implements ArrayAccess
         'time' => 'int',
         'no_unassigned' => 'int',
         'routes' => '\Swagger\Client\Model\Route[]',
-        'unassigned' => 'object'
+        'unassigned' => '\Swagger\Client\Model\SolutionUnassigned'
     );
   
     /** 
@@ -131,7 +131,7 @@ class Solution implements ArrayAccess
     
     /**
       * $unassigned 
-      * @var object
+      * @var \Swagger\Client\Model\SolutionUnassigned
       */
     protected $unassigned;
     
@@ -259,7 +259,7 @@ class Solution implements ArrayAccess
     
     /**
      * Gets unassigned
-     * @return object
+     * @return \Swagger\Client\Model\SolutionUnassigned
      */
     public function getUnassigned()
     {
@@ -268,7 +268,7 @@ class Solution implements ArrayAccess
   
     /**
      * Sets unassigned
-     * @param object $unassigned 
+     * @param \Swagger\Client\Model\SolutionUnassigned $unassigned 
      * @return $this
      */
     public function setUnassigned($unassigned)

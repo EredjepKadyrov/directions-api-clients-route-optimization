@@ -28,6 +28,7 @@ void
 SWGShipment::init() {
     id = new QString("");
     name = new QString("");
+    priority = 0;
     pickup = new SWGStop();
     delivery = new SWGStop();
     size = new QList<qint32>();
@@ -44,6 +45,7 @@ SWGShipment::cleanup() {
     if(name != NULL) {
         delete name;
     }
+    
     if(pickup != NULL) {
         delete pickup;
     }
@@ -81,6 +83,7 @@ void
 SWGShipment::fromJsonObject(QJsonObject &pJson) {
     setValue(&id, pJson["id"], "QString", "QString");
     setValue(&name, pJson["name"], "QString", "QString");
+    setValue(&priority, pJson["priority"], "qint32", "");
     setValue(&pickup, pJson["pickup"], "SWGStop", "SWGStop");
     setValue(&delivery, pJson["delivery"], "SWGStop", "SWGStop");
     setValue(&size, pJson["size"], "QList", "");
@@ -114,6 +117,7 @@ SWGShipment::asJsonObject() {
     
     
     
+    obj->insert("priority", QJsonValue(priority));
     
     
     toJsonValue(QString("pickup"), pickup, obj, QString("SWGStop"));
@@ -166,6 +170,15 @@ SWGShipment::getName() {
 void
 SWGShipment::setName(QString* name) {
     this->name = name;
+}
+
+qint32
+SWGShipment::getPriority() {
+    return priority;
+}
+void
+SWGShipment::setPriority(qint32 priority) {
+    this->priority = priority;
 }
 
 SWGStop*

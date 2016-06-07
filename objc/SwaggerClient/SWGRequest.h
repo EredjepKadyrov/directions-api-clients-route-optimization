@@ -7,12 +7,12 @@
  * Do not edit the class manually.
  */
 
-#import "SWGVehicleType.h"
-#import "SWGService.h"
-#import "SWGRelation.h"
 #import "SWGAlgorithm.h"
+#import "SWGRelation.h"
+#import "SWGService.h"
 #import "SWGShipment.h"
 #import "SWGVehicle.h"
+#import "SWGVehicleType.h"
 
 
 @protocol SWGRequest
