@@ -20,7 +20,7 @@ function create {
   case "$LANG" in
 	java)
 		PKG="com.graphhopper.routeopt.client"
-		CONFIG="--api-package $PKG.api --invoker-package $PKG --model-package $PKG.model --artifact-id directions-api-java-client-route-opt --group-id com.graphhopper --library okhttp-gson"
+		CONFIG="--artifact-version 0.7-SNAPSHOT --api-package $PKG.api --invoker-package $PKG --model-package $PKG.model --artifact-id directions-api-java-client-route-opt --group-id com.graphhopper --library okhttp-gson"
 		;;
 	ruby)
 		CONFIG="-c ruby.json"
