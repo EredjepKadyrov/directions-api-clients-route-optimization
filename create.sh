@@ -7,6 +7,9 @@ FILE=swagger-codegen-cli-2.1.6.jar
 
 if [[ ! -f $FILE ]]; then
   wget http://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/2.1.6/$FILE -O $FILE
+  if [[ ! -f $FILE ]]; then
+    curl http://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/2.1.6/$FILE -O $FILE  
+  fi
 fi
 
 function create {
