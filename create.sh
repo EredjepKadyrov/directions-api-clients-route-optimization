@@ -3,6 +3,10 @@
 SPEC=https://graphhopper.com/api/1/vrp/swagger.json
 DIR=.
 
+if [[ ! -f swagger-codegen-cli.jar ]]; then
+  wget http://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/2.1.6/swagger-codegen-cli-2.1.6.jar -O swagger-codegen-cli.jar
+fi
+
 function create {
   LANG=$1
   CONFIG=""
@@ -33,7 +37,7 @@ function create {
   esac
   
   # echo "create $LANG, config: $CONFIG, additional params: $ADD_PARAMS"
-  SH="java -jar swagger-codegen/modules/swagger-codegen-cli/target/swagger-codegen-cli.jar generate -i $SPEC -l $LANG $CONFIG -o $DIR/$LANG $ADD_PARAMS"
+  SH="java -jar swagger-codegen-cli.jar generate -i $SPEC -l $LANG $CONFIG -o $DIR/$LANG $ADD_PARAMS"
   echo $SH
   $SH
 }
