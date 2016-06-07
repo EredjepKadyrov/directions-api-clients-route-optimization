@@ -3,12 +3,12 @@
 SPEC=https://graphhopper.com/api/1/vrp/swagger.json
 DIR=.
 
-FILE=swagger-codegen-cli-2.1.6.jar
+FILE=swagger-codegen-cli-2.1.5.jar
 
 if [[ ! -f $FILE ]]; then
-  wget http://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/2.1.6/$FILE -O $FILE
+  wget http://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/2.1.5/$FILE -O $FILE
   if [[ ! -f $FILE ]]; then
-    curl http://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/2.1.6/$FILE -O $FILE  
+    curl http://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/2.1.5/$FILE -O $FILE  
   fi
 fi
 
@@ -19,7 +19,8 @@ function create {
   
   case "$LANG" in
 	java)
-		CONFIG="-c java.json"
+		PKG="com.graphhopper.routeopt.client"
+		CONFIG="--api-package $PKG.api --invoker-package $PKG --model-package $PKG.model --artifact-id directions-api-java-client-route-opt --group-id com.graphhopper --library okhttp-gson"
 		;;
 	ruby)
 		CONFIG="-c ruby.json"
@@ -42,6 +43,7 @@ function create {
   esac
   
   # echo "create $LANG, config: $CONFIG, additional params: $ADD_PARAMS"
+  rm -rf $DIR/$LANG
   SH="java -jar $FILE generate -i $SPEC -l $LANG $CONFIG -o $DIR/$LANG $ADD_PARAMS"
   echo $SH
   $SH
