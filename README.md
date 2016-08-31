@@ -32,7 +32,7 @@ Description:
  
 ### Swagger
 
-Currently we use swagger codegen 2.1.5
+Currently we use swagger codegen 2.1.5 to create the projects and e.g. java uses swagger-annotations-version 1.5.0
 
 ### Update all clients
 
