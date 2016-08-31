@@ -10,7 +10,7 @@ java      |  yes     | no     | [official client](https://github.com/graphhopper
 javascript|  no      | -      | Use the [official client](https://github.com/graphhopper/directions-api-js-client) please
 python    |  yes     | no     |
 csharp    |  yes     | no     | [contributed client](https://github.com/Schuby80/WpfGraphHopper)
-ruby      |  yes     | no     |
+ruby      |  yes     | [yes](https://github.com/graphhopper/directions-api-clients-route-optimization/issues/3)   |
 sinatra (ruby)| yes  | no     |
 php       |  yes     | no     |
 perl      |  yes     | no     |
@@ -29,6 +29,10 @@ Description:
 
  * created=yes: this means we were able to create the client with the swagger library
  * tested=yes: this means we or one of our customers has successfully used the library
+ 
+### Swagger
+
+Currently we use swagger codegen 2.1.5
 
 ### Update all clients
 
