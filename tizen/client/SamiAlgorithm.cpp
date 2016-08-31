@@ -23,8 +23,7 @@ SamiAlgorithm::~SamiAlgorithm() {
 void
 SamiAlgorithm::init() {
     pProblem_type = null;
-    pObjective = null;
-    
+pObjective = null;
 }
 
 void
@@ -34,12 +33,11 @@ SamiAlgorithm::cleanup() {
         delete pProblem_type;
         pProblem_type = null;
     }
-    if(pObjective != null) {
+if(pObjective != null) {
         
         delete pObjective;
         pObjective = null;
     }
-    
 }
 
 
@@ -86,7 +84,7 @@ SamiAlgorithm::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pProblem_type, pProblem_typeVal, L"String", L"String");
         }
         delete pProblem_typeKey;
-        JsonString* pObjectiveKey = new JsonString(L"objective");
+JsonString* pObjectiveKey = new JsonString(L"objective");
         IJsonValue* pObjectiveVal = null;
         pJsonObject->GetValue(pObjectiveKey, pObjectiveVal);
         if(pObjectiveVal != null) {
@@ -95,7 +93,6 @@ SamiAlgorithm::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pObjective, pObjectiveVal, L"String", L"String");
         }
         delete pObjectiveKey;
-        
     }
 }
 
@@ -146,15 +143,12 @@ SamiAlgorithm::asJsonObject() {
     JsonObject *pJsonObject = new JsonObject();
     pJsonObject->Construct();
 
-    
     JsonString *pProblem_typeKey = new JsonString(L"problem_type");
     pJsonObject->Add(pProblem_typeKey, toJson(getPProblemType(), "String", ""));
 
-    
     JsonString *pObjectiveKey = new JsonString(L"objective");
     pJsonObject->Add(pObjectiveKey, toJson(getPObjective(), "String", ""));
 
-    
     return pJsonObject;
 }
 

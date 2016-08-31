@@ -18,10 +18,8 @@ public:
   SamiVrpApi();
   virtual ~SamiVrpApi();
 
-  
   SamiJobId* 
   postVrpWithCompletion(String* key, SamiRequest* body, void (* handler)(SamiJobId*, SamiError*));
-  
   static String getBasePath() {
     return L"https://graphhopper.com/api/1/vrp";
   }

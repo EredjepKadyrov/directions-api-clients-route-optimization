@@ -9,7 +9,6 @@ import Foundation
 
 
 public class VehicleType: JSONEncodable {
-
     public enum Profile: String { 
         case Car = "car"
         case Bike = "bike"
@@ -21,29 +20,27 @@ public class VehicleType: JSONEncodable {
         case SmallTruck = "small_truck"
         case Bus = "bus"
     }
-    
     /** Unique identifier for the vehicle type */
-    public var type_id: String?
+    public var typeId: String?
     /** Profile of vehicle type */
     public var profile: Profile?
     /** array of capacity dimensions */
-    public var capacity: [Int]?
+    public var capacity: [Int32]?
     /** speed_factor of vehicle type */
-    public var speed_factor: Double?
+    public var speedFactor: Double?
     /** service time factor of vehicle type */
-    public var service_time_factor: Double?
-    
+    public var serviceTimeFactor: Double?
 
     public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
-        nillableDictionary["type_id"] = self.type_id
+        nillableDictionary["type_id"] = self.typeId
         nillableDictionary["profile"] = self.profile?.rawValue
         nillableDictionary["capacity"] = self.capacity?.encodeToJSON()
-        nillableDictionary["speed_factor"] = self.speed_factor
-        nillableDictionary["service_time_factor"] = self.service_time_factor
+        nillableDictionary["speed_factor"] = self.speedFactor
+        nillableDictionary["service_time_factor"] = self.serviceTimeFactor
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

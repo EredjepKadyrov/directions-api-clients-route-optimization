@@ -41,22 +41,17 @@ public:
 
     SamiRelation* fromJson(String* obj);
 
-    
     String* getPType();
     void setPType(String* pType);
-    
     IList* getPIds();
     void setPIds(IList* pIds);
-    
     String* getPVehicleId();
     void setPVehicleId(String* pVehicle_id);
-    
 
 private:
     String* pType;
-    IList* pIds;
-    String* pVehicle_id;
-    
+IList* pIds;
+String* pVehicle_id;
 };
 
 } /* namespace Swagger */

@@ -60,30 +60,21 @@ SamiVrpApi::postVrpWithCompletion(String* key, SamiRequest* body, void (* succes
   headerParams->Construct();
 
   
-
   HashMap* queryParams = new HashMap(SingleObjectDeleter);
   queryParams->Construct();
 
   
     queryParams->Add(new String("key"), key);
-  
-  
 
   String* mBody = null;
 
-  
-  
-  
   if(body != null) {
     mBody = new String(body->asJson());
     headerParams->Add(new String("Content-Type"), new String("application/json"));
   }
-  
-  
 
   String url(L"/optimize");
 
-  
 
   client->execute(SamiVrpApi::getBasePath(), url, "POST", (IMap*)queryParams, mBody, (IMap*)headerParams, null, L"application/json");
   return null;

@@ -23,11 +23,10 @@ SamiActivity::~SamiActivity() {
 void
 SamiActivity::init() {
     pType = null;
-    pId = null;
-    pLocation_id = null;
-    pArr_time = null;
-    pEnd_time = null;
-    
+pId = null;
+pLocation_id = null;
+pArr_time = null;
+pEnd_time = null;
 }
 
 void
@@ -37,27 +36,26 @@ SamiActivity::cleanup() {
         delete pType;
         pType = null;
     }
-    if(pId != null) {
+if(pId != null) {
         
         delete pId;
         pId = null;
     }
-    if(pLocation_id != null) {
+if(pLocation_id != null) {
         
         delete pLocation_id;
         pLocation_id = null;
     }
-    if(pArr_time != null) {
+if(pArr_time != null) {
         
         delete pArr_time;
         pArr_time = null;
     }
-    if(pEnd_time != null) {
+if(pEnd_time != null) {
         
         delete pEnd_time;
         pEnd_time = null;
     }
-    
 }
 
 
@@ -104,7 +102,7 @@ SamiActivity::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pType, pTypeVal, L"String", L"String");
         }
         delete pTypeKey;
-        JsonString* pIdKey = new JsonString(L"id");
+JsonString* pIdKey = new JsonString(L"id");
         IJsonValue* pIdVal = null;
         pJsonObject->GetValue(pIdKey, pIdVal);
         if(pIdVal != null) {
@@ -113,7 +111,7 @@ SamiActivity::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pId, pIdVal, L"String", L"String");
         }
         delete pIdKey;
-        JsonString* pLocation_idKey = new JsonString(L"location_id");
+JsonString* pLocation_idKey = new JsonString(L"location_id");
         IJsonValue* pLocation_idVal = null;
         pJsonObject->GetValue(pLocation_idKey, pLocation_idVal);
         if(pLocation_idVal != null) {
@@ -122,7 +120,7 @@ SamiActivity::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pLocation_id, pLocation_idVal, L"String", L"String");
         }
         delete pLocation_idKey;
-        JsonString* pArr_timeKey = new JsonString(L"arr_time");
+JsonString* pArr_timeKey = new JsonString(L"arr_time");
         IJsonValue* pArr_timeVal = null;
         pJsonObject->GetValue(pArr_timeKey, pArr_timeVal);
         if(pArr_timeVal != null) {
@@ -131,7 +129,7 @@ SamiActivity::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pArr_time, pArr_timeVal, L"Long", L"Long");
         }
         delete pArr_timeKey;
-        JsonString* pEnd_timeKey = new JsonString(L"end_time");
+JsonString* pEnd_timeKey = new JsonString(L"end_time");
         IJsonValue* pEnd_timeVal = null;
         pJsonObject->GetValue(pEnd_timeKey, pEnd_timeVal);
         if(pEnd_timeVal != null) {
@@ -140,7 +138,6 @@ SamiActivity::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pEnd_time, pEnd_timeVal, L"Long", L"Long");
         }
         delete pEnd_timeKey;
-        
     }
 }
 
@@ -191,27 +188,21 @@ SamiActivity::asJsonObject() {
     JsonObject *pJsonObject = new JsonObject();
     pJsonObject->Construct();
 
-    
     JsonString *pTypeKey = new JsonString(L"type");
     pJsonObject->Add(pTypeKey, toJson(getPType(), "String", ""));
 
-    
     JsonString *pIdKey = new JsonString(L"id");
     pJsonObject->Add(pIdKey, toJson(getPId(), "String", ""));
 
-    
     JsonString *pLocation_idKey = new JsonString(L"location_id");
     pJsonObject->Add(pLocation_idKey, toJson(getPLocationId(), "String", ""));
 
-    
     JsonString *pArr_timeKey = new JsonString(L"arr_time");
     pJsonObject->Add(pArr_timeKey, toJson(getPArrTime(), "Long", ""));
 
-    
     JsonString *pEnd_timeKey = new JsonString(L"end_time");
     pJsonObject->Add(pEnd_timeKey, toJson(getPEndTime(), "Long", ""));
 
-    
     return pJsonObject;
 }
 

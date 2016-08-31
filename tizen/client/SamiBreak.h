@@ -17,6 +17,7 @@
 using namespace Tizen::Web::Json;
 
 
+using Tizen::Base::Collection::IList;
 using Tizen::Base::Long;
 
 
@@ -40,22 +41,26 @@ public:
 
     SamiBreak* fromJson(String* obj);
 
-    
     Long* getPEarliest();
     void setPEarliest(Long* pEarliest);
-    
     Long* getPLatest();
     void setPLatest(Long* pLatest);
-    
     Long* getPDuration();
     void setPDuration(Long* pDuration);
-    
+    Long* getPMaxDrivingTime();
+    void setPMaxDrivingTime(Long* pMax_driving_time);
+    Long* getPInitialDrivingTime();
+    void setPInitialDrivingTime(Long* pInitial_driving_time);
+    IList* getPPossibleSplit();
+    void setPPossibleSplit(IList* pPossible_split);
 
 private:
     Long* pEarliest;
-    Long* pLatest;
-    Long* pDuration;
-    
+Long* pLatest;
+Long* pDuration;
+Long* pMax_driving_time;
+Long* pInitial_driving_time;
+IList* pPossible_split;
 };
 
 } /* namespace Swagger */

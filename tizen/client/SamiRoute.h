@@ -42,18 +42,14 @@ public:
 
     SamiRoute* fromJson(String* obj);
 
-    
     String* getPVehicleId();
     void setPVehicleId(String* pVehicle_id);
-    
     IList* getPActivities();
     void setPActivities(IList* pActivities);
-    
 
 private:
     String* pVehicle_id;
-    IList* pActivities;
-    
+IList* pActivities;
 };
 
 } /* namespace Swagger */

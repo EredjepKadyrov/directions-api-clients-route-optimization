@@ -23,8 +23,7 @@ SamiRoute::~SamiRoute() {
 void
 SamiRoute::init() {
     pVehicle_id = null;
-    pActivities = null;
-    
+pActivities = null;
 }
 
 void
@@ -34,12 +33,11 @@ SamiRoute::cleanup() {
         delete pVehicle_id;
         pVehicle_id = null;
     }
-    if(pActivities != null) {
+if(pActivities != null) {
         pActivities->RemoveAll(true);
         delete pActivities;
         pActivities = null;
     }
-    
 }
 
 
@@ -86,7 +84,7 @@ SamiRoute::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pVehicle_id, pVehicle_idVal, L"String", L"String");
         }
         delete pVehicle_idKey;
-        JsonString* pActivitiesKey = new JsonString(L"activities");
+JsonString* pActivitiesKey = new JsonString(L"activities");
         IJsonValue* pActivitiesVal = null;
         pJsonObject->GetValue(pActivitiesKey, pActivitiesVal);
         if(pActivitiesVal != null) {
@@ -95,7 +93,6 @@ SamiRoute::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pActivities, pActivitiesVal, L"IList", L"SamiActivity");
         }
         delete pActivitiesKey;
-        
     }
 }
 
@@ -146,15 +143,12 @@ SamiRoute::asJsonObject() {
     JsonObject *pJsonObject = new JsonObject();
     pJsonObject->Construct();
 
-    
     JsonString *pVehicle_idKey = new JsonString(L"vehicle_id");
     pJsonObject->Add(pVehicle_idKey, toJson(getPVehicleId(), "String", ""));
 
-    
     JsonString *pActivitiesKey = new JsonString(L"activities");
     pJsonObject->Add(pActivitiesKey, toJson(getPActivities(), "SamiActivity", "array"));
 
-    
     return pJsonObject;
 }
 

@@ -9,14 +9,12 @@ import Foundation
 
 
 public class Relation: JSONEncodable {
-
     /** identifier of relation */
     public var type: String?
     /** An array of ids that should be related */
     public var ids: [String]?
     /** vehicle id */
-    public var vehicle_id: String?
-    
+    public var vehicleId: String?
 
     public init() {}
 
@@ -25,7 +23,7 @@ public class Relation: JSONEncodable {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["type"] = self.type
         nillableDictionary["ids"] = self.ids?.encodeToJSON()
-        nillableDictionary["vehicle_id"] = self.vehicle_id
+        nillableDictionary["vehicle_id"] = self.vehicleId
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

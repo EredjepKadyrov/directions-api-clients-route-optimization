@@ -9,37 +9,35 @@ import Foundation
 
 
 public class Vehicle: JSONEncodable {
-
     /** Unique identifier of vehicle */
-    public var vehicle_id: String?
+    public var vehicleId: String?
     /** Unique identifier referring to the available vehicle types */
-    public var type_id: String?
-    public var start_address: Address?
-    public var end_address: Address?
-    public var Swaggerbreak: Break?
+    public var typeId: String?
+    public var startAddress: Address?
+    public var endAddress: Address?
+    public var _break: Break?
     /** Indicates whether vehicle should return to start address or not. If not, it can end at any service activity. */
-    public var return_to_depot: Bool?
+    public var returnToDepot: Bool?
     /** earliest start of vehicle at its start location */
-    public var earliest_start: Int?
+    public var earliestStart: Int64?
     /** latest end of vehicle at its end location */
-    public var latest_end: Int?
+    public var latestEnd: Int64?
     /** array of skills */
     public var skills: [String]?
-    
 
     public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
-        nillableDictionary["vehicle_id"] = self.vehicle_id
-        nillableDictionary["type_id"] = self.type_id
-        nillableDictionary["start_address"] = self.start_address?.encodeToJSON()
-        nillableDictionary["end_address"] = self.end_address?.encodeToJSON()
-        nillableDictionary["Swaggerbreak"] = self.Swaggerbreak?.encodeToJSON()
-        nillableDictionary["return_to_depot"] = self.return_to_depot
-        nillableDictionary["earliest_start"] = self.earliest_start
-        nillableDictionary["latest_end"] = self.latest_end
+        nillableDictionary["vehicle_id"] = self.vehicleId
+        nillableDictionary["type_id"] = self.typeId
+        nillableDictionary["start_address"] = self.startAddress?.encodeToJSON()
+        nillableDictionary["end_address"] = self.endAddress?.encodeToJSON()
+        nillableDictionary["break"] = self._break?.encodeToJSON()
+        nillableDictionary["return_to_depot"] = self.returnToDepot
+        nillableDictionary["earliest_start"] = self.earliestStart?.encodeToJSON()
+        nillableDictionary["latest_end"] = self.latestEnd?.encodeToJSON()
         nillableDictionary["skills"] = self.skills?.encodeToJSON()
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary

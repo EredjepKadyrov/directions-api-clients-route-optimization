@@ -60,27 +60,21 @@ SamiSolutionApi::getSolutionWithCompletion(String* key, String* jobId, void (* s
   headerParams->Construct();
 
   
-
   HashMap* queryParams = new HashMap(SingleObjectDeleter);
   queryParams->Construct();
 
   
     queryParams->Add(new String("key"), key);
-  
-  
 
   String* mBody = null;
 
-  
 
   String url(L"/solution/{jobId}");
 
-  
   String s_jobId(L"{");
   s_jobId.Append(L"jobId");
   s_jobId.Append(L"}");
   url.Replace(s_jobId, stringify(jobId, L"String*"));
-  
 
   client->execute(SamiSolutionApi::getBasePath(), url, "GET", (IMap*)queryParams, mBody, (IMap*)headerParams, null, L"application/json");
   return null;

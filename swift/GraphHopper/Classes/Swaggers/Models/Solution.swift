@@ -9,29 +9,27 @@ import Foundation
 
 
 public class Solution: JSONEncodable {
-
     /** overall costs of solution */
-    public var costs: Int?
+    public var costs: Int32?
     /** overall travel distance in meters */
-    public var distance: Int?
+    public var distance: Int32?
     /** overall travel time in ms */
-    public var time: Int?
+    public var time: Int64?
     /** number of jobs that could not be assigned to final solution */
-    public var no_unassigned: Int?
+    public var noUnassigned: Int32?
     /** An array of routes */
     public var routes: [Route]?
-    public var unassigned: Solution_unassigned?
-    
+    public var unassigned: SolutionUnassigned?
 
     public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
-        nillableDictionary["costs"] = self.costs
-        nillableDictionary["distance"] = self.distance
-        nillableDictionary["time"] = self.time
-        nillableDictionary["no_unassigned"] = self.no_unassigned
+        nillableDictionary["costs"] = self.costs?.encodeToJSON()
+        nillableDictionary["distance"] = self.distance?.encodeToJSON()
+        nillableDictionary["time"] = self.time?.encodeToJSON()
+        nillableDictionary["no_unassigned"] = self.noUnassigned?.encodeToJSON()
         nillableDictionary["routes"] = self.routes?.encodeToJSON()
         nillableDictionary["unassigned"] = self.unassigned?.encodeToJSON()
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]

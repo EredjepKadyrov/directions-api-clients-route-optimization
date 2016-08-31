@@ -23,9 +23,11 @@ SamiBreak::~SamiBreak() {
 void
 SamiBreak::init() {
     pEarliest = null;
-    pLatest = null;
-    pDuration = null;
-    
+pLatest = null;
+pDuration = null;
+pMax_driving_time = null;
+pInitial_driving_time = null;
+pPossible_split = null;
 }
 
 void
@@ -35,17 +37,31 @@ SamiBreak::cleanup() {
         delete pEarliest;
         pEarliest = null;
     }
-    if(pLatest != null) {
+if(pLatest != null) {
         
         delete pLatest;
         pLatest = null;
     }
-    if(pDuration != null) {
+if(pDuration != null) {
         
         delete pDuration;
         pDuration = null;
     }
-    
+if(pMax_driving_time != null) {
+        
+        delete pMax_driving_time;
+        pMax_driving_time = null;
+    }
+if(pInitial_driving_time != null) {
+        
+        delete pInitial_driving_time;
+        pInitial_driving_time = null;
+    }
+if(pPossible_split != null) {
+        pPossible_split->RemoveAll(true);
+        delete pPossible_split;
+        pPossible_split = null;
+    }
 }
 
 
@@ -92,7 +108,7 @@ SamiBreak::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pEarliest, pEarliestVal, L"Long", L"Long");
         }
         delete pEarliestKey;
-        JsonString* pLatestKey = new JsonString(L"latest");
+JsonString* pLatestKey = new JsonString(L"latest");
         IJsonValue* pLatestVal = null;
         pJsonObject->GetValue(pLatestKey, pLatestVal);
         if(pLatestVal != null) {
@@ -101,7 +117,7 @@ SamiBreak::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pLatest, pLatestVal, L"Long", L"Long");
         }
         delete pLatestKey;
-        JsonString* pDurationKey = new JsonString(L"duration");
+JsonString* pDurationKey = new JsonString(L"duration");
         IJsonValue* pDurationVal = null;
         pJsonObject->GetValue(pDurationKey, pDurationVal);
         if(pDurationVal != null) {
@@ -110,7 +126,33 @@ SamiBreak::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pDuration, pDurationVal, L"Long", L"Long");
         }
         delete pDurationKey;
-        
+JsonString* pMax_driving_timeKey = new JsonString(L"max_driving_time");
+        IJsonValue* pMax_driving_timeVal = null;
+        pJsonObject->GetValue(pMax_driving_timeKey, pMax_driving_timeVal);
+        if(pMax_driving_timeVal != null) {
+            
+            pMax_driving_time = new Long();
+            jsonToValue(pMax_driving_time, pMax_driving_timeVal, L"Long", L"Long");
+        }
+        delete pMax_driving_timeKey;
+JsonString* pInitial_driving_timeKey = new JsonString(L"initial_driving_time");
+        IJsonValue* pInitial_driving_timeVal = null;
+        pJsonObject->GetValue(pInitial_driving_timeKey, pInitial_driving_timeVal);
+        if(pInitial_driving_timeVal != null) {
+            
+            pInitial_driving_time = new Long();
+            jsonToValue(pInitial_driving_time, pInitial_driving_timeVal, L"Long", L"Long");
+        }
+        delete pInitial_driving_timeKey;
+JsonString* pPossible_splitKey = new JsonString(L"possible_split");
+        IJsonValue* pPossible_splitVal = null;
+        pJsonObject->GetValue(pPossible_splitKey, pPossible_splitVal);
+        if(pPossible_splitVal != null) {
+            pPossible_split = new ArrayList();
+            
+            jsonToValue(pPossible_split, pPossible_splitVal, L"IList", L"Long");
+        }
+        delete pPossible_splitKey;
     }
 }
 
@@ -161,19 +203,24 @@ SamiBreak::asJsonObject() {
     JsonObject *pJsonObject = new JsonObject();
     pJsonObject->Construct();
 
-    
     JsonString *pEarliestKey = new JsonString(L"earliest");
     pJsonObject->Add(pEarliestKey, toJson(getPEarliest(), "Long", ""));
 
-    
     JsonString *pLatestKey = new JsonString(L"latest");
     pJsonObject->Add(pLatestKey, toJson(getPLatest(), "Long", ""));
 
-    
     JsonString *pDurationKey = new JsonString(L"duration");
     pJsonObject->Add(pDurationKey, toJson(getPDuration(), "Long", ""));
 
-    
+    JsonString *pMax_driving_timeKey = new JsonString(L"max_driving_time");
+    pJsonObject->Add(pMax_driving_timeKey, toJson(getPMaxDrivingTime(), "Long", ""));
+
+    JsonString *pInitial_driving_timeKey = new JsonString(L"initial_driving_time");
+    pJsonObject->Add(pInitial_driving_timeKey, toJson(getPInitialDrivingTime(), "Long", ""));
+
+    JsonString *pPossible_splitKey = new JsonString(L"possible_split");
+    pJsonObject->Add(pPossible_splitKey, toJson(getPPossibleSplit(), "Long", "array"));
+
     return pJsonObject;
 }
 
@@ -202,6 +249,33 @@ SamiBreak::getPDuration() {
 void
 SamiBreak::setPDuration(Long* pDuration) {
     this->pDuration = pDuration;
+}
+
+Long*
+SamiBreak::getPMaxDrivingTime() {
+    return pMax_driving_time;
+}
+void
+SamiBreak::setPMaxDrivingTime(Long* pMax_driving_time) {
+    this->pMax_driving_time = pMax_driving_time;
+}
+
+Long*
+SamiBreak::getPInitialDrivingTime() {
+    return pInitial_driving_time;
+}
+void
+SamiBreak::setPInitialDrivingTime(Long* pInitial_driving_time) {
+    this->pInitial_driving_time = pInitial_driving_time;
+}
+
+IList*
+SamiBreak::getPPossibleSplit() {
+    return pPossible_split;
+}
+void
+SamiBreak::setPPossibleSplit(IList* pPossible_split) {
+    this->pPossible_split = pPossible_split;
 }
 
 

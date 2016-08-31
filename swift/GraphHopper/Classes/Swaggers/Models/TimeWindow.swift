@@ -9,20 +9,18 @@ import Foundation
 
 
 public class TimeWindow: JSONEncodable {
-
     /** earliest start time of corresponding activity */
-    public var earliest: Int?
+    public var earliest: Int64?
     /** latest start time of corresponding activity */
-    public var latest: Int?
-    
+    public var latest: Int64?
 
     public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
-        nillableDictionary["earliest"] = self.earliest
-        nillableDictionary["latest"] = self.latest
+        nillableDictionary["earliest"] = self.earliest?.encodeToJSON()
+        nillableDictionary["latest"] = self.latest?.encodeToJSON()
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

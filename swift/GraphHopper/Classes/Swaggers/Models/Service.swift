@@ -9,33 +9,30 @@ import Foundation
 
 
 public class Service: JSONEncodable {
-
-    public enum SwaggerType: String { 
+    public enum ModelType: String { 
         case Service = "service"
         case Pickup = "pickup"
         case Delivery = "delivery"
     }
-    
     /** Unique identifier of service */
     public var id: String?
     /** type of service */
-    public var type: SwaggerType?
-    /** priority of service, i.e. 1 = high, 2 = normal, 3 = low. default is 2. */
-    public var priority: Int?
+    public var type: ModelType?
+    /** priority of service, i.e. 1 &#x3D; high, 2 &#x3D; normal, 3 &#x3D; low. default is 2. */
+    public var priority: Int32?
     /** name of service */
     public var name: String?
     public var address: Address?
     /** duration of service, i.e. time in ms the corresponding activity takes */
-    public var duration: Int?
+    public var duration: Int64?
     /** array of time windows. currently, only a single time window is allowed */
-    public var time_windows: [TimeWindow]?
+    public var timeWindows: [TimeWindow]?
     /** array of capacity dimensions */
-    public var size: [Int]?
+    public var size: [Int32]?
     /** array of required skills */
-    public var required_skills: [String]?
+    public var requiredSkills: [String]?
     /** array of allowed vehicle ids */
-    public var allowed_vehicles: [String]?
-    
+    public var allowedVehicles: [String]?
 
     public init() {}
 
@@ -44,14 +41,14 @@ public class Service: JSONEncodable {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["id"] = self.id
         nillableDictionary["type"] = self.type?.rawValue
-        nillableDictionary["priority"] = self.priority
+        nillableDictionary["priority"] = self.priority?.encodeToJSON()
         nillableDictionary["name"] = self.name
         nillableDictionary["address"] = self.address?.encodeToJSON()
-        nillableDictionary["duration"] = self.duration
-        nillableDictionary["time_windows"] = self.time_windows?.encodeToJSON()
+        nillableDictionary["duration"] = self.duration?.encodeToJSON()
+        nillableDictionary["time_windows"] = self.timeWindows?.encodeToJSON()
         nillableDictionary["size"] = self.size?.encodeToJSON()
-        nillableDictionary["required_skills"] = self.required_skills?.encodeToJSON()
-        nillableDictionary["allowed_vehicles"] = self.allowed_vehicles?.encodeToJSON()
+        nillableDictionary["required_skills"] = self.requiredSkills?.encodeToJSON()
+        nillableDictionary["allowed_vehicles"] = self.allowedVehicles?.encodeToJSON()
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

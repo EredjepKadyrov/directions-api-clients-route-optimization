@@ -7,20 +7,31 @@
 
 import Alamofire
 
-extension GraphHopperAPI {
-    
-    public class SolutionAPI: APIBase {
-    
-        /**
-         
-         Return the solution associated to the jobId
-         
-         - GET /solution/{jobId}
-         - This endpoint returns the solution of a large problems. You can fetch it with the job_id, you have been sent.
-         - API Key:
-           - type: apiKey key (QUERY)
-           - name: api_key
-         - examples: [{example={
+
+
+public class SolutionAPI: APIBase {
+    /**
+     Return the solution associated to the jobId
+     
+     - parameter key: (query) your API key 
+     - parameter jobId: (path) Request solution with jobId 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    public class func getSolution(key key: String, jobId: String, completion: ((data: Response?, error: ErrorType?) -> Void)) {
+        getSolutionWithRequestBuilder(key: key, jobId: jobId).execute { (response, error) -> Void in
+            completion(data: response?.body, error: error);
+        }
+    }
+
+
+    /**
+     Return the solution associated to the jobId
+     - GET /solution/{jobId}
+     - This endpoint returns the solution of a large problems. You can fetch it with the job_id, you have been sent. 
+     - API Key:
+       - type: apiKey key (QUERY)
+       - name: api_key
+     - examples: [{example={
   "waiting_in_queue" : 123456789,
   "status" : "aeiou",
   "processing_time" : 123456789,
@@ -46,26 +57,28 @@ extension GraphHopperAPI {
   },
   "job_id" : "aeiou"
 }, contentType=application/json}]
-         
-         - parameter key: (query) your API key
-         - parameter jobId: (path) Request solution with jobId
+     
+     - parameter key: (query) your API key 
+     - parameter jobId: (path) Request solution with jobId 
 
-         - returns: RequestBuilder<Response> 
-         */
-        public class func getSolution(key key: String, jobId: String) -> RequestBuilder<Response> {
-            var path = "/solution/{jobId}"
-            path = path.stringByReplacingOccurrencesOfString("{jobId}", withString: "\(jobId)", options: .LiteralSearch, range: nil)
-            let URLString = GraphHopperAPI.basePath + path
-            
-            let nillableParameters: [String:AnyObject?] = [
-                "key": key
-            ]
-            let parameters = APIHelper.rejectNil(nillableParameters)
+     - returns: RequestBuilder<Response> 
+     */
+    public class func getSolutionWithRequestBuilder(key key: String, jobId: String) -> RequestBuilder<Response> {
+        var path = "/solution/{jobId}"
+        path = path.stringByReplacingOccurrencesOfString("{jobId}", withString: "\(jobId)", options: .LiteralSearch, range: nil)
+        let URLString = GraphHopperAPI.basePath + path
 
-            let requestBuilder: RequestBuilder<Response>.Type = GraphHopperAPI.requestBuilderFactory.getBuilder()
+        let nillableParameters: [String:AnyObject?] = [
+            "key": key
+        ]
+ 
+        let parameters = APIHelper.rejectNil(nillableParameters)
+ 
+        let convertedParameters = APIHelper.convertBoolToString(parameters)
+ 
+        let requestBuilder: RequestBuilder<Response>.Type = GraphHopperAPI.requestBuilderFactory.getBuilder()
 
-            return requestBuilder.init(method: "GET", URLString: URLString, parameters: parameters, isBody: false)
-        }
-    
+        return requestBuilder.init(method: "GET", URLString: URLString, parameters: convertedParameters, isBody: false)
     }
+
 }

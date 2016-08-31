@@ -17,10 +17,8 @@ public:
   SamiSolutionApi();
   virtual ~SamiSolutionApi();
 
-  
   SamiResponse* 
   getSolutionWithCompletion(String* key, String* jobId, void (* handler)(SamiResponse*, SamiError*));
-  
   static String getBasePath() {
     return L"https://graphhopper.com/api/1/vrp";
   }

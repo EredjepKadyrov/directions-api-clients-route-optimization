@@ -23,9 +23,8 @@ SamiAddress::~SamiAddress() {
 void
 SamiAddress::init() {
     pLocation_id = null;
-    pLon = null;
-    pLat = null;
-    
+pLon = null;
+pLat = null;
 }
 
 void
@@ -35,17 +34,16 @@ SamiAddress::cleanup() {
         delete pLocation_id;
         pLocation_id = null;
     }
-    if(pLon != null) {
+if(pLon != null) {
         
         delete pLon;
         pLon = null;
     }
-    if(pLat != null) {
+if(pLat != null) {
         
         delete pLat;
         pLat = null;
     }
-    
 }
 
 
@@ -92,7 +90,7 @@ SamiAddress::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pLocation_id, pLocation_idVal, L"String", L"String");
         }
         delete pLocation_idKey;
-        JsonString* pLonKey = new JsonString(L"lon");
+JsonString* pLonKey = new JsonString(L"lon");
         IJsonValue* pLonVal = null;
         pJsonObject->GetValue(pLonKey, pLonVal);
         if(pLonVal != null) {
@@ -101,7 +99,7 @@ SamiAddress::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pLon, pLonVal, L"Double", L"Double");
         }
         delete pLonKey;
-        JsonString* pLatKey = new JsonString(L"lat");
+JsonString* pLatKey = new JsonString(L"lat");
         IJsonValue* pLatVal = null;
         pJsonObject->GetValue(pLatKey, pLatVal);
         if(pLatVal != null) {
@@ -110,7 +108,6 @@ SamiAddress::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pLat, pLatVal, L"Double", L"Double");
         }
         delete pLatKey;
-        
     }
 }
 
@@ -161,19 +158,15 @@ SamiAddress::asJsonObject() {
     JsonObject *pJsonObject = new JsonObject();
     pJsonObject->Construct();
 
-    
     JsonString *pLocation_idKey = new JsonString(L"location_id");
     pJsonObject->Add(pLocation_idKey, toJson(getPLocationId(), "String", ""));
 
-    
     JsonString *pLonKey = new JsonString(L"lon");
     pJsonObject->Add(pLonKey, toJson(getPLon(), "Double", ""));
 
-    
     JsonString *pLatKey = new JsonString(L"lat");
     pJsonObject->Add(pLatKey, toJson(getPLat(), "Double", ""));
 
-    
     return pJsonObject;
 }
 

@@ -9,22 +9,20 @@ import Foundation
 
 
 public class Shipment: JSONEncodable {
-
     /** Unique identifier of service */
     public var id: String?
     /** name of shipment */
     public var name: String?
-    /** priority of service, i.e. 1 = high, 2 = normal, 3 = low. default is 2. */
-    public var priority: Int?
+    /** priority of service, i.e. 1 &#x3D; high, 2 &#x3D; normal, 3 &#x3D; low. default is 2. */
+    public var priority: Int32?
     public var pickup: Stop?
     public var delivery: Stop?
     /** array of capacity dimensions */
-    public var size: [Int]?
+    public var size: [Int32]?
     /** array of required skills */
-    public var required_skills: [String]?
+    public var requiredSkills: [String]?
     /** array of allowed vehicle ids */
-    public var allowed_vehicles: [String]?
-    
+    public var allowedVehicles: [String]?
 
     public init() {}
 
@@ -33,12 +31,12 @@ public class Shipment: JSONEncodable {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["id"] = self.id
         nillableDictionary["name"] = self.name
-        nillableDictionary["priority"] = self.priority
+        nillableDictionary["priority"] = self.priority?.encodeToJSON()
         nillableDictionary["pickup"] = self.pickup?.encodeToJSON()
         nillableDictionary["delivery"] = self.delivery?.encodeToJSON()
         nillableDictionary["size"] = self.size?.encodeToJSON()
-        nillableDictionary["required_skills"] = self.required_skills?.encodeToJSON()
-        nillableDictionary["allowed_vehicles"] = self.allowed_vehicles?.encodeToJSON()
+        nillableDictionary["required_skills"] = self.requiredSkills?.encodeToJSON()
+        nillableDictionary["allowed_vehicles"] = self.allowedVehicles?.encodeToJSON()
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

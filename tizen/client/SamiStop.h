@@ -43,22 +43,17 @@ public:
 
     SamiStop* fromJson(String* obj);
 
-    
     SamiAddress* getPAddress();
     void setPAddress(SamiAddress* pAddress);
-    
     Long* getPDuration();
     void setPDuration(Long* pDuration);
-    
     IList* getPTimeWindows();
     void setPTimeWindows(IList* pTime_windows);
-    
 
 private:
     SamiAddress* pAddress;
-    Long* pDuration;
-    IList* pTime_windows;
-    
+Long* pDuration;
+IList* pTime_windows;
 };
 
 } /* namespace Swagger */

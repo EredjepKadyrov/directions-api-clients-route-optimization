@@ -9,26 +9,23 @@ import Foundation
 
 
 public class Activity: JSONEncodable {
-
-    public enum SwaggerType: String { 
+    public enum ModelType: String { 
         case Start = "start"
         case End = "end"
         case Service = "service"
         case Pickupshipment = "pickupShipment"
         case Delivershipment = "deliverShipment"
     }
-    
     /** type of activity */
-    public var type: SwaggerType?
+    public var type: ModelType?
     /** id referring to the underlying service or shipment, i.e. the shipment or service this activity belongs to */
     public var id: String?
     /** id that refers to address */
-    public var location_id: String?
+    public var locationId: String?
     /** arrival time at this activity in ms */
-    public var arr_time: Int?
+    public var arrTime: Int64?
     /** end time of and thus departure time at this activity */
-    public var end_time: Int?
-    
+    public var endTime: Int64?
 
     public init() {}
 
@@ -37,9 +34,9 @@ public class Activity: JSONEncodable {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["type"] = self.type?.rawValue
         nillableDictionary["id"] = self.id
-        nillableDictionary["location_id"] = self.location_id
-        nillableDictionary["arr_time"] = self.arr_time
-        nillableDictionary["end_time"] = self.end_time
+        nillableDictionary["location_id"] = self.locationId
+        nillableDictionary["arr_time"] = self.arrTime?.encodeToJSON()
+        nillableDictionary["end_time"] = self.endTime?.encodeToJSON()
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

@@ -45,50 +45,38 @@ public:
 
     SamiService* fromJson(String* obj);
 
-    
     String* getPId();
     void setPId(String* pId);
-    
     String* getPType();
     void setPType(String* pType);
-    
     Integer* getPPriority();
     void setPPriority(Integer* pPriority);
-    
     String* getPName();
     void setPName(String* pName);
-    
     SamiAddress* getPAddress();
     void setPAddress(SamiAddress* pAddress);
-    
     Long* getPDuration();
     void setPDuration(Long* pDuration);
-    
     IList* getPTimeWindows();
     void setPTimeWindows(IList* pTime_windows);
-    
     IList* getPSize();
     void setPSize(IList* pSize);
-    
     IList* getPRequiredSkills();
     void setPRequiredSkills(IList* pRequired_skills);
-    
     IList* getPAllowedVehicles();
     void setPAllowedVehicles(IList* pAllowed_vehicles);
-    
 
 private:
     String* pId;
-    String* pType;
-    Integer* pPriority;
-    String* pName;
-    SamiAddress* pAddress;
-    Long* pDuration;
-    IList* pTime_windows;
-    IList* pSize;
-    IList* pRequired_skills;
-    IList* pAllowed_vehicles;
-    
+String* pType;
+Integer* pPriority;
+String* pName;
+SamiAddress* pAddress;
+Long* pDuration;
+IList* pTime_windows;
+IList* pSize;
+IList* pRequired_skills;
+IList* pAllowed_vehicles;
 };
 
 } /* namespace Swagger */

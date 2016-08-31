@@ -3,12 +3,14 @@
 SPEC=https://graphhopper.com/api/1/vrp/swagger.json
 DIR=.
 
-FILE=swagger-codegen-cli-2.1.5.jar
+VERSION=0.8-SNAPSHOT
+SW_VERSION=2.2.1
+FILE=swagger-codegen-cli-$SW_VERSION.jar
 
 if [[ ! -f $FILE ]]; then
-  wget http://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/2.1.5/$FILE -O $FILE
+  wget http://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/$SW_VERSION/$FILE -O $FILE
   if [[ ! -f $FILE ]]; then
-    curl http://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/2.1.5/$FILE -O $FILE  
+    curl http://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/$SW_VERSION/$FILE -O $FILE  
   fi
 fi
 
@@ -20,7 +22,7 @@ function create {
   case "$LANG" in
 	java)
 		PKG="com.graphhopper.routeopt.client"
-		CONFIG="--artifact-version 0.7-SNAPSHOT --api-package $PKG.api --invoker-package $PKG --model-package $PKG.model --artifact-id directions-api-java-client-route-opt --group-id com.graphhopper --library okhttp-gson"
+		CONFIG="--artifact-version $VERSION --api-package $PKG.api --invoker-package $PKG --model-package $PKG.model --artifact-id directions-api-java-client-route-opt --group-id com.graphhopper --library okhttp-gson"
 		;;
 	ruby)
 		CONFIG="-c ruby.json"

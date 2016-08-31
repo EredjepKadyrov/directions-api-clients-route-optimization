@@ -43,42 +43,32 @@ public:
 
     SamiShipment* fromJson(String* obj);
 
-    
     String* getPId();
     void setPId(String* pId);
-    
     String* getPName();
     void setPName(String* pName);
-    
     Integer* getPPriority();
     void setPPriority(Integer* pPriority);
-    
     SamiStop* getPPickup();
     void setPPickup(SamiStop* pPickup);
-    
     SamiStop* getPDelivery();
     void setPDelivery(SamiStop* pDelivery);
-    
     IList* getPSize();
     void setPSize(IList* pSize);
-    
     IList* getPRequiredSkills();
     void setPRequiredSkills(IList* pRequired_skills);
-    
     IList* getPAllowedVehicles();
     void setPAllowedVehicles(IList* pAllowed_vehicles);
-    
 
 private:
     String* pId;
-    String* pName;
-    Integer* pPriority;
-    SamiStop* pPickup;
-    SamiStop* pDelivery;
-    IList* pSize;
-    IList* pRequired_skills;
-    IList* pAllowed_vehicles;
-    
+String* pName;
+Integer* pPriority;
+SamiStop* pPickup;
+SamiStop* pDelivery;
+IList* pSize;
+IList* pRequired_skills;
+IList* pAllowed_vehicles;
 };
 
 } /* namespace Swagger */

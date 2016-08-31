@@ -9,13 +9,11 @@ import Foundation
 
 
 public class Stop: JSONEncodable {
-
     public var address: Address?
     /** duration of stop, i.e. time in ms the corresponding activity takes */
-    public var duration: Int?
+    public var duration: Int64?
     /** array of time windows. currently, only a single time window is allowed */
-    public var time_windows: [TimeWindow]?
-    
+    public var timeWindows: [TimeWindow]?
 
     public init() {}
 
@@ -23,8 +21,8 @@ public class Stop: JSONEncodable {
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["address"] = self.address?.encodeToJSON()
-        nillableDictionary["duration"] = self.duration
-        nillableDictionary["time_windows"] = self.time_windows?.encodeToJSON()
+        nillableDictionary["duration"] = self.duration?.encodeToJSON()
+        nillableDictionary["time_windows"] = self.timeWindows?.encodeToJSON()
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

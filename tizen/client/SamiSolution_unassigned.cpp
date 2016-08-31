@@ -23,8 +23,7 @@ SamiSolution_unassigned::~SamiSolution_unassigned() {
 void
 SamiSolution_unassigned::init() {
     pServices = null;
-    pShipments = null;
-    
+pShipments = null;
 }
 
 void
@@ -34,12 +33,11 @@ SamiSolution_unassigned::cleanup() {
         delete pServices;
         pServices = null;
     }
-    if(pShipments != null) {
+if(pShipments != null) {
         pShipments->RemoveAll(true);
         delete pShipments;
         pShipments = null;
     }
-    
 }
 
 
@@ -86,7 +84,7 @@ SamiSolution_unassigned::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pServices, pServicesVal, L"IList", L"String");
         }
         delete pServicesKey;
-        JsonString* pShipmentsKey = new JsonString(L"shipments");
+JsonString* pShipmentsKey = new JsonString(L"shipments");
         IJsonValue* pShipmentsVal = null;
         pJsonObject->GetValue(pShipmentsKey, pShipmentsVal);
         if(pShipmentsVal != null) {
@@ -95,7 +93,6 @@ SamiSolution_unassigned::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pShipments, pShipmentsVal, L"IList", L"String");
         }
         delete pShipmentsKey;
-        
     }
 }
 
@@ -146,15 +143,12 @@ SamiSolution_unassigned::asJsonObject() {
     JsonObject *pJsonObject = new JsonObject();
     pJsonObject->Construct();
 
-    
     JsonString *pServicesKey = new JsonString(L"services");
     pJsonObject->Add(pServicesKey, toJson(getPServices(), "String", "array"));
 
-    
     JsonString *pShipmentsKey = new JsonString(L"shipments");
     pJsonObject->Add(pShipmentsKey, toJson(getPShipments(), "String", "array"));
 
-    
     return pJsonObject;
 }
 

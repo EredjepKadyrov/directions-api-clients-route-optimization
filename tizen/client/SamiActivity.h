@@ -41,30 +41,23 @@ public:
 
     SamiActivity* fromJson(String* obj);
 
-    
     String* getPType();
     void setPType(String* pType);
-    
     String* getPId();
     void setPId(String* pId);
-    
     String* getPLocationId();
     void setPLocationId(String* pLocation_id);
-    
     Long* getPArrTime();
     void setPArrTime(Long* pArr_time);
-    
     Long* getPEndTime();
     void setPEndTime(Long* pEnd_time);
-    
 
 private:
     String* pType;
-    String* pId;
-    String* pLocation_id;
-    Long* pArr_time;
-    Long* pEnd_time;
-    
+String* pId;
+String* pLocation_id;
+Long* pArr_time;
+Long* pEnd_time;
 };
 
 } /* namespace Swagger */

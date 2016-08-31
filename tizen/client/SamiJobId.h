@@ -40,14 +40,11 @@ public:
 
     SamiJobId* fromJson(String* obj);
 
-    
     String* getPJobId();
     void setPJobId(String* pJob_id);
-    
 
 private:
     String* pJob_id;
-    
 };
 
 } /* namespace Swagger */

@@ -23,8 +23,7 @@ SamiTimeWindow::~SamiTimeWindow() {
 void
 SamiTimeWindow::init() {
     pEarliest = null;
-    pLatest = null;
-    
+pLatest = null;
 }
 
 void
@@ -34,12 +33,11 @@ SamiTimeWindow::cleanup() {
         delete pEarliest;
         pEarliest = null;
     }
-    if(pLatest != null) {
+if(pLatest != null) {
         
         delete pLatest;
         pLatest = null;
     }
-    
 }
 
 
@@ -86,7 +84,7 @@ SamiTimeWindow::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pEarliest, pEarliestVal, L"Long", L"Long");
         }
         delete pEarliestKey;
-        JsonString* pLatestKey = new JsonString(L"latest");
+JsonString* pLatestKey = new JsonString(L"latest");
         IJsonValue* pLatestVal = null;
         pJsonObject->GetValue(pLatestKey, pLatestVal);
         if(pLatestVal != null) {
@@ -95,7 +93,6 @@ SamiTimeWindow::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pLatest, pLatestVal, L"Long", L"Long");
         }
         delete pLatestKey;
-        
     }
 }
 
@@ -146,15 +143,12 @@ SamiTimeWindow::asJsonObject() {
     JsonObject *pJsonObject = new JsonObject();
     pJsonObject->Construct();
 
-    
     JsonString *pEarliestKey = new JsonString(L"earliest");
     pJsonObject->Add(pEarliestKey, toJson(getPEarliest(), "Long", ""));
 
-    
     JsonString *pLatestKey = new JsonString(L"latest");
     pJsonObject->Add(pLatestKey, toJson(getPLatest(), "Long", ""));
 
-    
     return pJsonObject;
 }
 

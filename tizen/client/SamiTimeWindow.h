@@ -40,18 +40,14 @@ public:
 
     SamiTimeWindow* fromJson(String* obj);
 
-    
     Long* getPEarliest();
     void setPEarliest(Long* pEarliest);
-    
     Long* getPLatest();
     void setPLatest(Long* pLatest);
-    
 
 private:
     Long* pEarliest;
-    Long* pLatest;
-    
+Long* pLatest;
 };
 
 } /* namespace Swagger */

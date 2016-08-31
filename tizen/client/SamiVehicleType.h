@@ -43,30 +43,23 @@ public:
 
     SamiVehicleType* fromJson(String* obj);
 
-    
     String* getPTypeId();
     void setPTypeId(String* pType_id);
-    
     String* getPProfile();
     void setPProfile(String* pProfile);
-    
     IList* getPCapacity();
     void setPCapacity(IList* pCapacity);
-    
     Double* getPSpeedFactor();
     void setPSpeedFactor(Double* pSpeed_factor);
-    
     Double* getPServiceTimeFactor();
     void setPServiceTimeFactor(Double* pService_time_factor);
-    
 
 private:
     String* pType_id;
-    String* pProfile;
-    IList* pCapacity;
-    Double* pSpeed_factor;
-    Double* pService_time_factor;
-    
+String* pProfile;
+IList* pCapacity;
+Double* pSpeed_factor;
+Double* pService_time_factor;
 };
 
 } /* namespace Swagger */

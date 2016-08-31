@@ -23,9 +23,8 @@ SamiRelation::~SamiRelation() {
 void
 SamiRelation::init() {
     pType = null;
-    pIds = null;
-    pVehicle_id = null;
-    
+pIds = null;
+pVehicle_id = null;
 }
 
 void
@@ -35,17 +34,16 @@ SamiRelation::cleanup() {
         delete pType;
         pType = null;
     }
-    if(pIds != null) {
+if(pIds != null) {
         pIds->RemoveAll(true);
         delete pIds;
         pIds = null;
     }
-    if(pVehicle_id != null) {
+if(pVehicle_id != null) {
         
         delete pVehicle_id;
         pVehicle_id = null;
     }
-    
 }
 
 
@@ -92,7 +90,7 @@ SamiRelation::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pType, pTypeVal, L"String", L"String");
         }
         delete pTypeKey;
-        JsonString* pIdsKey = new JsonString(L"ids");
+JsonString* pIdsKey = new JsonString(L"ids");
         IJsonValue* pIdsVal = null;
         pJsonObject->GetValue(pIdsKey, pIdsVal);
         if(pIdsVal != null) {
@@ -101,7 +99,7 @@ SamiRelation::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pIds, pIdsVal, L"IList", L"String");
         }
         delete pIdsKey;
-        JsonString* pVehicle_idKey = new JsonString(L"vehicle_id");
+JsonString* pVehicle_idKey = new JsonString(L"vehicle_id");
         IJsonValue* pVehicle_idVal = null;
         pJsonObject->GetValue(pVehicle_idKey, pVehicle_idVal);
         if(pVehicle_idVal != null) {
@@ -110,7 +108,6 @@ SamiRelation::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pVehicle_id, pVehicle_idVal, L"String", L"String");
         }
         delete pVehicle_idKey;
-        
     }
 }
 
@@ -161,19 +158,15 @@ SamiRelation::asJsonObject() {
     JsonObject *pJsonObject = new JsonObject();
     pJsonObject->Construct();
 
-    
     JsonString *pTypeKey = new JsonString(L"type");
     pJsonObject->Add(pTypeKey, toJson(getPType(), "String", ""));
 
-    
     JsonString *pIdsKey = new JsonString(L"ids");
     pJsonObject->Add(pIdsKey, toJson(getPIds(), "String", "array"));
 
-    
     JsonString *pVehicle_idKey = new JsonString(L"vehicle_id");
     pJsonObject->Add(pVehicle_idKey, toJson(getPVehicleId(), "String", ""));
 
-    
     return pJsonObject;
 }
 

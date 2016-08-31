@@ -34,32 +34,44 @@ public class Response<T> {
 private var once = dispatch_once_t()
 class Decoders {
     static private var decoders = Dictionary<String, ((AnyObject) -> AnyObject)>()
-    
+
     static func addDecoder<T>(clazz clazz: T.Type, decoder: ((AnyObject) -> T)) {
         let key = "\(T.self)"
         decoders[key] = { decoder($0) as! AnyObject }
     }
-    
+
     static func decode<T>(clazz clazz: [T].Type, source: AnyObject) -> [T] {
         let array = source as! [AnyObject]
         return array.map { Decoders.decode(clazz: T.self, source: $0) }
     }
-    
+
     static func decode<T, Key: Hashable>(clazz clazz: [Key:T].Type, source: AnyObject) -> [Key:T] {
-        let sourceDictinoary = source as! [Key: AnyObject]
+        let sourceDictionary = source as! [Key: AnyObject]
         var dictionary = [Key:T]()
-        for (key, value) in sourceDictinoary {
+        for (key, value) in sourceDictionary {
             dictionary[key] = Decoders.decode(clazz: T.self, source: value)
         }
         return dictionary
     }
-    
+
     static func decode<T>(clazz clazz: T.Type, source: AnyObject) -> T {
         initialize()
+        if T.self is Int32.Type && source is NSNumber {
+            return source.intValue as! T;
+        }
+        if T.self is Int64.Type && source is NSNumber {
+            return source.longLongValue as! T;
+        }
+        if T.self is NSUUID.Type && source is String {
+            return NSUUID(UUIDString: source as! String) as! T
+        }
         if source is T {
             return source as! T
         }
-        
+        if T.self is NSData.Type && source is String {
+            return NSData(base64EncodedString: source as! String, options: NSDataBase64DecodingOptions()) as! T
+        }
+
         let key = "\(T.self)"
         if let decoder = decoders[key] {
            return decoder(source) as! T
@@ -94,14 +106,15 @@ class Decoders {
             Decoders.decode(clazz: clazz, source: someSource)
         }
     }
-	
+
     static private func initialize() {
         dispatch_once(&once) {
             let formatters = [
                 "yyyy-MM-dd",
                 "yyyy-MM-dd'T'HH:mm:ssZZZZZ",
                 "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ",
-                "yyyy-MM-dd'T'HH:mm:ss'Z'"
+                "yyyy-MM-dd'T'HH:mm:ss'Z'",
+                "yyyy-MM-dd'T'HH:mm:ss.SSS"
             ].map { (format: String) -> NSDateFormatter in
                 let formatter = NSDateFormatter()
                 formatter.dateFormat = format
@@ -109,293 +122,332 @@ class Decoders {
             }
             // Decoder for NSDate
             Decoders.addDecoder(clazz: NSDate.self) { (source: AnyObject) -> NSDate in
-                let sourceString = source as! String
-                for formatter in formatters {
-                    if let date = formatter.dateFromString(sourceString) {
-                        return date
+               if let sourceString = source as? String {
+                    for formatter in formatters {
+                        if let date = formatter.dateFromString(sourceString) {
+                            return date
+                        }
                     }
+
                 }
-                fatalError("formatter failed to parse \(sourceString)")
+                if let sourceInt = source as? Int {
+                    // treat as a java date
+                    return NSDate(timeIntervalSince1970: Double(sourceInt / 1000) )
+                }
+                fatalError("formatter failed to parse \(source)")
             } 
 
-			// Decoder for [JobId]
-            Decoders.addDecoder(clazz: [JobId].self) { (source: AnyObject) -> [JobId] in
-                return Decoders.decode(clazz: [JobId].self, source: source)
+            // Decoder for [Activity]
+            Decoders.addDecoder(clazz: [Activity].self) { (source: AnyObject) -> [Activity] in
+                return Decoders.decode(clazz: [Activity].self, source: source)
             }
-			// Decoder for JobId
-            Decoders.addDecoder(clazz: JobId.self) { (source: AnyObject) -> JobId in
+            // Decoder for Activity
+            Decoders.addDecoder(clazz: Activity.self) { (source: AnyObject) -> Activity in
                 let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = JobId()
-                instance.job_id = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["job_id"])
+                let instance = Activity()
+                instance.type = Activity.ModelType(rawValue: (sourceDictionary["type"] as? String) ?? "") 
+                instance.id = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["id"])
+                instance.locationId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["location_id"])
+                instance.arrTime = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["arr_time"])
+                instance.endTime = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["end_time"])
                 return instance
             }
-			
 
-			// Decoder for [Request]
-            Decoders.addDecoder(clazz: [Request].self) { (source: AnyObject) -> [Request] in
-                return Decoders.decode(clazz: [Request].self, source: source)
-            }
-			// Decoder for Request
-            Decoders.addDecoder(clazz: Request.self) { (source: AnyObject) -> Request in
-                let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = Request()
-                instance.vehicles = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["vehicles"])
-                instance.vehicle_types = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["vehicle_types"])
-                instance.services = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["services"])
-                instance.shipments = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["shipments"])
-                instance.relations = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["relations"])
-                instance.algorithm = Decoders.decodeOptional(clazz: Algorithm.self, source: sourceDictionary["algorithm"])
-                return instance
-            }
-			
 
-			// Decoder for [Vehicle]
-            Decoders.addDecoder(clazz: [Vehicle].self) { (source: AnyObject) -> [Vehicle] in
-                return Decoders.decode(clazz: [Vehicle].self, source: source)
-            }
-			// Decoder for Vehicle
-            Decoders.addDecoder(clazz: Vehicle.self) { (source: AnyObject) -> Vehicle in
-                let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = Vehicle()
-                instance.vehicle_id = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["vehicle_id"])
-                instance.type_id = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["type_id"])
-                instance.start_address = Decoders.decodeOptional(clazz: Address.self, source: sourceDictionary["start_address"])
-                instance.end_address = Decoders.decodeOptional(clazz: Address.self, source: sourceDictionary["end_address"])
-                instance.Swaggerbreak = Decoders.decodeOptional(clazz: Break.self, source: sourceDictionary["Swaggerbreak"])
-                instance.return_to_depot = Decoders.decodeOptional(clazz: Bool.self, source: sourceDictionary["return_to_depot"])
-                instance.earliest_start = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["earliest_start"])
-                instance.latest_end = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["latest_end"])
-                instance.skills = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["skills"])
-                return instance
-            }
-			
-
-			// Decoder for [Algorithm]
-            Decoders.addDecoder(clazz: [Algorithm].self) { (source: AnyObject) -> [Algorithm] in
-                return Decoders.decode(clazz: [Algorithm].self, source: source)
-            }
-			// Decoder for Algorithm
-            Decoders.addDecoder(clazz: Algorithm.self) { (source: AnyObject) -> Algorithm in
-                let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = Algorithm()
-                instance.problem_type = (sourceDictionary["problem_type"] as? String).map { Algorithm.Problem_type(rawValue: $0)! } 
-                instance.objective = (sourceDictionary["objective"] as? String).map { Algorithm.Objective(rawValue: $0)! } 
-                return instance
-            }
-			
-
-			// Decoder for [Address]
+            // Decoder for [Address]
             Decoders.addDecoder(clazz: [Address].self) { (source: AnyObject) -> [Address] in
                 return Decoders.decode(clazz: [Address].self, source: source)
             }
-			// Decoder for Address
+            // Decoder for Address
             Decoders.addDecoder(clazz: Address.self) { (source: AnyObject) -> Address in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Address()
-                instance.location_id = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["location_id"])
+                instance.locationId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["location_id"])
                 instance.lon = Decoders.decodeOptional(clazz: Double.self, source: sourceDictionary["lon"])
                 instance.lat = Decoders.decodeOptional(clazz: Double.self, source: sourceDictionary["lat"])
                 return instance
             }
-			
 
-			// Decoder for [Break]
+
+            // Decoder for [Algorithm]
+            Decoders.addDecoder(clazz: [Algorithm].self) { (source: AnyObject) -> [Algorithm] in
+                return Decoders.decode(clazz: [Algorithm].self, source: source)
+            }
+            // Decoder for Algorithm
+            Decoders.addDecoder(clazz: Algorithm.self) { (source: AnyObject) -> Algorithm in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = Algorithm()
+                instance.problemType = Algorithm.ProblemType(rawValue: (sourceDictionary["problem_type"] as? String) ?? "") 
+                instance.objective = Algorithm.Objective(rawValue: (sourceDictionary["objective"] as? String) ?? "") 
+                return instance
+            }
+
+
+            // Decoder for [Break]
             Decoders.addDecoder(clazz: [Break].self) { (source: AnyObject) -> [Break] in
                 return Decoders.decode(clazz: [Break].self, source: source)
             }
-			// Decoder for Break
+            // Decoder for Break
             Decoders.addDecoder(clazz: Break.self) { (source: AnyObject) -> Break in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Break()
-                instance.earliest = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["earliest"])
-                instance.latest = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["latest"])
-                instance.duration = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["duration"])
+                instance.earliest = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["earliest"])
+                instance.latest = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["latest"])
+                instance.duration = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["duration"])
+                instance.maxDrivingTime = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["max_driving_time"])
+                instance.initialDrivingTime = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["initial_driving_time"])
+                instance.possibleSplit = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["possible_split"])
                 return instance
             }
-			
 
-			// Decoder for [VehicleType]
-            Decoders.addDecoder(clazz: [VehicleType].self) { (source: AnyObject) -> [VehicleType] in
-                return Decoders.decode(clazz: [VehicleType].self, source: source)
+
+            // Decoder for [CostMatrix]
+            Decoders.addDecoder(clazz: [CostMatrix].self) { (source: AnyObject) -> [CostMatrix] in
+                return Decoders.decode(clazz: [CostMatrix].self, source: source)
             }
-			// Decoder for VehicleType
-            Decoders.addDecoder(clazz: VehicleType.self) { (source: AnyObject) -> VehicleType in
+            // Decoder for CostMatrix
+            Decoders.addDecoder(clazz: CostMatrix.self) { (source: AnyObject) -> CostMatrix in
                 let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = VehicleType()
-                instance.type_id = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["type_id"])
-                instance.profile = (sourceDictionary["profile"] as? String).map { VehicleType.Profile(rawValue: $0)! } 
-                instance.capacity = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["capacity"])
-                instance.speed_factor = Decoders.decodeOptional(clazz: Double.self, source: sourceDictionary["speed_factor"])
-                instance.service_time_factor = Decoders.decodeOptional(clazz: Double.self, source: sourceDictionary["service_time_factor"])
+                let instance = CostMatrix()
+                instance.type = CostMatrix.ModelType(rawValue: (sourceDictionary["type"] as? String) ?? "") 
+                instance.url = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["url"])
+                instance.profile = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["profile"])
                 return instance
             }
-			
 
-			// Decoder for [Service]
-            Decoders.addDecoder(clazz: [Service].self) { (source: AnyObject) -> [Service] in
-                return Decoders.decode(clazz: [Service].self, source: source)
+
+            // Decoder for [JobId]
+            Decoders.addDecoder(clazz: [JobId].self) { (source: AnyObject) -> [JobId] in
+                return Decoders.decode(clazz: [JobId].self, source: source)
             }
-			// Decoder for Service
-            Decoders.addDecoder(clazz: Service.self) { (source: AnyObject) -> Service in
+            // Decoder for JobId
+            Decoders.addDecoder(clazz: JobId.self) { (source: AnyObject) -> JobId in
                 let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = Service()
-                instance.id = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["id"])
-                instance.type = (sourceDictionary["type"] as? String).map { Service.SwaggerType(rawValue: $0)! } 
-                instance.priority = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["priority"])
-                instance.name = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["name"])
-                instance.address = Decoders.decodeOptional(clazz: Address.self, source: sourceDictionary["address"])
-                instance.duration = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["duration"])
-                instance.time_windows = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["time_windows"])
-                instance.size = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["size"])
-                instance.required_skills = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["required_skills"])
-                instance.allowed_vehicles = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["allowed_vehicles"])
+                let instance = JobId()
+                instance.jobId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["job_id"])
                 return instance
             }
-			
 
-			// Decoder for [Shipment]
-            Decoders.addDecoder(clazz: [Shipment].self) { (source: AnyObject) -> [Shipment] in
-                return Decoders.decode(clazz: [Shipment].self, source: source)
+
+            // Decoder for [Objective]
+            Decoders.addDecoder(clazz: [Objective].self) { (source: AnyObject) -> [Objective] in
+                return Decoders.decode(clazz: [Objective].self, source: source)
             }
-			// Decoder for Shipment
-            Decoders.addDecoder(clazz: Shipment.self) { (source: AnyObject) -> Shipment in
+            // Decoder for Objective
+            Decoders.addDecoder(clazz: Objective.self) { (source: AnyObject) -> Objective in
                 let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = Shipment()
-                instance.id = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["id"])
-                instance.name = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["name"])
-                instance.priority = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["priority"])
-                instance.pickup = Decoders.decodeOptional(clazz: Stop.self, source: sourceDictionary["pickup"])
-                instance.delivery = Decoders.decodeOptional(clazz: Stop.self, source: sourceDictionary["delivery"])
-                instance.size = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["size"])
-                instance.required_skills = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["required_skills"])
-                instance.allowed_vehicles = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["allowed_vehicles"])
+                let instance = Objective()
+                instance.type = Objective.ModelType(rawValue: (sourceDictionary["type"] as? String) ?? "") 
+                instance.value = Objective.Value(rawValue: (sourceDictionary["value"] as? String) ?? "") 
                 return instance
             }
-			
 
-			// Decoder for [Stop]
-            Decoders.addDecoder(clazz: [Stop].self) { (source: AnyObject) -> [Stop] in
-                return Decoders.decode(clazz: [Stop].self, source: source)
-            }
-			// Decoder for Stop
-            Decoders.addDecoder(clazz: Stop.self) { (source: AnyObject) -> Stop in
-                let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = Stop()
-                instance.address = Decoders.decodeOptional(clazz: Address.self, source: sourceDictionary["address"])
-                instance.duration = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["duration"])
-                instance.time_windows = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["time_windows"])
-                return instance
-            }
-			
 
-			// Decoder for [TimeWindow]
-            Decoders.addDecoder(clazz: [TimeWindow].self) { (source: AnyObject) -> [TimeWindow] in
-                return Decoders.decode(clazz: [TimeWindow].self, source: source)
-            }
-			// Decoder for TimeWindow
-            Decoders.addDecoder(clazz: TimeWindow.self) { (source: AnyObject) -> TimeWindow in
-                let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = TimeWindow()
-                instance.earliest = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["earliest"])
-                instance.latest = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["latest"])
-                return instance
-            }
-			
-
-			// Decoder for [Relation]
+            // Decoder for [Relation]
             Decoders.addDecoder(clazz: [Relation].self) { (source: AnyObject) -> [Relation] in
                 return Decoders.decode(clazz: [Relation].self, source: source)
             }
-			// Decoder for Relation
+            // Decoder for Relation
             Decoders.addDecoder(clazz: Relation.self) { (source: AnyObject) -> Relation in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Relation()
                 instance.type = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["type"])
                 instance.ids = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["ids"])
-                instance.vehicle_id = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["vehicle_id"])
+                instance.vehicleId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["vehicle_id"])
                 return instance
             }
-			
 
-			// Decoder for [Response]
+
+            // Decoder for [Request]
+            Decoders.addDecoder(clazz: [Request].self) { (source: AnyObject) -> [Request] in
+                return Decoders.decode(clazz: [Request].self, source: source)
+            }
+            // Decoder for Request
+            Decoders.addDecoder(clazz: Request.self) { (source: AnyObject) -> Request in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = Request()
+                instance.vehicles = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["vehicles"])
+                instance.vehicleTypes = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["vehicle_types"])
+                instance.services = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["services"])
+                instance.shipments = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["shipments"])
+                instance.relations = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["relations"])
+                instance.algorithm = Decoders.decodeOptional(clazz: Algorithm.self, source: sourceDictionary["algorithm"])
+                instance.objectives = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["objectives"])
+                instance.costMatrices = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["cost_matrices"])
+                return instance
+            }
+
+
+            // Decoder for [Response]
             Decoders.addDecoder(clazz: [Response].self) { (source: AnyObject) -> [Response] in
                 return Decoders.decode(clazz: [Response].self, source: source)
             }
-			// Decoder for Response
+            // Decoder for Response
             Decoders.addDecoder(clazz: Response.self) { (source: AnyObject) -> Response in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Response()
-                instance.job_id = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["job_id"])
-                instance.status = (sourceDictionary["status"] as? String).map { Response.Status(rawValue: $0)! } 
-                instance.waiting_in_queue = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["waiting_in_queue"])
-                instance.processing_time = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["processing_time"])
+                instance.jobId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["job_id"])
+                instance.status = Response.Status(rawValue: (sourceDictionary["status"] as? String) ?? "") 
+                instance.waitingInQueue = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["waiting_in_queue"])
+                instance.processingTime = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["processing_time"])
                 instance.solution = Decoders.decodeOptional(clazz: Solution.self, source: sourceDictionary["solution"])
                 return instance
             }
-			
 
-			// Decoder for [Solution]
-            Decoders.addDecoder(clazz: [Solution].self) { (source: AnyObject) -> [Solution] in
-                return Decoders.decode(clazz: [Solution].self, source: source)
-            }
-			// Decoder for Solution
-            Decoders.addDecoder(clazz: Solution.self) { (source: AnyObject) -> Solution in
-                let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = Solution()
-                instance.costs = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["costs"])
-                instance.distance = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["distance"])
-                instance.time = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["time"])
-                instance.no_unassigned = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["no_unassigned"])
-                instance.routes = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["routes"])
-                instance.unassigned = Decoders.decodeOptional(clazz: Solution_unassigned.self, source: sourceDictionary["unassigned"])
-                return instance
-            }
-			
 
-			// Decoder for [Route]
+            // Decoder for [Route]
             Decoders.addDecoder(clazz: [Route].self) { (source: AnyObject) -> [Route] in
                 return Decoders.decode(clazz: [Route].self, source: source)
             }
-			// Decoder for Route
+            // Decoder for Route
             Decoders.addDecoder(clazz: Route.self) { (source: AnyObject) -> Route in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Route()
-                instance.vehicle_id = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["vehicle_id"])
+                instance.vehicleId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["vehicle_id"])
                 instance.activities = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["activities"])
                 return instance
             }
-			
 
-			// Decoder for [Activity]
-            Decoders.addDecoder(clazz: [Activity].self) { (source: AnyObject) -> [Activity] in
-                return Decoders.decode(clazz: [Activity].self, source: source)
+
+            // Decoder for [Service]
+            Decoders.addDecoder(clazz: [Service].self) { (source: AnyObject) -> [Service] in
+                return Decoders.decode(clazz: [Service].self, source: source)
             }
-			// Decoder for Activity
-            Decoders.addDecoder(clazz: Activity.self) { (source: AnyObject) -> Activity in
+            // Decoder for Service
+            Decoders.addDecoder(clazz: Service.self) { (source: AnyObject) -> Service in
                 let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = Activity()
-                instance.type = (sourceDictionary["type"] as? String).map { Activity.SwaggerType(rawValue: $0)! } 
+                let instance = Service()
                 instance.id = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["id"])
-                instance.location_id = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["location_id"])
-                instance.arr_time = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["arr_time"])
-                instance.end_time = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["end_time"])
+                instance.type = Service.ModelType(rawValue: (sourceDictionary["type"] as? String) ?? "") 
+                instance.priority = Decoders.decodeOptional(clazz: Int32.self, source: sourceDictionary["priority"])
+                instance.name = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["name"])
+                instance.address = Decoders.decodeOptional(clazz: Address.self, source: sourceDictionary["address"])
+                instance.duration = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["duration"])
+                instance.timeWindows = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["time_windows"])
+                instance.size = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["size"])
+                instance.requiredSkills = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["required_skills"])
+                instance.allowedVehicles = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["allowed_vehicles"])
                 return instance
             }
-			
 
-			// Decoder for [Solution_unassigned]
-            Decoders.addDecoder(clazz: [Solution_unassigned].self) { (source: AnyObject) -> [Solution_unassigned] in
-                return Decoders.decode(clazz: [Solution_unassigned].self, source: source)
+
+            // Decoder for [Shipment]
+            Decoders.addDecoder(clazz: [Shipment].self) { (source: AnyObject) -> [Shipment] in
+                return Decoders.decode(clazz: [Shipment].self, source: source)
             }
-			// Decoder for Solution_unassigned
-            Decoders.addDecoder(clazz: Solution_unassigned.self) { (source: AnyObject) -> Solution_unassigned in
+            // Decoder for Shipment
+            Decoders.addDecoder(clazz: Shipment.self) { (source: AnyObject) -> Shipment in
                 let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = Solution_unassigned()
+                let instance = Shipment()
+                instance.id = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["id"])
+                instance.name = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["name"])
+                instance.priority = Decoders.decodeOptional(clazz: Int32.self, source: sourceDictionary["priority"])
+                instance.pickup = Decoders.decodeOptional(clazz: Stop.self, source: sourceDictionary["pickup"])
+                instance.delivery = Decoders.decodeOptional(clazz: Stop.self, source: sourceDictionary["delivery"])
+                instance.size = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["size"])
+                instance.requiredSkills = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["required_skills"])
+                instance.allowedVehicles = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["allowed_vehicles"])
+                return instance
+            }
+
+
+            // Decoder for [Solution]
+            Decoders.addDecoder(clazz: [Solution].self) { (source: AnyObject) -> [Solution] in
+                return Decoders.decode(clazz: [Solution].self, source: source)
+            }
+            // Decoder for Solution
+            Decoders.addDecoder(clazz: Solution.self) { (source: AnyObject) -> Solution in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = Solution()
+                instance.costs = Decoders.decodeOptional(clazz: Int32.self, source: sourceDictionary["costs"])
+                instance.distance = Decoders.decodeOptional(clazz: Int32.self, source: sourceDictionary["distance"])
+                instance.time = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["time"])
+                instance.noUnassigned = Decoders.decodeOptional(clazz: Int32.self, source: sourceDictionary["no_unassigned"])
+                instance.routes = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["routes"])
+                instance.unassigned = Decoders.decodeOptional(clazz: SolutionUnassigned.self, source: sourceDictionary["unassigned"])
+                return instance
+            }
+
+
+            // Decoder for [SolutionUnassigned]
+            Decoders.addDecoder(clazz: [SolutionUnassigned].self) { (source: AnyObject) -> [SolutionUnassigned] in
+                return Decoders.decode(clazz: [SolutionUnassigned].self, source: source)
+            }
+            // Decoder for SolutionUnassigned
+            Decoders.addDecoder(clazz: SolutionUnassigned.self) { (source: AnyObject) -> SolutionUnassigned in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = SolutionUnassigned()
                 instance.services = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["services"])
                 instance.shipments = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["shipments"])
                 return instance
             }
-			
+
+
+            // Decoder for [Stop]
+            Decoders.addDecoder(clazz: [Stop].self) { (source: AnyObject) -> [Stop] in
+                return Decoders.decode(clazz: [Stop].self, source: source)
+            }
+            // Decoder for Stop
+            Decoders.addDecoder(clazz: Stop.self) { (source: AnyObject) -> Stop in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = Stop()
+                instance.address = Decoders.decodeOptional(clazz: Address.self, source: sourceDictionary["address"])
+                instance.duration = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["duration"])
+                instance.timeWindows = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["time_windows"])
+                return instance
+            }
+
+
+            // Decoder for [TimeWindow]
+            Decoders.addDecoder(clazz: [TimeWindow].self) { (source: AnyObject) -> [TimeWindow] in
+                return Decoders.decode(clazz: [TimeWindow].self, source: source)
+            }
+            // Decoder for TimeWindow
+            Decoders.addDecoder(clazz: TimeWindow.self) { (source: AnyObject) -> TimeWindow in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = TimeWindow()
+                instance.earliest = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["earliest"])
+                instance.latest = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["latest"])
+                return instance
+            }
+
+
+            // Decoder for [Vehicle]
+            Decoders.addDecoder(clazz: [Vehicle].self) { (source: AnyObject) -> [Vehicle] in
+                return Decoders.decode(clazz: [Vehicle].self, source: source)
+            }
+            // Decoder for Vehicle
+            Decoders.addDecoder(clazz: Vehicle.self) { (source: AnyObject) -> Vehicle in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = Vehicle()
+                instance.vehicleId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["vehicle_id"])
+                instance.typeId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["type_id"])
+                instance.startAddress = Decoders.decodeOptional(clazz: Address.self, source: sourceDictionary["start_address"])
+                instance.endAddress = Decoders.decodeOptional(clazz: Address.self, source: sourceDictionary["end_address"])
+                instance._break = Decoders.decodeOptional(clazz: Break.self, source: sourceDictionary["break"])
+                instance.returnToDepot = Decoders.decodeOptional(clazz: Bool.self, source: sourceDictionary["return_to_depot"])
+                instance.earliestStart = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["earliest_start"])
+                instance.latestEnd = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["latest_end"])
+                instance.skills = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["skills"])
+                return instance
+            }
+
+
+            // Decoder for [VehicleType]
+            Decoders.addDecoder(clazz: [VehicleType].self) { (source: AnyObject) -> [VehicleType] in
+                return Decoders.decode(clazz: [VehicleType].self, source: source)
+            }
+            // Decoder for VehicleType
+            Decoders.addDecoder(clazz: VehicleType.self) { (source: AnyObject) -> VehicleType in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = VehicleType()
+                instance.typeId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["type_id"])
+                instance.profile = VehicleType.Profile(rawValue: (sourceDictionary["profile"] as? String) ?? "") 
+                instance.capacity = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["capacity"])
+                instance.speedFactor = Decoders.decodeOptional(clazz: Double.self, source: sourceDictionary["speed_factor"])
+                instance.serviceTimeFactor = Decoders.decodeOptional(clazz: Double.self, source: sourceDictionary["service_time_factor"])
+                return instance
+            }
         }
     }
 }

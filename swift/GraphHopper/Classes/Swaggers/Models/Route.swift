@@ -9,19 +9,17 @@ import Foundation
 
 
 public class Route: JSONEncodable {
-
     /** id of vehicle that operates route */
-    public var vehicle_id: String?
+    public var vehicleId: String?
     /** array of activities */
     public var activities: [Activity]?
-    
 
     public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
-        nillableDictionary["vehicle_id"] = self.vehicle_id
+        nillableDictionary["vehicle_id"] = self.vehicleId
         nillableDictionary["activities"] = self.activities?.encodeToJSON()
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary

@@ -23,11 +23,10 @@ SamiResponse::~SamiResponse() {
 void
 SamiResponse::init() {
     pJob_id = null;
-    pStatus = null;
-    pWaiting_in_queue = null;
-    pProcessing_time = null;
-    pSolution = null;
-    
+pStatus = null;
+pWaiting_in_queue = null;
+pProcessing_time = null;
+pSolution = null;
 }
 
 void
@@ -37,27 +36,26 @@ SamiResponse::cleanup() {
         delete pJob_id;
         pJob_id = null;
     }
-    if(pStatus != null) {
+if(pStatus != null) {
         
         delete pStatus;
         pStatus = null;
     }
-    if(pWaiting_in_queue != null) {
+if(pWaiting_in_queue != null) {
         
         delete pWaiting_in_queue;
         pWaiting_in_queue = null;
     }
-    if(pProcessing_time != null) {
+if(pProcessing_time != null) {
         
         delete pProcessing_time;
         pProcessing_time = null;
     }
-    if(pSolution != null) {
+if(pSolution != null) {
         
         delete pSolution;
         pSolution = null;
     }
-    
 }
 
 
@@ -104,7 +102,7 @@ SamiResponse::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pJob_id, pJob_idVal, L"String", L"String");
         }
         delete pJob_idKey;
-        JsonString* pStatusKey = new JsonString(L"status");
+JsonString* pStatusKey = new JsonString(L"status");
         IJsonValue* pStatusVal = null;
         pJsonObject->GetValue(pStatusKey, pStatusVal);
         if(pStatusVal != null) {
@@ -113,7 +111,7 @@ SamiResponse::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pStatus, pStatusVal, L"String", L"String");
         }
         delete pStatusKey;
-        JsonString* pWaiting_in_queueKey = new JsonString(L"waiting_in_queue");
+JsonString* pWaiting_in_queueKey = new JsonString(L"waiting_in_queue");
         IJsonValue* pWaiting_in_queueVal = null;
         pJsonObject->GetValue(pWaiting_in_queueKey, pWaiting_in_queueVal);
         if(pWaiting_in_queueVal != null) {
@@ -122,7 +120,7 @@ SamiResponse::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pWaiting_in_queue, pWaiting_in_queueVal, L"Long", L"Long");
         }
         delete pWaiting_in_queueKey;
-        JsonString* pProcessing_timeKey = new JsonString(L"processing_time");
+JsonString* pProcessing_timeKey = new JsonString(L"processing_time");
         IJsonValue* pProcessing_timeVal = null;
         pJsonObject->GetValue(pProcessing_timeKey, pProcessing_timeVal);
         if(pProcessing_timeVal != null) {
@@ -131,7 +129,7 @@ SamiResponse::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pProcessing_time, pProcessing_timeVal, L"Long", L"Long");
         }
         delete pProcessing_timeKey;
-        JsonString* pSolutionKey = new JsonString(L"solution");
+JsonString* pSolutionKey = new JsonString(L"solution");
         IJsonValue* pSolutionVal = null;
         pJsonObject->GetValue(pSolutionKey, pSolutionVal);
         if(pSolutionVal != null) {
@@ -140,7 +138,6 @@ SamiResponse::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pSolution, pSolutionVal, L"SamiSolution", L"SamiSolution");
         }
         delete pSolutionKey;
-        
     }
 }
 
@@ -191,27 +188,21 @@ SamiResponse::asJsonObject() {
     JsonObject *pJsonObject = new JsonObject();
     pJsonObject->Construct();
 
-    
     JsonString *pJob_idKey = new JsonString(L"job_id");
     pJsonObject->Add(pJob_idKey, toJson(getPJobId(), "String", ""));
 
-    
     JsonString *pStatusKey = new JsonString(L"status");
     pJsonObject->Add(pStatusKey, toJson(getPStatus(), "String", ""));
 
-    
     JsonString *pWaiting_in_queueKey = new JsonString(L"waiting_in_queue");
     pJsonObject->Add(pWaiting_in_queueKey, toJson(getPWaitingInQueue(), "Long", ""));
 
-    
     JsonString *pProcessing_timeKey = new JsonString(L"processing_time");
     pJsonObject->Add(pProcessing_timeKey, toJson(getPProcessingTime(), "Long", ""));
 
-    
     JsonString *pSolutionKey = new JsonString(L"solution");
     pJsonObject->Add(pSolutionKey, toJson(getPSolution(), "SamiSolution", ""));
 
-    
     return pJsonObject;
 }
 

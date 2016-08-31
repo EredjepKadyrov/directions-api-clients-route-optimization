@@ -9,27 +9,23 @@ import Foundation
 
 
 public class Algorithm: JSONEncodable {
-
-    public enum Problem_type: String { 
+    public enum ProblemType: String { 
         case Min = "min"
         case MinMax = "min-max"
     }
-    
     public enum Objective: String { 
         case TransportTime = "transport_time"
         case CompletionTime = "completion_time"
     }
-    
-    public var problem_type: Problem_type?
+    public var problemType: ProblemType?
     public var objective: Objective?
-    
 
     public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
-        nillableDictionary["problem_type"] = self.problem_type?.rawValue
+        nillableDictionary["problem_type"] = self.problemType?.rawValue
         nillableDictionary["objective"] = self.objective?.rawValue
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary

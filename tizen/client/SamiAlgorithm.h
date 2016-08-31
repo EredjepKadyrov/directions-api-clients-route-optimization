@@ -40,18 +40,14 @@ public:
 
     SamiAlgorithm* fromJson(String* obj);
 
-    
     String* getPProblemType();
     void setPProblemType(String* pProblem_type);
-    
     String* getPObjective();
     void setPObjective(String* pObjective);
-    
 
 private:
     String* pProblem_type;
-    String* pObjective;
-    
+String* pObjective;
 };
 
 } /* namespace Swagger */

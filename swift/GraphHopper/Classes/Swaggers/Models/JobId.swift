@@ -9,17 +9,15 @@ import Foundation
 
 
 public class JobId: JSONEncodable {
-
     /** unique id for your job/request with which you can fetch your solution */
-    public var job_id: String?
-    
+    public var jobId: String?
 
     public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
-        nillableDictionary["job_id"] = self.job_id
+        nillableDictionary["job_id"] = self.jobId
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

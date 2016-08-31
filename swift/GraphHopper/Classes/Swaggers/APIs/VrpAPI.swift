@@ -7,38 +7,49 @@
 
 import Alamofire
 
-extension GraphHopperAPI {
-    
-    public class VrpAPI: APIBase {
-    
-        /**
-         
-         Solves large routing problems
-         
-         - POST /optimize
-         - This endpoint solves large problems, i.e. traveling salesman or vehicle routing problems, and returns the solution.
-         - API Key:
-           - type: apiKey key (QUERY)
-           - name: api_key
-         - examples: [{example={
+
+
+public class VrpAPI: APIBase {
+    /**
+     Solves vehicle routing problems
+     
+     - parameter key: (query) your API key 
+     - parameter body: (body) Request object that contains the problem to be solved 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    public class func postVrp(key key: String, body: Request, completion: ((data: JobId?, error: ErrorType?) -> Void)) {
+        postVrpWithRequestBuilder(key: key, body: body).execute { (response, error) -> Void in
+            completion(data: response?.body, error: error);
+        }
+    }
+
+
+    /**
+     Solves vehicle routing problems
+     - POST /optimize
+     - This endpoint for solving vehicle routing problems, i.e. traveling salesman or vehicle routing problems, and returns the solution. 
+     - API Key:
+       - type: apiKey key (QUERY)
+       - name: api_key
+     - examples: [{example={
   "job_id" : "aeiou"
 }, contentType=application/json}]
-         
-         - parameter key: (query) your API key
-         - parameter body: (body) Request object that contains the problem to be solved
+     
+     - parameter key: (query) your API key 
+     - parameter body: (body) Request object that contains the problem to be solved 
 
-         - returns: RequestBuilder<JobId> 
-         */
-        public class func postVrp(key key: String, body: Request) -> RequestBuilder<JobId> {
-            let path = "/optimize"
-            let URLString = GraphHopperAPI.basePath + path
-            
-            let parameters = body.encodeToJSON() as? [String:AnyObject]
+     - returns: RequestBuilder<JobId> 
+     */
+    public class func postVrpWithRequestBuilder(key key: String, body: Request) -> RequestBuilder<JobId> {
+        let path = "/optimize"
+        let URLString = GraphHopperAPI.basePath + path
+        let parameters = body.encodeToJSON() as? [String:AnyObject]
+ 
+        let convertedParameters = APIHelper.convertBoolToString(parameters)
+ 
+        let requestBuilder: RequestBuilder<JobId>.Type = GraphHopperAPI.requestBuilderFactory.getBuilder()
 
-            let requestBuilder: RequestBuilder<JobId>.Type = GraphHopperAPI.requestBuilderFactory.getBuilder()
-
-            return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
-        }
-    
+        return requestBuilder.init(method: "POST", URLString: URLString, parameters: convertedParameters, isBody: false)
     }
+
 }

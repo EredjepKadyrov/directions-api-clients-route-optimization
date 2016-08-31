@@ -23,14 +23,13 @@ SamiShipment::~SamiShipment() {
 void
 SamiShipment::init() {
     pId = null;
-    pName = null;
-    pPriority = null;
-    pPickup = null;
-    pDelivery = null;
-    pSize = null;
-    pRequired_skills = null;
-    pAllowed_vehicles = null;
-    
+pName = null;
+pPriority = null;
+pPickup = null;
+pDelivery = null;
+pSize = null;
+pRequired_skills = null;
+pAllowed_vehicles = null;
 }
 
 void
@@ -40,42 +39,41 @@ SamiShipment::cleanup() {
         delete pId;
         pId = null;
     }
-    if(pName != null) {
+if(pName != null) {
         
         delete pName;
         pName = null;
     }
-    if(pPriority != null) {
+if(pPriority != null) {
         
         delete pPriority;
         pPriority = null;
     }
-    if(pPickup != null) {
+if(pPickup != null) {
         
         delete pPickup;
         pPickup = null;
     }
-    if(pDelivery != null) {
+if(pDelivery != null) {
         
         delete pDelivery;
         pDelivery = null;
     }
-    if(pSize != null) {
+if(pSize != null) {
         pSize->RemoveAll(true);
         delete pSize;
         pSize = null;
     }
-    if(pRequired_skills != null) {
+if(pRequired_skills != null) {
         pRequired_skills->RemoveAll(true);
         delete pRequired_skills;
         pRequired_skills = null;
     }
-    if(pAllowed_vehicles != null) {
+if(pAllowed_vehicles != null) {
         pAllowed_vehicles->RemoveAll(true);
         delete pAllowed_vehicles;
         pAllowed_vehicles = null;
     }
-    
 }
 
 
@@ -122,7 +120,7 @@ SamiShipment::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pId, pIdVal, L"String", L"String");
         }
         delete pIdKey;
-        JsonString* pNameKey = new JsonString(L"name");
+JsonString* pNameKey = new JsonString(L"name");
         IJsonValue* pNameVal = null;
         pJsonObject->GetValue(pNameKey, pNameVal);
         if(pNameVal != null) {
@@ -131,7 +129,7 @@ SamiShipment::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pName, pNameVal, L"String", L"String");
         }
         delete pNameKey;
-        JsonString* pPriorityKey = new JsonString(L"priority");
+JsonString* pPriorityKey = new JsonString(L"priority");
         IJsonValue* pPriorityVal = null;
         pJsonObject->GetValue(pPriorityKey, pPriorityVal);
         if(pPriorityVal != null) {
@@ -140,7 +138,7 @@ SamiShipment::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pPriority, pPriorityVal, L"Integer", L"Integer");
         }
         delete pPriorityKey;
-        JsonString* pPickupKey = new JsonString(L"pickup");
+JsonString* pPickupKey = new JsonString(L"pickup");
         IJsonValue* pPickupVal = null;
         pJsonObject->GetValue(pPickupKey, pPickupVal);
         if(pPickupVal != null) {
@@ -149,7 +147,7 @@ SamiShipment::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pPickup, pPickupVal, L"SamiStop", L"SamiStop");
         }
         delete pPickupKey;
-        JsonString* pDeliveryKey = new JsonString(L"delivery");
+JsonString* pDeliveryKey = new JsonString(L"delivery");
         IJsonValue* pDeliveryVal = null;
         pJsonObject->GetValue(pDeliveryKey, pDeliveryVal);
         if(pDeliveryVal != null) {
@@ -158,7 +156,7 @@ SamiShipment::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pDelivery, pDeliveryVal, L"SamiStop", L"SamiStop");
         }
         delete pDeliveryKey;
-        JsonString* pSizeKey = new JsonString(L"size");
+JsonString* pSizeKey = new JsonString(L"size");
         IJsonValue* pSizeVal = null;
         pJsonObject->GetValue(pSizeKey, pSizeVal);
         if(pSizeVal != null) {
@@ -167,7 +165,7 @@ SamiShipment::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pSize, pSizeVal, L"IList", L"Integer");
         }
         delete pSizeKey;
-        JsonString* pRequired_skillsKey = new JsonString(L"required_skills");
+JsonString* pRequired_skillsKey = new JsonString(L"required_skills");
         IJsonValue* pRequired_skillsVal = null;
         pJsonObject->GetValue(pRequired_skillsKey, pRequired_skillsVal);
         if(pRequired_skillsVal != null) {
@@ -176,7 +174,7 @@ SamiShipment::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pRequired_skills, pRequired_skillsVal, L"IList", L"String");
         }
         delete pRequired_skillsKey;
-        JsonString* pAllowed_vehiclesKey = new JsonString(L"allowed_vehicles");
+JsonString* pAllowed_vehiclesKey = new JsonString(L"allowed_vehicles");
         IJsonValue* pAllowed_vehiclesVal = null;
         pJsonObject->GetValue(pAllowed_vehiclesKey, pAllowed_vehiclesVal);
         if(pAllowed_vehiclesVal != null) {
@@ -185,7 +183,6 @@ SamiShipment::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pAllowed_vehicles, pAllowed_vehiclesVal, L"IList", L"String");
         }
         delete pAllowed_vehiclesKey;
-        
     }
 }
 
@@ -236,39 +233,30 @@ SamiShipment::asJsonObject() {
     JsonObject *pJsonObject = new JsonObject();
     pJsonObject->Construct();
 
-    
     JsonString *pIdKey = new JsonString(L"id");
     pJsonObject->Add(pIdKey, toJson(getPId(), "String", ""));
 
-    
     JsonString *pNameKey = new JsonString(L"name");
     pJsonObject->Add(pNameKey, toJson(getPName(), "String", ""));
 
-    
     JsonString *pPriorityKey = new JsonString(L"priority");
     pJsonObject->Add(pPriorityKey, toJson(getPPriority(), "Integer", ""));
 
-    
     JsonString *pPickupKey = new JsonString(L"pickup");
     pJsonObject->Add(pPickupKey, toJson(getPPickup(), "SamiStop", ""));
 
-    
     JsonString *pDeliveryKey = new JsonString(L"delivery");
     pJsonObject->Add(pDeliveryKey, toJson(getPDelivery(), "SamiStop", ""));
 
-    
     JsonString *pSizeKey = new JsonString(L"size");
     pJsonObject->Add(pSizeKey, toJson(getPSize(), "Integer", "array"));
 
-    
     JsonString *pRequired_skillsKey = new JsonString(L"required_skills");
     pJsonObject->Add(pRequired_skillsKey, toJson(getPRequiredSkills(), "String", "array"));
 
-    
     JsonString *pAllowed_vehiclesKey = new JsonString(L"allowed_vehicles");
     pJsonObject->Add(pAllowed_vehiclesKey, toJson(getPAllowedVehicles(), "String", "array"));
 
-    
     return pJsonObject;
 }
 

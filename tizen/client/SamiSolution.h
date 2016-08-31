@@ -44,34 +44,26 @@ public:
 
     SamiSolution* fromJson(String* obj);
 
-    
     Integer* getPCosts();
     void setPCosts(Integer* pCosts);
-    
     Integer* getPDistance();
     void setPDistance(Integer* pDistance);
-    
     Long* getPTime();
     void setPTime(Long* pTime);
-    
     Integer* getPNoUnassigned();
     void setPNoUnassigned(Integer* pNo_unassigned);
-    
     IList* getPRoutes();
     void setPRoutes(IList* pRoutes);
-    
     SamiSolution_unassigned* getPUnassigned();
     void setPUnassigned(SamiSolution_unassigned* pUnassigned);
-    
 
 private:
     Integer* pCosts;
-    Integer* pDistance;
-    Long* pTime;
-    Integer* pNo_unassigned;
-    IList* pRoutes;
-    SamiSolution_unassigned* pUnassigned;
-    
+Integer* pDistance;
+Long* pTime;
+Integer* pNo_unassigned;
+IList* pRoutes;
+SamiSolution_unassigned* pUnassigned;
 };
 
 } /* namespace Swagger */

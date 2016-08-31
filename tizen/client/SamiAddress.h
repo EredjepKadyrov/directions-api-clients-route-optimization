@@ -41,22 +41,17 @@ public:
 
     SamiAddress* fromJson(String* obj);
 
-    
     String* getPLocationId();
     void setPLocationId(String* pLocation_id);
-    
     Double* getPLon();
     void setPLon(Double* pLon);
-    
     Double* getPLat();
     void setPLat(Double* pLat);
-    
 
 private:
     String* pLocation_id;
-    Double* pLon;
-    Double* pLat;
-    
+Double* pLon;
+Double* pLat;
 };
 
 } /* namespace Swagger */

@@ -42,30 +42,23 @@ public:
 
     SamiResponse* fromJson(String* obj);
 
-    
     String* getPJobId();
     void setPJobId(String* pJob_id);
-    
     String* getPStatus();
     void setPStatus(String* pStatus);
-    
     Long* getPWaitingInQueue();
     void setPWaitingInQueue(Long* pWaiting_in_queue);
-    
     Long* getPProcessingTime();
     void setPProcessingTime(Long* pProcessing_time);
-    
     SamiSolution* getPSolution();
     void setPSolution(SamiSolution* pSolution);
-    
 
 private:
     String* pJob_id;
-    String* pStatus;
-    Long* pWaiting_in_queue;
-    Long* pProcessing_time;
-    SamiSolution* pSolution;
-    
+String* pStatus;
+Long* pWaiting_in_queue;
+Long* pProcessing_time;
+SamiSolution* pSolution;
 };
 
 } /* namespace Swagger */

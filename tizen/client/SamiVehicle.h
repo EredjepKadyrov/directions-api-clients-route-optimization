@@ -45,46 +45,35 @@ public:
 
     SamiVehicle* fromJson(String* obj);
 
-    
     String* getPVehicleId();
     void setPVehicleId(String* pVehicle_id);
-    
     String* getPTypeId();
     void setPTypeId(String* pType_id);
-    
     SamiAddress* getPStartAddress();
     void setPStartAddress(SamiAddress* pStart_address);
-    
     SamiAddress* getPEndAddress();
     void setPEndAddress(SamiAddress* pEnd_address);
-    
     SamiBreak* getPBreak();
     void setPBreak(SamiBreak* pBreak);
-    
     Boolean* getPReturnToDepot();
     void setPReturnToDepot(Boolean* pReturn_to_depot);
-    
     Long* getPEarliestStart();
     void setPEarliestStart(Long* pEarliest_start);
-    
     Long* getPLatestEnd();
     void setPLatestEnd(Long* pLatest_end);
-    
     IList* getPSkills();
     void setPSkills(IList* pSkills);
-    
 
 private:
     String* pVehicle_id;
-    String* pType_id;
-    SamiAddress* pStart_address;
-    SamiAddress* pEnd_address;
-    SamiBreak* pBreak;
-    Boolean* pReturn_to_depot;
-    Long* pEarliest_start;
-    Long* pLatest_end;
-    IList* pSkills;
-    
+String* pType_id;
+SamiAddress* pStart_address;
+SamiAddress* pEnd_address;
+SamiBreak* pBreak;
+Boolean* pReturn_to_depot;
+Long* pEarliest_start;
+Long* pLatest_end;
+IList* pSkills;
 };
 
 } /* namespace Swagger */

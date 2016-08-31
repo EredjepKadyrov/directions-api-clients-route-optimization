@@ -9,11 +9,10 @@ import Foundation
 
 
 public class Request: JSONEncodable {
-
     /** An array of vehicles that can be employed */
     public var vehicles: [Vehicle]?
     /** An array of vehicle types */
-    public var vehicle_types: [VehicleType]?
+    public var vehicleTypes: [VehicleType]?
     /** An array of services */
     public var services: [Service]?
     /** An array of shipments */
@@ -21,7 +20,10 @@ public class Request: JSONEncodable {
     /** An array of relations */
     public var relations: [Relation]?
     public var algorithm: Algorithm?
-    
+    /** An array of objectives */
+    public var objectives: [Objective]?
+    /** An array of cost matrices */
+    public var costMatrices: [CostMatrix]?
 
     public init() {}
 
@@ -29,11 +31,13 @@ public class Request: JSONEncodable {
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["vehicles"] = self.vehicles?.encodeToJSON()
-        nillableDictionary["vehicle_types"] = self.vehicle_types?.encodeToJSON()
+        nillableDictionary["vehicle_types"] = self.vehicleTypes?.encodeToJSON()
         nillableDictionary["services"] = self.services?.encodeToJSON()
         nillableDictionary["shipments"] = self.shipments?.encodeToJSON()
         nillableDictionary["relations"] = self.relations?.encodeToJSON()
         nillableDictionary["algorithm"] = self.algorithm?.encodeToJSON()
+        nillableDictionary["objectives"] = self.objectives?.encodeToJSON()
+        nillableDictionary["cost_matrices"] = self.costMatrices?.encodeToJSON()
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

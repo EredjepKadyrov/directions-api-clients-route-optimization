@@ -23,12 +23,11 @@ SamiSolution::~SamiSolution() {
 void
 SamiSolution::init() {
     pCosts = null;
-    pDistance = null;
-    pTime = null;
-    pNo_unassigned = null;
-    pRoutes = null;
-    pUnassigned = null;
-    
+pDistance = null;
+pTime = null;
+pNo_unassigned = null;
+pRoutes = null;
+pUnassigned = null;
 }
 
 void
@@ -38,32 +37,31 @@ SamiSolution::cleanup() {
         delete pCosts;
         pCosts = null;
     }
-    if(pDistance != null) {
+if(pDistance != null) {
         
         delete pDistance;
         pDistance = null;
     }
-    if(pTime != null) {
+if(pTime != null) {
         
         delete pTime;
         pTime = null;
     }
-    if(pNo_unassigned != null) {
+if(pNo_unassigned != null) {
         
         delete pNo_unassigned;
         pNo_unassigned = null;
     }
-    if(pRoutes != null) {
+if(pRoutes != null) {
         pRoutes->RemoveAll(true);
         delete pRoutes;
         pRoutes = null;
     }
-    if(pUnassigned != null) {
+if(pUnassigned != null) {
         
         delete pUnassigned;
         pUnassigned = null;
     }
-    
 }
 
 
@@ -110,7 +108,7 @@ SamiSolution::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pCosts, pCostsVal, L"Integer", L"Integer");
         }
         delete pCostsKey;
-        JsonString* pDistanceKey = new JsonString(L"distance");
+JsonString* pDistanceKey = new JsonString(L"distance");
         IJsonValue* pDistanceVal = null;
         pJsonObject->GetValue(pDistanceKey, pDistanceVal);
         if(pDistanceVal != null) {
@@ -119,7 +117,7 @@ SamiSolution::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pDistance, pDistanceVal, L"Integer", L"Integer");
         }
         delete pDistanceKey;
-        JsonString* pTimeKey = new JsonString(L"time");
+JsonString* pTimeKey = new JsonString(L"time");
         IJsonValue* pTimeVal = null;
         pJsonObject->GetValue(pTimeKey, pTimeVal);
         if(pTimeVal != null) {
@@ -128,7 +126,7 @@ SamiSolution::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pTime, pTimeVal, L"Long", L"Long");
         }
         delete pTimeKey;
-        JsonString* pNo_unassignedKey = new JsonString(L"no_unassigned");
+JsonString* pNo_unassignedKey = new JsonString(L"no_unassigned");
         IJsonValue* pNo_unassignedVal = null;
         pJsonObject->GetValue(pNo_unassignedKey, pNo_unassignedVal);
         if(pNo_unassignedVal != null) {
@@ -137,7 +135,7 @@ SamiSolution::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pNo_unassigned, pNo_unassignedVal, L"Integer", L"Integer");
         }
         delete pNo_unassignedKey;
-        JsonString* pRoutesKey = new JsonString(L"routes");
+JsonString* pRoutesKey = new JsonString(L"routes");
         IJsonValue* pRoutesVal = null;
         pJsonObject->GetValue(pRoutesKey, pRoutesVal);
         if(pRoutesVal != null) {
@@ -146,7 +144,7 @@ SamiSolution::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pRoutes, pRoutesVal, L"IList", L"SamiRoute");
         }
         delete pRoutesKey;
-        JsonString* pUnassignedKey = new JsonString(L"unassigned");
+JsonString* pUnassignedKey = new JsonString(L"unassigned");
         IJsonValue* pUnassignedVal = null;
         pJsonObject->GetValue(pUnassignedKey, pUnassignedVal);
         if(pUnassignedVal != null) {
@@ -155,7 +153,6 @@ SamiSolution::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pUnassigned, pUnassignedVal, L"SamiSolution_unassigned", L"SamiSolution_unassigned");
         }
         delete pUnassignedKey;
-        
     }
 }
 
@@ -206,31 +203,24 @@ SamiSolution::asJsonObject() {
     JsonObject *pJsonObject = new JsonObject();
     pJsonObject->Construct();
 
-    
     JsonString *pCostsKey = new JsonString(L"costs");
     pJsonObject->Add(pCostsKey, toJson(getPCosts(), "Integer", ""));
 
-    
     JsonString *pDistanceKey = new JsonString(L"distance");
     pJsonObject->Add(pDistanceKey, toJson(getPDistance(), "Integer", ""));
 
-    
     JsonString *pTimeKey = new JsonString(L"time");
     pJsonObject->Add(pTimeKey, toJson(getPTime(), "Long", ""));
 
-    
     JsonString *pNo_unassignedKey = new JsonString(L"no_unassigned");
     pJsonObject->Add(pNo_unassignedKey, toJson(getPNoUnassigned(), "Integer", ""));
 
-    
     JsonString *pRoutesKey = new JsonString(L"routes");
     pJsonObject->Add(pRoutesKey, toJson(getPRoutes(), "SamiRoute", "array"));
 
-    
     JsonString *pUnassignedKey = new JsonString(L"unassigned");
     pJsonObject->Add(pUnassignedKey, toJson(getPUnassigned(), "SamiSolution_unassigned", ""));
 
-    
     return pJsonObject;
 }
 

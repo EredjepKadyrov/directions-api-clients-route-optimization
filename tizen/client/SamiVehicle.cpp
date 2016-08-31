@@ -23,15 +23,14 @@ SamiVehicle::~SamiVehicle() {
 void
 SamiVehicle::init() {
     pVehicle_id = null;
-    pType_id = null;
-    pStart_address = null;
-    pEnd_address = null;
-    pBreak = null;
-    pReturn_to_depot = null;
-    pEarliest_start = null;
-    pLatest_end = null;
-    pSkills = null;
-    
+pType_id = null;
+pStart_address = null;
+pEnd_address = null;
+pBreak = null;
+pReturn_to_depot = null;
+pEarliest_start = null;
+pLatest_end = null;
+pSkills = null;
 }
 
 void
@@ -41,47 +40,46 @@ SamiVehicle::cleanup() {
         delete pVehicle_id;
         pVehicle_id = null;
     }
-    if(pType_id != null) {
+if(pType_id != null) {
         
         delete pType_id;
         pType_id = null;
     }
-    if(pStart_address != null) {
+if(pStart_address != null) {
         
         delete pStart_address;
         pStart_address = null;
     }
-    if(pEnd_address != null) {
+if(pEnd_address != null) {
         
         delete pEnd_address;
         pEnd_address = null;
     }
-    if(pBreak != null) {
+if(pBreak != null) {
         
         delete pBreak;
         pBreak = null;
     }
-    if(pReturn_to_depot != null) {
+if(pReturn_to_depot != null) {
         
         delete pReturn_to_depot;
         pReturn_to_depot = null;
     }
-    if(pEarliest_start != null) {
+if(pEarliest_start != null) {
         
         delete pEarliest_start;
         pEarliest_start = null;
     }
-    if(pLatest_end != null) {
+if(pLatest_end != null) {
         
         delete pLatest_end;
         pLatest_end = null;
     }
-    if(pSkills != null) {
+if(pSkills != null) {
         pSkills->RemoveAll(true);
         delete pSkills;
         pSkills = null;
     }
-    
 }
 
 
@@ -128,7 +126,7 @@ SamiVehicle::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pVehicle_id, pVehicle_idVal, L"String", L"String");
         }
         delete pVehicle_idKey;
-        JsonString* pType_idKey = new JsonString(L"type_id");
+JsonString* pType_idKey = new JsonString(L"type_id");
         IJsonValue* pType_idVal = null;
         pJsonObject->GetValue(pType_idKey, pType_idVal);
         if(pType_idVal != null) {
@@ -137,7 +135,7 @@ SamiVehicle::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pType_id, pType_idVal, L"String", L"String");
         }
         delete pType_idKey;
-        JsonString* pStart_addressKey = new JsonString(L"start_address");
+JsonString* pStart_addressKey = new JsonString(L"start_address");
         IJsonValue* pStart_addressVal = null;
         pJsonObject->GetValue(pStart_addressKey, pStart_addressVal);
         if(pStart_addressVal != null) {
@@ -146,7 +144,7 @@ SamiVehicle::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pStart_address, pStart_addressVal, L"SamiAddress", L"SamiAddress");
         }
         delete pStart_addressKey;
-        JsonString* pEnd_addressKey = new JsonString(L"end_address");
+JsonString* pEnd_addressKey = new JsonString(L"end_address");
         IJsonValue* pEnd_addressVal = null;
         pJsonObject->GetValue(pEnd_addressKey, pEnd_addressVal);
         if(pEnd_addressVal != null) {
@@ -155,7 +153,7 @@ SamiVehicle::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pEnd_address, pEnd_addressVal, L"SamiAddress", L"SamiAddress");
         }
         delete pEnd_addressKey;
-        JsonString* pBreakKey = new JsonString(L"break");
+JsonString* pBreakKey = new JsonString(L"break");
         IJsonValue* pBreakVal = null;
         pJsonObject->GetValue(pBreakKey, pBreakVal);
         if(pBreakVal != null) {
@@ -164,7 +162,7 @@ SamiVehicle::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pBreak, pBreakVal, L"SamiBreak", L"SamiBreak");
         }
         delete pBreakKey;
-        JsonString* pReturn_to_depotKey = new JsonString(L"return_to_depot");
+JsonString* pReturn_to_depotKey = new JsonString(L"return_to_depot");
         IJsonValue* pReturn_to_depotVal = null;
         pJsonObject->GetValue(pReturn_to_depotKey, pReturn_to_depotVal);
         if(pReturn_to_depotVal != null) {
@@ -173,7 +171,7 @@ SamiVehicle::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pReturn_to_depot, pReturn_to_depotVal, L"Boolean", L"Boolean");
         }
         delete pReturn_to_depotKey;
-        JsonString* pEarliest_startKey = new JsonString(L"earliest_start");
+JsonString* pEarliest_startKey = new JsonString(L"earliest_start");
         IJsonValue* pEarliest_startVal = null;
         pJsonObject->GetValue(pEarliest_startKey, pEarliest_startVal);
         if(pEarliest_startVal != null) {
@@ -182,7 +180,7 @@ SamiVehicle::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pEarliest_start, pEarliest_startVal, L"Long", L"Long");
         }
         delete pEarliest_startKey;
-        JsonString* pLatest_endKey = new JsonString(L"latest_end");
+JsonString* pLatest_endKey = new JsonString(L"latest_end");
         IJsonValue* pLatest_endVal = null;
         pJsonObject->GetValue(pLatest_endKey, pLatest_endVal);
         if(pLatest_endVal != null) {
@@ -191,7 +189,7 @@ SamiVehicle::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pLatest_end, pLatest_endVal, L"Long", L"Long");
         }
         delete pLatest_endKey;
-        JsonString* pSkillsKey = new JsonString(L"skills");
+JsonString* pSkillsKey = new JsonString(L"skills");
         IJsonValue* pSkillsVal = null;
         pJsonObject->GetValue(pSkillsKey, pSkillsVal);
         if(pSkillsVal != null) {
@@ -200,7 +198,6 @@ SamiVehicle::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pSkills, pSkillsVal, L"IList", L"String");
         }
         delete pSkillsKey;
-        
     }
 }
 
@@ -251,43 +248,33 @@ SamiVehicle::asJsonObject() {
     JsonObject *pJsonObject = new JsonObject();
     pJsonObject->Construct();
 
-    
     JsonString *pVehicle_idKey = new JsonString(L"vehicle_id");
     pJsonObject->Add(pVehicle_idKey, toJson(getPVehicleId(), "String", ""));
 
-    
     JsonString *pType_idKey = new JsonString(L"type_id");
     pJsonObject->Add(pType_idKey, toJson(getPTypeId(), "String", ""));
 
-    
     JsonString *pStart_addressKey = new JsonString(L"start_address");
     pJsonObject->Add(pStart_addressKey, toJson(getPStartAddress(), "SamiAddress", ""));
 
-    
     JsonString *pEnd_addressKey = new JsonString(L"end_address");
     pJsonObject->Add(pEnd_addressKey, toJson(getPEndAddress(), "SamiAddress", ""));
 
-    
     JsonString *pBreakKey = new JsonString(L"break");
     pJsonObject->Add(pBreakKey, toJson(getPBreak(), "SamiBreak", ""));
 
-    
     JsonString *pReturn_to_depotKey = new JsonString(L"return_to_depot");
     pJsonObject->Add(pReturn_to_depotKey, toJson(getPReturnToDepot(), "Boolean", ""));
 
-    
     JsonString *pEarliest_startKey = new JsonString(L"earliest_start");
     pJsonObject->Add(pEarliest_startKey, toJson(getPEarliestStart(), "Long", ""));
 
-    
     JsonString *pLatest_endKey = new JsonString(L"latest_end");
     pJsonObject->Add(pLatest_endKey, toJson(getPLatestEnd(), "Long", ""));
 
-    
     JsonString *pSkillsKey = new JsonString(L"skills");
     pJsonObject->Add(pSkillsKey, toJson(getPSkills(), "String", "array"));
 
-    
     return pJsonObject;
 }
 

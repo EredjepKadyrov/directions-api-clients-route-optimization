@@ -41,18 +41,14 @@ public:
 
     SamiSolution_unassigned* fromJson(String* obj);
 
-    
     IList* getPServices();
     void setPServices(IList* pServices);
-    
     IList* getPShipments();
     void setPShipments(IList* pShipments);
-    
 
 private:
     IList* pServices;
-    IList* pShipments;
-    
+IList* pShipments;
 };
 
 } /* namespace Swagger */

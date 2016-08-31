@@ -23,9 +23,8 @@ SamiStop::~SamiStop() {
 void
 SamiStop::init() {
     pAddress = null;
-    pDuration = null;
-    pTime_windows = null;
-    
+pDuration = null;
+pTime_windows = null;
 }
 
 void
@@ -35,17 +34,16 @@ SamiStop::cleanup() {
         delete pAddress;
         pAddress = null;
     }
-    if(pDuration != null) {
+if(pDuration != null) {
         
         delete pDuration;
         pDuration = null;
     }
-    if(pTime_windows != null) {
+if(pTime_windows != null) {
         pTime_windows->RemoveAll(true);
         delete pTime_windows;
         pTime_windows = null;
     }
-    
 }
 
 
@@ -92,7 +90,7 @@ SamiStop::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pAddress, pAddressVal, L"SamiAddress", L"SamiAddress");
         }
         delete pAddressKey;
-        JsonString* pDurationKey = new JsonString(L"duration");
+JsonString* pDurationKey = new JsonString(L"duration");
         IJsonValue* pDurationVal = null;
         pJsonObject->GetValue(pDurationKey, pDurationVal);
         if(pDurationVal != null) {
@@ -101,7 +99,7 @@ SamiStop::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pDuration, pDurationVal, L"Long", L"Long");
         }
         delete pDurationKey;
-        JsonString* pTime_windowsKey = new JsonString(L"time_windows");
+JsonString* pTime_windowsKey = new JsonString(L"time_windows");
         IJsonValue* pTime_windowsVal = null;
         pJsonObject->GetValue(pTime_windowsKey, pTime_windowsVal);
         if(pTime_windowsVal != null) {
@@ -110,7 +108,6 @@ SamiStop::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pTime_windows, pTime_windowsVal, L"IList", L"SamiTimeWindow");
         }
         delete pTime_windowsKey;
-        
     }
 }
 
@@ -161,19 +158,15 @@ SamiStop::asJsonObject() {
     JsonObject *pJsonObject = new JsonObject();
     pJsonObject->Construct();
 
-    
     JsonString *pAddressKey = new JsonString(L"address");
     pJsonObject->Add(pAddressKey, toJson(getPAddress(), "SamiAddress", ""));
 
-    
     JsonString *pDurationKey = new JsonString(L"duration");
     pJsonObject->Add(pDurationKey, toJson(getPDuration(), "Long", ""));
 
-    
     JsonString *pTime_windowsKey = new JsonString(L"time_windows");
     pJsonObject->Add(pTime_windowsKey, toJson(getPTimeWindows(), "SamiTimeWindow", "array"));
 
-    
     return pJsonObject;
 }
 

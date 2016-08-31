@@ -23,7 +23,6 @@ SamiJobId::~SamiJobId() {
 void
 SamiJobId::init() {
     pJob_id = null;
-    
 }
 
 void
@@ -33,7 +32,6 @@ SamiJobId::cleanup() {
         delete pJob_id;
         pJob_id = null;
     }
-    
 }
 
 
@@ -80,7 +78,6 @@ SamiJobId::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pJob_id, pJob_idVal, L"String", L"String");
         }
         delete pJob_idKey;
-        
     }
 }
 
@@ -131,11 +128,9 @@ SamiJobId::asJsonObject() {
     JsonObject *pJsonObject = new JsonObject();
     pJsonObject->Construct();
 
-    
     JsonString *pJob_idKey = new JsonString(L"job_id");
     pJsonObject->Add(pJob_idKey, toJson(getPJobId(), "String", ""));
 
-    
     return pJsonObject;
 }
 

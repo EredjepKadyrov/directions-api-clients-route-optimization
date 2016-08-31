@@ -23,12 +23,13 @@ SamiRequest::~SamiRequest() {
 void
 SamiRequest::init() {
     pVehicles = null;
-    pVehicle_types = null;
-    pServices = null;
-    pShipments = null;
-    pRelations = null;
-    pAlgorithm = null;
-    
+pVehicle_types = null;
+pServices = null;
+pShipments = null;
+pRelations = null;
+pAlgorithm = null;
+pObjectives = null;
+pCost_matrices = null;
 }
 
 void
@@ -38,32 +39,41 @@ SamiRequest::cleanup() {
         delete pVehicles;
         pVehicles = null;
     }
-    if(pVehicle_types != null) {
+if(pVehicle_types != null) {
         pVehicle_types->RemoveAll(true);
         delete pVehicle_types;
         pVehicle_types = null;
     }
-    if(pServices != null) {
+if(pServices != null) {
         pServices->RemoveAll(true);
         delete pServices;
         pServices = null;
     }
-    if(pShipments != null) {
+if(pShipments != null) {
         pShipments->RemoveAll(true);
         delete pShipments;
         pShipments = null;
     }
-    if(pRelations != null) {
+if(pRelations != null) {
         pRelations->RemoveAll(true);
         delete pRelations;
         pRelations = null;
     }
-    if(pAlgorithm != null) {
+if(pAlgorithm != null) {
         
         delete pAlgorithm;
         pAlgorithm = null;
     }
-    
+if(pObjectives != null) {
+        pObjectives->RemoveAll(true);
+        delete pObjectives;
+        pObjectives = null;
+    }
+if(pCost_matrices != null) {
+        pCost_matrices->RemoveAll(true);
+        delete pCost_matrices;
+        pCost_matrices = null;
+    }
 }
 
 
@@ -110,7 +120,7 @@ SamiRequest::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pVehicles, pVehiclesVal, L"IList", L"SamiVehicle");
         }
         delete pVehiclesKey;
-        JsonString* pVehicle_typesKey = new JsonString(L"vehicle_types");
+JsonString* pVehicle_typesKey = new JsonString(L"vehicle_types");
         IJsonValue* pVehicle_typesVal = null;
         pJsonObject->GetValue(pVehicle_typesKey, pVehicle_typesVal);
         if(pVehicle_typesVal != null) {
@@ -119,7 +129,7 @@ SamiRequest::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pVehicle_types, pVehicle_typesVal, L"IList", L"SamiVehicleType");
         }
         delete pVehicle_typesKey;
-        JsonString* pServicesKey = new JsonString(L"services");
+JsonString* pServicesKey = new JsonString(L"services");
         IJsonValue* pServicesVal = null;
         pJsonObject->GetValue(pServicesKey, pServicesVal);
         if(pServicesVal != null) {
@@ -128,7 +138,7 @@ SamiRequest::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pServices, pServicesVal, L"IList", L"SamiService");
         }
         delete pServicesKey;
-        JsonString* pShipmentsKey = new JsonString(L"shipments");
+JsonString* pShipmentsKey = new JsonString(L"shipments");
         IJsonValue* pShipmentsVal = null;
         pJsonObject->GetValue(pShipmentsKey, pShipmentsVal);
         if(pShipmentsVal != null) {
@@ -137,7 +147,7 @@ SamiRequest::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pShipments, pShipmentsVal, L"IList", L"SamiShipment");
         }
         delete pShipmentsKey;
-        JsonString* pRelationsKey = new JsonString(L"relations");
+JsonString* pRelationsKey = new JsonString(L"relations");
         IJsonValue* pRelationsVal = null;
         pJsonObject->GetValue(pRelationsKey, pRelationsVal);
         if(pRelationsVal != null) {
@@ -146,7 +156,7 @@ SamiRequest::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pRelations, pRelationsVal, L"IList", L"SamiRelation");
         }
         delete pRelationsKey;
-        JsonString* pAlgorithmKey = new JsonString(L"algorithm");
+JsonString* pAlgorithmKey = new JsonString(L"algorithm");
         IJsonValue* pAlgorithmVal = null;
         pJsonObject->GetValue(pAlgorithmKey, pAlgorithmVal);
         if(pAlgorithmVal != null) {
@@ -155,7 +165,24 @@ SamiRequest::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pAlgorithm, pAlgorithmVal, L"SamiAlgorithm", L"SamiAlgorithm");
         }
         delete pAlgorithmKey;
-        
+JsonString* pObjectivesKey = new JsonString(L"objectives");
+        IJsonValue* pObjectivesVal = null;
+        pJsonObject->GetValue(pObjectivesKey, pObjectivesVal);
+        if(pObjectivesVal != null) {
+            pObjectives = new ArrayList();
+            
+            jsonToValue(pObjectives, pObjectivesVal, L"IList", L"SamiObjective");
+        }
+        delete pObjectivesKey;
+JsonString* pCost_matricesKey = new JsonString(L"cost_matrices");
+        IJsonValue* pCost_matricesVal = null;
+        pJsonObject->GetValue(pCost_matricesKey, pCost_matricesVal);
+        if(pCost_matricesVal != null) {
+            pCost_matrices = new ArrayList();
+            
+            jsonToValue(pCost_matrices, pCost_matricesVal, L"IList", L"SamiCostMatrix");
+        }
+        delete pCost_matricesKey;
     }
 }
 
@@ -206,31 +233,30 @@ SamiRequest::asJsonObject() {
     JsonObject *pJsonObject = new JsonObject();
     pJsonObject->Construct();
 
-    
     JsonString *pVehiclesKey = new JsonString(L"vehicles");
     pJsonObject->Add(pVehiclesKey, toJson(getPVehicles(), "SamiVehicle", "array"));
 
-    
     JsonString *pVehicle_typesKey = new JsonString(L"vehicle_types");
     pJsonObject->Add(pVehicle_typesKey, toJson(getPVehicleTypes(), "SamiVehicleType", "array"));
 
-    
     JsonString *pServicesKey = new JsonString(L"services");
     pJsonObject->Add(pServicesKey, toJson(getPServices(), "SamiService", "array"));
 
-    
     JsonString *pShipmentsKey = new JsonString(L"shipments");
     pJsonObject->Add(pShipmentsKey, toJson(getPShipments(), "SamiShipment", "array"));
 
-    
     JsonString *pRelationsKey = new JsonString(L"relations");
     pJsonObject->Add(pRelationsKey, toJson(getPRelations(), "SamiRelation", "array"));
 
-    
     JsonString *pAlgorithmKey = new JsonString(L"algorithm");
     pJsonObject->Add(pAlgorithmKey, toJson(getPAlgorithm(), "SamiAlgorithm", ""));
 
-    
+    JsonString *pObjectivesKey = new JsonString(L"objectives");
+    pJsonObject->Add(pObjectivesKey, toJson(getPObjectives(), "SamiObjective", "array"));
+
+    JsonString *pCost_matricesKey = new JsonString(L"cost_matrices");
+    pJsonObject->Add(pCost_matricesKey, toJson(getPCostMatrices(), "SamiCostMatrix", "array"));
+
     return pJsonObject;
 }
 
@@ -286,6 +312,24 @@ SamiRequest::getPAlgorithm() {
 void
 SamiRequest::setPAlgorithm(SamiAlgorithm* pAlgorithm) {
     this->pAlgorithm = pAlgorithm;
+}
+
+IList*
+SamiRequest::getPObjectives() {
+    return pObjectives;
+}
+void
+SamiRequest::setPObjectives(IList* pObjectives) {
+    this->pObjectives = pObjectives;
+}
+
+IList*
+SamiRequest::getPCostMatrices() {
+    return pCost_matrices;
+}
+void
+SamiRequest::setPCostMatrices(IList* pCost_matrices) {
+    this->pCost_matrices = pCost_matrices;
 }
 
 

@@ -9,34 +9,31 @@ import Foundation
 
 
 public class Response: JSONEncodable {
-
     public enum Status: String { 
         case WaitingInQueue = "waiting_in_queue"
         case Processing = "processing"
         case Finished = "finished"
     }
-    
     /** unique identify of job - which you get when posting your request to the large problem solver */
-    public var job_id: String?
+    public var jobId: String?
     /** indicates the current status of the job */
     public var status: Status?
     /** waiting time in ms */
-    public var waiting_in_queue: Int?
+    public var waitingInQueue: Int64?
     /** processing time in ms. if job is still waiting in queue, processing_time is 0 */
-    public var processing_time: Int?
+    public var processingTime: Int64?
     /** the solution. only available if status field indicates finished */
     public var solution: Solution?
-    
 
     public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
-        nillableDictionary["job_id"] = self.job_id
+        nillableDictionary["job_id"] = self.jobId
         nillableDictionary["status"] = self.status?.rawValue
-        nillableDictionary["waiting_in_queue"] = self.waiting_in_queue
-        nillableDictionary["processing_time"] = self.processing_time
+        nillableDictionary["waiting_in_queue"] = self.waitingInQueue?.encodeToJSON()
+        nillableDictionary["processing_time"] = self.processingTime?.encodeToJSON()
         nillableDictionary["solution"] = self.solution?.encodeToJSON()
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
