@@ -6,8 +6,8 @@ Please see the successfully created one in the subfolders.
 
 language  |  created?| tested?| alternative
 :---------|:---------|:-------|:------------
-java      |  yes     | no     | [official client](https://github.com/graphhopper/directions-api-java-client)
-javascript|  no      | -      | Use the [official client](https://github.com/graphhopper/directions-api-js-client) please
+java      |  yes     | yes    | Use the [official client](https://github.com/graphhopper/directions-api-java-client)
+javascript|  no      | -      | Use the [official client](https://github.com/graphhopper/directions-api-js-client)
 python    |  yes     | no     |
 csharp    |  yes     | no     | [contributed client](https://github.com/Schuby80/WpfGraphHopper)
 ruby      |  yes     | [yes](https://github.com/graphhopper/directions-api-clients-route-optimization/issues/3)   |
