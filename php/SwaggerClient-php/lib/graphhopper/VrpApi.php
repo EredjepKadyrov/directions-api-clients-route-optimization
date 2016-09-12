@@ -1,6 +1,6 @@
 <?php
 /**
- * SolutionApi
+ * VrpApi
  * PHP version 5
  *
  * @category Class
@@ -38,7 +38,7 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Api;
+namespace graphhopper;
 
 use \Swagger\Client\Configuration;
 use \Swagger\Client\ApiClient;
@@ -46,7 +46,7 @@ use \Swagger\Client\ApiException;
 use \Swagger\Client\ObjectSerializer;
 
 /**
- * SolutionApi Class Doc Comment
+ * VrpApi Class Doc Comment
  *
  * @category Class
  * @package  Swagger\Client
@@ -54,7 +54,7 @@ use \Swagger\Client\ObjectSerializer;
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class SolutionApi
+class VrpApi
 {
 
     /**
@@ -94,7 +94,7 @@ class SolutionApi
      *
      * @param \Swagger\Client\ApiClient $apiClient set the API client
      *
-     * @return SolutionApi
+     * @return VrpApi
      */
     public function setApiClient(\Swagger\Client\ApiClient $apiClient)
     {
@@ -103,43 +103,43 @@ class SolutionApi
     }
 
     /**
-     * Operation getSolution
+     * Operation postVrp
      *
-     * Return the solution associated to the jobId
+     * Solves vehicle routing problems
      *
      * @param string $key your API key (required)
-     * @param string $job_id Request solution with jobId (required)
-     * @return \Swagger\Client\Model\Response
+     * @param \Swagger\Client\Model\Request $body Request object that contains the problem to be solved (required)
+     * @return \Swagger\Client\Model\JobId
      * @throws \Swagger\Client\ApiException on non-2xx response
      */
-    public function getSolution($key, $job_id)
+    public function postVrp($key, $body)
     {
-        list($response) = $this->getSolutionWithHttpInfo($key, $job_id);
+        list($response) = $this->postVrpWithHttpInfo($key, $body);
         return $response;
     }
 
     /**
-     * Operation getSolutionWithHttpInfo
+     * Operation postVrpWithHttpInfo
      *
-     * Return the solution associated to the jobId
+     * Solves vehicle routing problems
      *
      * @param string $key your API key (required)
-     * @param string $job_id Request solution with jobId (required)
-     * @return Array of \Swagger\Client\Model\Response, HTTP status code, HTTP response headers (array of strings)
+     * @param \Swagger\Client\Model\Request $body Request object that contains the problem to be solved (required)
+     * @return Array of \Swagger\Client\Model\JobId, HTTP status code, HTTP response headers (array of strings)
      * @throws \Swagger\Client\ApiException on non-2xx response
      */
-    public function getSolutionWithHttpInfo($key, $job_id)
+    public function postVrpWithHttpInfo($key, $body)
     {
         // verify the required parameter 'key' is set
         if ($key === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $key when calling getSolution');
+            throw new \InvalidArgumentException('Missing the required parameter $key when calling postVrp');
         }
-        // verify the required parameter 'job_id' is set
-        if ($job_id === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $job_id when calling getSolution');
+        // verify the required parameter 'body' is set
+        if ($body === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $body when calling postVrp');
         }
         // parse inputs
-        $resourcePath = "/solution/{jobId}";
+        $resourcePath = "/optimize";
         $httpBody = '';
         $queryParams = array();
         $headerParams = array();
@@ -154,18 +154,15 @@ class SolutionApi
         if ($key !== null) {
             $queryParams['key'] = $this->apiClient->getSerializer()->toQueryValue($key);
         }
-        // path params
-        if ($job_id !== null) {
-            $resourcePath = str_replace(
-                "{" . "jobId" . "}",
-                $this->apiClient->getSerializer()->toPathValue($job_id),
-                $resourcePath
-            );
-        }
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
 
-        
+        // body params
+        $_tempBody = null;
+        if (isset($body)) {
+            $_tempBody = $body;
+        }
+
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
@@ -181,19 +178,19 @@ class SolutionApi
         try {
             list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
                 $resourcePath,
-                'GET',
+                'POST',
                 $queryParams,
                 $httpBody,
                 $headerParams,
-                '\Swagger\Client\Model\Response',
-                '/solution/{jobId}'
+                '\Swagger\Client\Model\JobId',
+                '/optimize'
             );
 
-            return array($this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\Response', $httpHeader), $statusCode, $httpHeader);
+            return array($this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\JobId', $httpHeader), $statusCode, $httpHeader);
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\Response', $e->getResponseHeaders());
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\JobId', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
             }

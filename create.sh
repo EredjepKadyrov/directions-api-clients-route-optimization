@@ -40,6 +40,9 @@ function create {
 	haskell)
 		CONFIG="-t modules/swagger-codegen/src/main/resources/haskell-servant"
 		;;
+	php)
+		CONFIG="--artifact-version $VERSION --git-repo-id directions-api-clients-route-optimization --git-user-id graphhopper --api-package graphhopper"
+		;;
   	*)
 		;;  
   esac

@@ -1,5 +1,6 @@
 {
-    "name": "GIT_USER_ID/GIT_REPO_ID",
+    "name": "graphhopper/directions-api-clients-route-optimization",
+    "version": "0.8-SNAPSHOT",
     "description": "",
     "keywords": [
         "swagger",
