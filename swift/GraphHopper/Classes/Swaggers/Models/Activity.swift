@@ -15,6 +15,8 @@ public class Activity: JSONEncodable {
         case Service = "service"
         case Pickupshipment = "pickupShipment"
         case Delivershipment = "deliverShipment"
+        case Pickup = "pickup"
+        case Delivery = "delivery"
     }
     /** type of activity */
     public var type: ModelType?

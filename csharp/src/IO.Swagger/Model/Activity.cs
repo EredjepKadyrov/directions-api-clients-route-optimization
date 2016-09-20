@@ -75,7 +75,19 @@ namespace IO.Swagger.Model
             /// Enum DeliverShipment for "deliverShipment"
             /// </summary>
             [EnumMember(Value = "deliverShipment")]
-            DeliverShipment
+            DeliverShipment,
+            
+            /// <summary>
+            /// Enum Pickup for "pickup"
+            /// </summary>
+            [EnumMember(Value = "pickup")]
+            Pickup,
+            
+            /// <summary>
+            /// Enum Delivery for "delivery"
+            /// </summary>
+            [EnumMember(Value = "delivery")]
+            Delivery
         }
 
         /// <summary>

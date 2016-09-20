@@ -134,6 +134,8 @@ class Activity implements ArrayAccess
     const TYPE_SERVICE = 'service';
     const TYPE_PICKUP_SHIPMENT = 'pickupShipment';
     const TYPE_DELIVER_SHIPMENT = 'deliverShipment';
+    const TYPE_PICKUP = 'pickup';
+    const TYPE_DELIVERY = 'delivery';
     
 
     
@@ -149,6 +151,8 @@ class Activity implements ArrayAccess
             self::TYPE_SERVICE,
             self::TYPE_PICKUP_SHIPMENT,
             self::TYPE_DELIVER_SHIPMENT,
+            self::TYPE_PICKUP,
+            self::TYPE_DELIVERY,
         ];
     }
     
@@ -180,7 +184,7 @@ class Activity implements ArrayAccess
     public function listInvalidProperties()
     {
         $invalid_properties = array();
-        $allowed_values = array("start", "end", "service", "pickupShipment", "deliverShipment");
+        $allowed_values = array("start", "end", "service", "pickupShipment", "deliverShipment", "pickup", "delivery");
         if (!in_array($this->container['type'], $allowed_values)) {
             $invalid_properties[] = "invalid value for 'type', must be one of #{allowed_values}.";
         }
@@ -196,7 +200,7 @@ class Activity implements ArrayAccess
      */
     public function valid()
     {
-        $allowed_values = array("start", "end", "service", "pickupShipment", "deliverShipment");
+        $allowed_values = array("start", "end", "service", "pickupShipment", "deliverShipment", "pickup", "delivery");
         if (!in_array($this->container['type'], $allowed_values)) {
             return false;
         }
@@ -220,9 +224,9 @@ class Activity implements ArrayAccess
      */
     public function setType($type)
     {
-        $allowed_values = array('start', 'end', 'service', 'pickupShipment', 'deliverShipment');
+        $allowed_values = array('start', 'end', 'service', 'pickupShipment', 'deliverShipment', 'pickup', 'delivery');
         if (!in_array($type, $allowed_values)) {
-            throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'start', 'end', 'service', 'pickupShipment', 'deliverShipment'");
+            throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'start', 'end', 'service', 'pickupShipment', 'deliverShipment', 'pickup', 'delivery'");
         }
         $this->container['type'] = $type;
 

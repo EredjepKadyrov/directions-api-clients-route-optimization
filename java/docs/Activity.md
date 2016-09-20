@@ -20,6 +20,8 @@ END | &quot;end&quot;
 SERVICE | &quot;service&quot;
 PICKUPSHIPMENT | &quot;pickupShipment&quot;
 DELIVERSHIPMENT | &quot;deliverShipment&quot;
+PICKUP | &quot;pickup&quot;
+DELIVERY | &quot;delivery&quot;
 
 
 

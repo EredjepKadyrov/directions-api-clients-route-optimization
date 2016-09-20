@@ -25,7 +25,7 @@
 
 package com.graphhopper.routeopt.client;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-31T10:35:10.244+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-09-20T15:55:03.557+02:00")
 public class Configuration {
     private static ApiClient defaultApiClient = new ApiClient();
 

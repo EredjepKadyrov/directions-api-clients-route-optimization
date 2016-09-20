@@ -125,7 +125,7 @@ module GraphHopper
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      type_validator = EnumAttributeValidator.new('String', ["start", "end", "service", "pickupShipment", "deliverShipment"])
+      type_validator = EnumAttributeValidator.new('String', ["start", "end", "service", "pickupShipment", "deliverShipment", "pickup", "delivery"])
       return false unless type_validator.valid?(@type)
       return true
     end
@@ -133,7 +133,7 @@ module GraphHopper
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["start", "end", "service", "pickupShipment", "deliverShipment"])
+      validator = EnumAttributeValidator.new('String', ["start", "end", "service", "pickupShipment", "deliverShipment", "pickup", "delivery"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for 'type', must be one of #{validator.allowable_values}."
       end

@@ -34,7 +34,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * Activity
  */
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-31T10:35:10.244+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-09-20T15:55:03.557+02:00")
 public class Activity   {
   /**
    * type of activity
@@ -53,7 +53,13 @@ public class Activity   {
     PICKUPSHIPMENT("pickupShipment"),
     
     @SerializedName("deliverShipment")
-    DELIVERSHIPMENT("deliverShipment");
+    DELIVERSHIPMENT("deliverShipment"),
+    
+    @SerializedName("pickup")
+    PICKUP("pickup"),
+    
+    @SerializedName("delivery")
+    DELIVERY("delivery");
 
     private String value;
 

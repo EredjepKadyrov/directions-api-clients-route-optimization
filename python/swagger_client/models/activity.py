@@ -83,7 +83,7 @@ class Activity(object):
         :param type: The type of this Activity.
         :type: str
         """
-        allowed_values = ["start", "end", "service", "pickupShipment", "deliverShipment"]
+        allowed_values = ["start", "end", "service", "pickupShipment", "deliverShipment", "pickup", "delivery"]
         if type not in allowed_values:
             raise ValueError(
                 "Invalid value for `type` ({0}), must be one of {1}"
