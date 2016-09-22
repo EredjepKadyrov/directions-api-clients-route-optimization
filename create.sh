@@ -28,7 +28,7 @@ function create {
 		CONFIG="-c ruby.json"
 		;;
 	go)		
-		CONFIG="-t modules/swagger-codegen/src/main/resources/go"
+		# CONFIG="-t modules/swagger-codegen/src/main/resources/go"
 		ADD_PARAMS="-DpackageName=graphhopper"
 		;;
 	swift)
@@ -38,7 +38,6 @@ function create {
 		CONFIG="-t modules/swagger-codegen/src/main/resources/Javascript"
 		;;
 	haskell)
-		CONFIG="-t modules/swagger-codegen/src/main/resources/haskell-servant"
 		;;
 	php)
 		CONFIG="--artifact-version $VERSION --git-repo-id directions-api-clients-route-optimization --git-user-id graphhopper --api-package graphhopper"
@@ -63,7 +62,6 @@ else
   create java
   create php
   create ruby
-  create sinatra
   create python
   create perl
   create scala
@@ -71,13 +69,13 @@ else
   create csharp
   create swift
   create objc
-  create dart
   create nodejs-server
   create qt5cpp
-    
-  # cannot make it working?
-  # create javascript
-  # create go
-  # create clojure
-  # create haskell
+  create go
+  create clojure
+  create haskell
+  
+  # create javascript -> nodejs-server    
+  # create dart       
+  # create sinatra    
 fi

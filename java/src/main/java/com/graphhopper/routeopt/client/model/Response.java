@@ -37,7 +37,7 @@ import java.util.List;
 /**
  * Response
  */
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-09-22T09:15:07.913+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-09-22T10:05:59.890+02:00")
 public class Response   {
   @SerializedName("copyrights")
   private List<String> copyrights = new ArrayList<String>();
