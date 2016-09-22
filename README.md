@@ -7,23 +7,23 @@ Please see the successfully created one in the subfolders.
 language  |  created?| tested?| alternative
 :---------|:---------|:-------|:------------
 java      |  yes     | yes    | Use the [official client](https://github.com/graphhopper/directions-api-java-client)
-javascript|  no      | -      | Use the [official client](https://github.com/graphhopper/directions-api-js-client)
+javascript|  no | -      | Use the [official client](https://github.com/graphhopper/directions-api-js-client) or nodejs-server
 python    |  yes     | no     |
 csharp    |  yes     | no     | [contributed client](https://github.com/Schuby80/WpfGraphHopper)
 ruby      |  yes     | [yes](https://github.com/graphhopper/directions-api-clients-route-optimization/issues/3)   |
-sinatra (ruby)| yes  | no     |
+sinatra (ruby)| [no](https://github.com/swagger-api/swagger-codegen/issues/3846)  | no     |
 php       |  yes     | [yes](https://github.com/graphhopper/directions-api-clients-route-optimization/issues/4)     |
 perl      |  yes     | no     |
 scala     |  yes     | no     |
 swift     |  yes     | no     |
 objc      |  yes     | no     |
 tizen     |  yes     | no     |
-nodejs-server  |  yes     | no     |
-dart      |  yes     | no     |
-go        |  no      | -      |
-clojure   |  no      | -      |
+nodejs-server  | yes | no     |
+dart      |  [no](https://github.com/swagger-api/swagger-codegen/issues/3846)     | no     |
+go        |  yes     | no     |
+clojure   |  yes     | no     |
 qt5cpp    |  yes     | no     |
-haskell   |  no      | -      |
+haskell   |  yes     | no     |
 
 Description:
 
