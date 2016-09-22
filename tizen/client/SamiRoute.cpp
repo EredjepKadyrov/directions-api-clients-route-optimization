@@ -23,6 +23,10 @@ SamiRoute::~SamiRoute() {
 void
 SamiRoute::init() {
     pVehicle_id = null;
+pDistance = null;
+pTransport_time = null;
+pCompletion_time = null;
+pWaiting_time = null;
 pActivities = null;
 }
 
@@ -32,6 +36,26 @@ SamiRoute::cleanup() {
         
         delete pVehicle_id;
         pVehicle_id = null;
+    }
+if(pDistance != null) {
+        
+        delete pDistance;
+        pDistance = null;
+    }
+if(pTransport_time != null) {
+        
+        delete pTransport_time;
+        pTransport_time = null;
+    }
+if(pCompletion_time != null) {
+        
+        delete pCompletion_time;
+        pCompletion_time = null;
+    }
+if(pWaiting_time != null) {
+        
+        delete pWaiting_time;
+        pWaiting_time = null;
     }
 if(pActivities != null) {
         pActivities->RemoveAll(true);
@@ -84,6 +108,42 @@ SamiRoute::fromJsonObject(IJsonValue* pJson) {
             jsonToValue(pVehicle_id, pVehicle_idVal, L"String", L"String");
         }
         delete pVehicle_idKey;
+JsonString* pDistanceKey = new JsonString(L"distance");
+        IJsonValue* pDistanceVal = null;
+        pJsonObject->GetValue(pDistanceKey, pDistanceVal);
+        if(pDistanceVal != null) {
+            
+            pDistance = new Long();
+            jsonToValue(pDistance, pDistanceVal, L"Long", L"Long");
+        }
+        delete pDistanceKey;
+JsonString* pTransport_timeKey = new JsonString(L"transport_time");
+        IJsonValue* pTransport_timeVal = null;
+        pJsonObject->GetValue(pTransport_timeKey, pTransport_timeVal);
+        if(pTransport_timeVal != null) {
+            
+            pTransport_time = new Long();
+            jsonToValue(pTransport_time, pTransport_timeVal, L"Long", L"Long");
+        }
+        delete pTransport_timeKey;
+JsonString* pCompletion_timeKey = new JsonString(L"completion_time");
+        IJsonValue* pCompletion_timeVal = null;
+        pJsonObject->GetValue(pCompletion_timeKey, pCompletion_timeVal);
+        if(pCompletion_timeVal != null) {
+            
+            pCompletion_time = new Long();
+            jsonToValue(pCompletion_time, pCompletion_timeVal, L"Long", L"Long");
+        }
+        delete pCompletion_timeKey;
+JsonString* pWaiting_timeKey = new JsonString(L"waiting_time");
+        IJsonValue* pWaiting_timeVal = null;
+        pJsonObject->GetValue(pWaiting_timeKey, pWaiting_timeVal);
+        if(pWaiting_timeVal != null) {
+            
+            pWaiting_time = new Long();
+            jsonToValue(pWaiting_time, pWaiting_timeVal, L"Long", L"Long");
+        }
+        delete pWaiting_timeKey;
 JsonString* pActivitiesKey = new JsonString(L"activities");
         IJsonValue* pActivitiesVal = null;
         pJsonObject->GetValue(pActivitiesKey, pActivitiesVal);
@@ -146,6 +206,18 @@ SamiRoute::asJsonObject() {
     JsonString *pVehicle_idKey = new JsonString(L"vehicle_id");
     pJsonObject->Add(pVehicle_idKey, toJson(getPVehicleId(), "String", ""));
 
+    JsonString *pDistanceKey = new JsonString(L"distance");
+    pJsonObject->Add(pDistanceKey, toJson(getPDistance(), "Long", ""));
+
+    JsonString *pTransport_timeKey = new JsonString(L"transport_time");
+    pJsonObject->Add(pTransport_timeKey, toJson(getPTransportTime(), "Long", ""));
+
+    JsonString *pCompletion_timeKey = new JsonString(L"completion_time");
+    pJsonObject->Add(pCompletion_timeKey, toJson(getPCompletionTime(), "Long", ""));
+
+    JsonString *pWaiting_timeKey = new JsonString(L"waiting_time");
+    pJsonObject->Add(pWaiting_timeKey, toJson(getPWaitingTime(), "Long", ""));
+
     JsonString *pActivitiesKey = new JsonString(L"activities");
     pJsonObject->Add(pActivitiesKey, toJson(getPActivities(), "SamiActivity", "array"));
 
@@ -159,6 +231,42 @@ SamiRoute::getPVehicleId() {
 void
 SamiRoute::setPVehicleId(String* pVehicle_id) {
     this->pVehicle_id = pVehicle_id;
+}
+
+Long*
+SamiRoute::getPDistance() {
+    return pDistance;
+}
+void
+SamiRoute::setPDistance(Long* pDistance) {
+    this->pDistance = pDistance;
+}
+
+Long*
+SamiRoute::getPTransportTime() {
+    return pTransport_time;
+}
+void
+SamiRoute::setPTransportTime(Long* pTransport_time) {
+    this->pTransport_time = pTransport_time;
+}
+
+Long*
+SamiRoute::getPCompletionTime() {
+    return pCompletion_time;
+}
+void
+SamiRoute::setPCompletionTime(Long* pCompletion_time) {
+    this->pCompletion_time = pCompletion_time;
+}
+
+Long*
+SamiRoute::getPWaitingTime() {
+    return pWaiting_time;
+}
+void
+SamiRoute::setPWaitingTime(Long* pWaiting_time) {
+    this->pWaiting_time = pWaiting_time;
 }
 
 IList*

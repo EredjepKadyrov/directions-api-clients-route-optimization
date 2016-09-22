@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**varCopyrights** | **NSArray&lt;NSString*&gt;*** |  | [optional] 
 **jobId** | **NSString*** | unique identify of job - which you get when posting your request to the large problem solver | [optional] 
 **status** | **NSString*** | indicates the current status of the job | [optional] 
 **waitingInQueue** | **NSNumber*** | waiting time in ms | [optional] 

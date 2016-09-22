@@ -43,6 +43,12 @@ describe 'Response' do
       expect(@instance).to be_instance_of(GraphHopper::Response)
     end
   end
+  describe 'test attribute "copyrights"' do
+    it 'should work' do
+       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "job_id"' do
     it 'should work' do
        # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

@@ -75,13 +75,15 @@ namespace IO.Swagger.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Response" /> class.
         /// </summary>
+        /// <param name="Copyrights">Copyrights.</param>
         /// <param name="JobId">unique identify of job - which you get when posting your request to the large problem solver.</param>
         /// <param name="Status">indicates the current status of the job.</param>
         /// <param name="WaitingInQueue">waiting time in ms.</param>
         /// <param name="ProcessingTime">processing time in ms. if job is still waiting in queue, processing_time is 0.</param>
         /// <param name="Solution">the solution. only available if status field indicates finished.</param>
-        public Response(string JobId = null, StatusEnum? Status = null, long? WaitingInQueue = null, long? ProcessingTime = null, Solution Solution = null)
+        public Response(List<string> Copyrights = null, string JobId = null, StatusEnum? Status = null, long? WaitingInQueue = null, long? ProcessingTime = null, Solution Solution = null)
         {
+            this.Copyrights = Copyrights;
             this.JobId = JobId;
             this.Status = Status;
             this.WaitingInQueue = WaitingInQueue;
@@ -89,6 +91,11 @@ namespace IO.Swagger.Model
             this.Solution = Solution;
         }
         
+        /// <summary>
+        /// Gets or Sets Copyrights
+        /// </summary>
+        [DataMember(Name="copyrights", EmitDefaultValue=false)]
+        public List<string> Copyrights { get; set; }
         /// <summary>
         /// unique identify of job - which you get when posting your request to the large problem solver
         /// </summary>
@@ -121,6 +128,7 @@ namespace IO.Swagger.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Response {\n");
+            sb.Append("  Copyrights: ").Append(Copyrights).Append("\n");
             sb.Append("  JobId: ").Append(JobId).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  WaitingInQueue: ").Append(WaitingInQueue).Append("\n");
@@ -163,6 +171,11 @@ namespace IO.Swagger.Model
 
             return 
                 (
+                    this.Copyrights == other.Copyrights ||
+                    this.Copyrights != null &&
+                    this.Copyrights.SequenceEqual(other.Copyrights)
+                ) && 
+                (
                     this.JobId == other.JobId ||
                     this.JobId != null &&
                     this.JobId.Equals(other.JobId)
@@ -200,6 +213,8 @@ namespace IO.Swagger.Model
             {
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
+                if (this.Copyrights != null)
+                    hash = hash * 59 + this.Copyrights.GetHashCode();
                 if (this.JobId != null)
                     hash = hash * 59 + this.JobId.GetHashCode();
                 if (this.Status != null)

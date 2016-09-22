@@ -166,6 +166,13 @@ __PACKAGE__->class_documentation({description => '',
 }                                 );
 
 __PACKAGE__->method_documentation({
+    'copyrights' => {
+    	datatype => 'ARRAY[string]',
+    	base_name => 'copyrights',
+    	description => '',
+    	format => '',
+    	read_only => '',
+    		},
     'job_id' => {
     	datatype => 'string',
     	base_name => 'job_id',
@@ -204,6 +211,7 @@ __PACKAGE__->method_documentation({
 });
 
 __PACKAGE__->swagger_types( {
+    'copyrights' => 'ARRAY[string]',
     'job_id' => 'string',
     'status' => 'string',
     'waiting_in_queue' => 'int',
@@ -212,6 +220,7 @@ __PACKAGE__->swagger_types( {
 } );
 
 __PACKAGE__->attribute_map( {
+    'copyrights' => 'copyrights',
     'job_id' => 'job_id',
     'status' => 'status',
     'waiting_in_queue' => 'waiting_in_queue',

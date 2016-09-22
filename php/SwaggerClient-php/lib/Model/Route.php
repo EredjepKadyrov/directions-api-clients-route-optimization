@@ -67,6 +67,10 @@ class Route implements ArrayAccess
       */
     protected static $swaggerTypes = array(
         'vehicle_id' => 'string',
+        'distance' => 'int',
+        'transport_time' => 'int',
+        'completion_time' => 'int',
+        'waiting_time' => 'int',
         'activities' => '\Swagger\Client\Model\Activity[]'
     );
 
@@ -81,6 +85,10 @@ class Route implements ArrayAccess
      */
     protected static $attributeMap = array(
         'vehicle_id' => 'vehicle_id',
+        'distance' => 'distance',
+        'transport_time' => 'transport_time',
+        'completion_time' => 'completion_time',
+        'waiting_time' => 'waiting_time',
         'activities' => 'activities'
     );
 
@@ -95,6 +103,10 @@ class Route implements ArrayAccess
      */
     protected static $setters = array(
         'vehicle_id' => 'setVehicleId',
+        'distance' => 'setDistance',
+        'transport_time' => 'setTransportTime',
+        'completion_time' => 'setCompletionTime',
+        'waiting_time' => 'setWaitingTime',
         'activities' => 'setActivities'
     );
 
@@ -109,6 +121,10 @@ class Route implements ArrayAccess
      */
     protected static $getters = array(
         'vehicle_id' => 'getVehicleId',
+        'distance' => 'getDistance',
+        'transport_time' => 'getTransportTime',
+        'completion_time' => 'getCompletionTime',
+        'waiting_time' => 'getWaitingTime',
         'activities' => 'getActivities'
     );
 
@@ -134,6 +150,10 @@ class Route implements ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['vehicle_id'] = isset($data['vehicle_id']) ? $data['vehicle_id'] : null;
+        $this->container['distance'] = isset($data['distance']) ? $data['distance'] : null;
+        $this->container['transport_time'] = isset($data['transport_time']) ? $data['transport_time'] : null;
+        $this->container['completion_time'] = isset($data['completion_time']) ? $data['completion_time'] : null;
+        $this->container['waiting_time'] = isset($data['waiting_time']) ? $data['waiting_time'] : null;
         $this->container['activities'] = isset($data['activities']) ? $data['activities'] : null;
     }
 
@@ -177,6 +197,90 @@ class Route implements ArrayAccess
     public function setVehicleId($vehicle_id)
     {
         $this->container['vehicle_id'] = $vehicle_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets distance
+     * @return int
+     */
+    public function getDistance()
+    {
+        return $this->container['distance'];
+    }
+
+    /**
+     * Sets distance
+     * @param int $distance distance of route in meter
+     * @return $this
+     */
+    public function setDistance($distance)
+    {
+        $this->container['distance'] = $distance;
+
+        return $this;
+    }
+
+    /**
+     * Gets transport_time
+     * @return int
+     */
+    public function getTransportTime()
+    {
+        return $this->container['transport_time'];
+    }
+
+    /**
+     * Sets transport_time
+     * @param int $transport_time transport time of route in ms
+     * @return $this
+     */
+    public function setTransportTime($transport_time)
+    {
+        $this->container['transport_time'] = $transport_time;
+
+        return $this;
+    }
+
+    /**
+     * Gets completion_time
+     * @return int
+     */
+    public function getCompletionTime()
+    {
+        return $this->container['completion_time'];
+    }
+
+    /**
+     * Sets completion_time
+     * @param int $completion_time completion time of route in ms
+     * @return $this
+     */
+    public function setCompletionTime($completion_time)
+    {
+        $this->container['completion_time'] = $completion_time;
+
+        return $this;
+    }
+
+    /**
+     * Gets waiting_time
+     * @return int
+     */
+    public function getWaitingTime()
+    {
+        return $this->container['waiting_time'];
+    }
+
+    /**
+     * Sets waiting_time
+     * @param int $waiting_time waiting time of route in ms
+     * @return $this
+     */
+    public function setWaitingTime($waiting_time)
+    {
+        $this->container['waiting_time'] = $waiting_time;
 
         return $this;
     }

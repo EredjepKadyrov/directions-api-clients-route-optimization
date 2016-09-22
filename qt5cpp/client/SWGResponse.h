@@ -35,6 +35,7 @@
 
 
 #include "SWGSolution.h"
+#include <QList>
 #include <QString>
 
 #include "SWGObject.h"
@@ -55,7 +56,9 @@ public:
     void fromJsonObject(QJsonObject &json);
     SWGResponse* fromJson(QString &jsonString);
 
-    QString* getJobId();
+    QList<QString*>* getCopyrights();
+    void setCopyrights(QList<QString*>* copyrights);
+QString* getJobId();
     void setJobId(QString* job_id);
 QString* getStatus();
     void setStatus(QString* status);
@@ -67,7 +70,8 @@ SWGSolution* getSolution();
     void setSolution(SWGSolution* solution);
 
 private:
-    QString* job_id;
+    QList<QString*>* copyrights;
+QString* job_id;
 QString* status;
 qint64 waiting_in_queue;
 qint64 processing_time;

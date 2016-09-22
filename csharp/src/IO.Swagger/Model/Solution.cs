@@ -44,15 +44,23 @@ namespace IO.Swagger.Model
         /// </summary>
         /// <param name="Costs">overall costs of solution.</param>
         /// <param name="Distance">overall travel distance in meters.</param>
-        /// <param name="Time">overall travel time in ms.</param>
+        /// <param name="Time">overall transport time in ms.</param>
+        /// <param name="TransportTime">overall transport time in ms.</param>
+        /// <param name="MaxOperationTime">operation time of the longest route in ms.</param>
+        /// <param name="WaitingTime">total waiting time in ms.</param>
+        /// <param name="NoVehicles">number of employed vehicles.</param>
         /// <param name="NoUnassigned">number of jobs that could not be assigned to final solution.</param>
         /// <param name="Routes">An array of routes.</param>
         /// <param name="Unassigned">Unassigned.</param>
-        public Solution(int? Costs = null, int? Distance = null, long? Time = null, int? NoUnassigned = null, List<Route> Routes = null, SolutionUnassigned Unassigned = null)
+        public Solution(int? Costs = null, int? Distance = null, long? Time = null, long? TransportTime = null, long? MaxOperationTime = null, long? WaitingTime = null, int? NoVehicles = null, int? NoUnassigned = null, List<Route> Routes = null, SolutionUnassigned Unassigned = null)
         {
             this.Costs = Costs;
             this.Distance = Distance;
             this.Time = Time;
+            this.TransportTime = TransportTime;
+            this.MaxOperationTime = MaxOperationTime;
+            this.WaitingTime = WaitingTime;
+            this.NoVehicles = NoVehicles;
             this.NoUnassigned = NoUnassigned;
             this.Routes = Routes;
             this.Unassigned = Unassigned;
@@ -71,11 +79,35 @@ namespace IO.Swagger.Model
         [DataMember(Name="distance", EmitDefaultValue=false)]
         public int? Distance { get; set; }
         /// <summary>
-        /// overall travel time in ms
+        /// overall transport time in ms
         /// </summary>
-        /// <value>overall travel time in ms</value>
+        /// <value>overall transport time in ms</value>
         [DataMember(Name="time", EmitDefaultValue=false)]
         public long? Time { get; set; }
+        /// <summary>
+        /// overall transport time in ms
+        /// </summary>
+        /// <value>overall transport time in ms</value>
+        [DataMember(Name="transport_time", EmitDefaultValue=false)]
+        public long? TransportTime { get; set; }
+        /// <summary>
+        /// operation time of the longest route in ms
+        /// </summary>
+        /// <value>operation time of the longest route in ms</value>
+        [DataMember(Name="max_operation_time", EmitDefaultValue=false)]
+        public long? MaxOperationTime { get; set; }
+        /// <summary>
+        /// total waiting time in ms
+        /// </summary>
+        /// <value>total waiting time in ms</value>
+        [DataMember(Name="waiting_time", EmitDefaultValue=false)]
+        public long? WaitingTime { get; set; }
+        /// <summary>
+        /// number of employed vehicles
+        /// </summary>
+        /// <value>number of employed vehicles</value>
+        [DataMember(Name="no_vehicles", EmitDefaultValue=false)]
+        public int? NoVehicles { get; set; }
         /// <summary>
         /// number of jobs that could not be assigned to final solution
         /// </summary>
@@ -104,6 +136,10 @@ namespace IO.Swagger.Model
             sb.Append("  Costs: ").Append(Costs).Append("\n");
             sb.Append("  Distance: ").Append(Distance).Append("\n");
             sb.Append("  Time: ").Append(Time).Append("\n");
+            sb.Append("  TransportTime: ").Append(TransportTime).Append("\n");
+            sb.Append("  MaxOperationTime: ").Append(MaxOperationTime).Append("\n");
+            sb.Append("  WaitingTime: ").Append(WaitingTime).Append("\n");
+            sb.Append("  NoVehicles: ").Append(NoVehicles).Append("\n");
             sb.Append("  NoUnassigned: ").Append(NoUnassigned).Append("\n");
             sb.Append("  Routes: ").Append(Routes).Append("\n");
             sb.Append("  Unassigned: ").Append(Unassigned).Append("\n");
@@ -159,6 +195,26 @@ namespace IO.Swagger.Model
                     this.Time.Equals(other.Time)
                 ) && 
                 (
+                    this.TransportTime == other.TransportTime ||
+                    this.TransportTime != null &&
+                    this.TransportTime.Equals(other.TransportTime)
+                ) && 
+                (
+                    this.MaxOperationTime == other.MaxOperationTime ||
+                    this.MaxOperationTime != null &&
+                    this.MaxOperationTime.Equals(other.MaxOperationTime)
+                ) && 
+                (
+                    this.WaitingTime == other.WaitingTime ||
+                    this.WaitingTime != null &&
+                    this.WaitingTime.Equals(other.WaitingTime)
+                ) && 
+                (
+                    this.NoVehicles == other.NoVehicles ||
+                    this.NoVehicles != null &&
+                    this.NoVehicles.Equals(other.NoVehicles)
+                ) && 
+                (
                     this.NoUnassigned == other.NoUnassigned ||
                     this.NoUnassigned != null &&
                     this.NoUnassigned.Equals(other.NoUnassigned)
@@ -192,6 +248,14 @@ namespace IO.Swagger.Model
                     hash = hash * 59 + this.Distance.GetHashCode();
                 if (this.Time != null)
                     hash = hash * 59 + this.Time.GetHashCode();
+                if (this.TransportTime != null)
+                    hash = hash * 59 + this.TransportTime.GetHashCode();
+                if (this.MaxOperationTime != null)
+                    hash = hash * 59 + this.MaxOperationTime.GetHashCode();
+                if (this.WaitingTime != null)
+                    hash = hash * 59 + this.WaitingTime.GetHashCode();
+                if (this.NoVehicles != null)
+                    hash = hash * 59 + this.NoVehicles.GetHashCode();
                 if (this.NoUnassigned != null)
                     hash = hash * 59 + this.NoUnassigned.GetHashCode();
                 if (this.Routes != null)

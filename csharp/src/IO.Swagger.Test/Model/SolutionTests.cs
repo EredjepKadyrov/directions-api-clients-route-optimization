@@ -101,6 +101,38 @@ namespace IO.Swagger.Test
             // TODO unit test for the property 'Time'
         }
         /// <summary>
+        /// Test the property 'TransportTime'
+        /// </summary>
+        [Test]
+        public void TransportTimeTest()
+        {
+            // TODO unit test for the property 'TransportTime'
+        }
+        /// <summary>
+        /// Test the property 'MaxOperationTime'
+        /// </summary>
+        [Test]
+        public void MaxOperationTimeTest()
+        {
+            // TODO unit test for the property 'MaxOperationTime'
+        }
+        /// <summary>
+        /// Test the property 'WaitingTime'
+        /// </summary>
+        [Test]
+        public void WaitingTimeTest()
+        {
+            // TODO unit test for the property 'WaitingTime'
+        }
+        /// <summary>
+        /// Test the property 'NoVehicles'
+        /// </summary>
+        [Test]
+        public void NoVehiclesTest()
+        {
+            // TODO unit test for the property 'NoVehicles'
+        }
+        /// <summary>
         /// Test the property 'NoUnassigned'
         /// </summary>
         [Test]

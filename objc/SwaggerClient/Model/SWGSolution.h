@@ -40,9 +40,21 @@
 /* overall travel distance in meters [optional]
  */
 @property(nonatomic) NSNumber* distance;
-/* overall travel time in ms [optional]
+/* overall transport time in ms [optional]
  */
 @property(nonatomic) NSNumber* time;
+/* overall transport time in ms [optional]
+ */
+@property(nonatomic) NSNumber* transportTime;
+/* operation time of the longest route in ms [optional]
+ */
+@property(nonatomic) NSNumber* maxOperationTime;
+/* total waiting time in ms [optional]
+ */
+@property(nonatomic) NSNumber* waitingTime;
+/* number of employed vehicles [optional]
+ */
+@property(nonatomic) NSNumber* noVehicles;
 /* number of jobs that could not be assigned to final solution [optional]
  */
 @property(nonatomic) NSNumber* noUnassigned;

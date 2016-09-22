@@ -28,6 +28,16 @@ public class Activity: JSONEncodable {
     public var arrTime: Int64?
     /** end time of and thus departure time at this activity */
     public var endTime: Int64?
+    /** waiting time at this activity in ms */
+    public var waitingTime: Int64?
+    /** cumulated distance from start to this activity in m */
+    public var distance: Int64?
+    /** driving time of driver in ms */
+    public var drivingTime: Int64?
+    /** Array with size/capacity dimensions before this activity */
+    public var loadBefore: [Int32]?
+    /** Array with size/capacity dimensions after this activity */
+    public var loadAfter: [Int32]?
 
     public init() {}
 
@@ -39,6 +49,11 @@ public class Activity: JSONEncodable {
         nillableDictionary["location_id"] = self.locationId
         nillableDictionary["arr_time"] = self.arrTime?.encodeToJSON()
         nillableDictionary["end_time"] = self.endTime?.encodeToJSON()
+        nillableDictionary["waiting_time"] = self.waitingTime?.encodeToJSON()
+        nillableDictionary["distance"] = self.distance?.encodeToJSON()
+        nillableDictionary["driving_time"] = self.drivingTime?.encodeToJSON()
+        nillableDictionary["load_before"] = self.loadBefore?.encodeToJSON()
+        nillableDictionary["load_after"] = self.loadAfter?.encodeToJSON()
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

@@ -25,6 +25,10 @@ SamiSolution::init() {
     pCosts = null;
 pDistance = null;
 pTime = null;
+pTransport_time = null;
+pMax_operation_time = null;
+pWaiting_time = null;
+pNo_vehicles = null;
 pNo_unassigned = null;
 pRoutes = null;
 pUnassigned = null;
@@ -46,6 +50,26 @@ if(pTime != null) {
         
         delete pTime;
         pTime = null;
+    }
+if(pTransport_time != null) {
+        
+        delete pTransport_time;
+        pTransport_time = null;
+    }
+if(pMax_operation_time != null) {
+        
+        delete pMax_operation_time;
+        pMax_operation_time = null;
+    }
+if(pWaiting_time != null) {
+        
+        delete pWaiting_time;
+        pWaiting_time = null;
+    }
+if(pNo_vehicles != null) {
+        
+        delete pNo_vehicles;
+        pNo_vehicles = null;
     }
 if(pNo_unassigned != null) {
         
@@ -126,6 +150,42 @@ JsonString* pTimeKey = new JsonString(L"time");
             jsonToValue(pTime, pTimeVal, L"Long", L"Long");
         }
         delete pTimeKey;
+JsonString* pTransport_timeKey = new JsonString(L"transport_time");
+        IJsonValue* pTransport_timeVal = null;
+        pJsonObject->GetValue(pTransport_timeKey, pTransport_timeVal);
+        if(pTransport_timeVal != null) {
+            
+            pTransport_time = new Long();
+            jsonToValue(pTransport_time, pTransport_timeVal, L"Long", L"Long");
+        }
+        delete pTransport_timeKey;
+JsonString* pMax_operation_timeKey = new JsonString(L"max_operation_time");
+        IJsonValue* pMax_operation_timeVal = null;
+        pJsonObject->GetValue(pMax_operation_timeKey, pMax_operation_timeVal);
+        if(pMax_operation_timeVal != null) {
+            
+            pMax_operation_time = new Long();
+            jsonToValue(pMax_operation_time, pMax_operation_timeVal, L"Long", L"Long");
+        }
+        delete pMax_operation_timeKey;
+JsonString* pWaiting_timeKey = new JsonString(L"waiting_time");
+        IJsonValue* pWaiting_timeVal = null;
+        pJsonObject->GetValue(pWaiting_timeKey, pWaiting_timeVal);
+        if(pWaiting_timeVal != null) {
+            
+            pWaiting_time = new Long();
+            jsonToValue(pWaiting_time, pWaiting_timeVal, L"Long", L"Long");
+        }
+        delete pWaiting_timeKey;
+JsonString* pNo_vehiclesKey = new JsonString(L"no_vehicles");
+        IJsonValue* pNo_vehiclesVal = null;
+        pJsonObject->GetValue(pNo_vehiclesKey, pNo_vehiclesVal);
+        if(pNo_vehiclesVal != null) {
+            
+            pNo_vehicles = new Integer();
+            jsonToValue(pNo_vehicles, pNo_vehiclesVal, L"Integer", L"Integer");
+        }
+        delete pNo_vehiclesKey;
 JsonString* pNo_unassignedKey = new JsonString(L"no_unassigned");
         IJsonValue* pNo_unassignedVal = null;
         pJsonObject->GetValue(pNo_unassignedKey, pNo_unassignedVal);
@@ -212,6 +272,18 @@ SamiSolution::asJsonObject() {
     JsonString *pTimeKey = new JsonString(L"time");
     pJsonObject->Add(pTimeKey, toJson(getPTime(), "Long", ""));
 
+    JsonString *pTransport_timeKey = new JsonString(L"transport_time");
+    pJsonObject->Add(pTransport_timeKey, toJson(getPTransportTime(), "Long", ""));
+
+    JsonString *pMax_operation_timeKey = new JsonString(L"max_operation_time");
+    pJsonObject->Add(pMax_operation_timeKey, toJson(getPMaxOperationTime(), "Long", ""));
+
+    JsonString *pWaiting_timeKey = new JsonString(L"waiting_time");
+    pJsonObject->Add(pWaiting_timeKey, toJson(getPWaitingTime(), "Long", ""));
+
+    JsonString *pNo_vehiclesKey = new JsonString(L"no_vehicles");
+    pJsonObject->Add(pNo_vehiclesKey, toJson(getPNoVehicles(), "Integer", ""));
+
     JsonString *pNo_unassignedKey = new JsonString(L"no_unassigned");
     pJsonObject->Add(pNo_unassignedKey, toJson(getPNoUnassigned(), "Integer", ""));
 
@@ -249,6 +321,42 @@ SamiSolution::getPTime() {
 void
 SamiSolution::setPTime(Long* pTime) {
     this->pTime = pTime;
+}
+
+Long*
+SamiSolution::getPTransportTime() {
+    return pTransport_time;
+}
+void
+SamiSolution::setPTransportTime(Long* pTransport_time) {
+    this->pTransport_time = pTransport_time;
+}
+
+Long*
+SamiSolution::getPMaxOperationTime() {
+    return pMax_operation_time;
+}
+void
+SamiSolution::setPMaxOperationTime(Long* pMax_operation_time) {
+    this->pMax_operation_time = pMax_operation_time;
+}
+
+Long*
+SamiSolution::getPWaitingTime() {
+    return pWaiting_time;
+}
+void
+SamiSolution::setPWaitingTime(Long* pWaiting_time) {
+    this->pWaiting_time = pWaiting_time;
+}
+
+Integer*
+SamiSolution::getPNoVehicles() {
+    return pNo_vehicles;
+}
+void
+SamiSolution::setPNoVehicles(Integer* pNo_vehicles) {
+    this->pNo_vehicles = pNo_vehicles;
 }
 
 Integer*

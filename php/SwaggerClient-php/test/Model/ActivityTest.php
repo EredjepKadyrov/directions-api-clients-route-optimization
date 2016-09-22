@@ -135,4 +135,44 @@ class ActivityTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * Test attribute "waiting_time"
+     */
+    public function testPropertyWaitingTime()
+    {
+
+    }
+
+    /**
+     * Test attribute "distance"
+     */
+    public function testPropertyDistance()
+    {
+
+    }
+
+    /**
+     * Test attribute "driving_time"
+     */
+    public function testPropertyDrivingTime()
+    {
+
+    }
+
+    /**
+     * Test attribute "load_before"
+     */
+    public function testPropertyLoadBefore()
+    {
+
+    }
+
+    /**
+     * Test attribute "load_after"
+     */
+    public function testPropertyLoadAfter()
+    {
+
+    }
+
 }

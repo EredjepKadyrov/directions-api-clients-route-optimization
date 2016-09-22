@@ -51,6 +51,10 @@ SWGRoute::~SWGRoute() {
 void
 SWGRoute::init() {
     vehicle_id = new QString("");
+distance = 0L;
+transport_time = 0L;
+completion_time = 0L;
+waiting_time = 0L;
 activities = new QList<SWGActivity*>();
 }
 
@@ -59,6 +63,10 @@ SWGRoute::cleanup() {
     if(vehicle_id != NULL) {
         delete vehicle_id;
     }
+
+
+
+
 if(activities != NULL) {
         QList<SWGActivity*>* arr = activities;
         foreach(SWGActivity* o, *arr) {
@@ -80,6 +88,10 @@ SWGRoute::fromJson(QString &json) {
 void
 SWGRoute::fromJsonObject(QJsonObject &pJson) {
     setValue(&vehicle_id, pJson["vehicle_id"], "QString", "QString");
+setValue(&distance, pJson["distance"], "qint64", "");
+setValue(&transport_time, pJson["transport_time"], "qint64", "");
+setValue(&completion_time, pJson["completion_time"], "qint64", "");
+setValue(&waiting_time, pJson["waiting_time"], "qint64", "");
 setValue(&activities, pJson["activities"], "QList", "SWGActivity");
 }
 
@@ -101,6 +113,10 @@ SWGRoute::asJsonObject() {
     toJsonValue(QString("vehicle_id"), vehicle_id, obj, QString("QString"));
     
         
+obj->insert("distance", QJsonValue(distance));
+obj->insert("transport_time", QJsonValue(transport_time));
+obj->insert("completion_time", QJsonValue(completion_time));
+obj->insert("waiting_time", QJsonValue(waiting_time));
 
     
     QList<SWGActivity*>* activitiesList = activities;
@@ -120,6 +136,42 @@ SWGRoute::getVehicleId() {
 void
 SWGRoute::setVehicleId(QString* vehicle_id) {
     this->vehicle_id = vehicle_id;
+}
+
+qint64
+SWGRoute::getDistance() {
+    return distance;
+}
+void
+SWGRoute::setDistance(qint64 distance) {
+    this->distance = distance;
+}
+
+qint64
+SWGRoute::getTransportTime() {
+    return transport_time;
+}
+void
+SWGRoute::setTransportTime(qint64 transport_time) {
+    this->transport_time = transport_time;
+}
+
+qint64
+SWGRoute::getCompletionTime() {
+    return completion_time;
+}
+void
+SWGRoute::setCompletionTime(qint64 completion_time) {
+    this->completion_time = completion_time;
+}
+
+qint64
+SWGRoute::getWaitingTime() {
+    return waiting_time;
+}
+void
+SWGRoute::setWaitingTime(qint64 waiting_time) {
+    this->waiting_time = waiting_time;
 }
 
 QList<SWGActivity*>*

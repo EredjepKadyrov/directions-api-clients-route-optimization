@@ -29,6 +29,18 @@ module GraphHopper
     # id of vehicle that operates route
     attr_accessor :vehicle_id
 
+    # distance of route in meter
+    attr_accessor :distance
+
+    # transport time of route in ms
+    attr_accessor :transport_time
+
+    # completion time of route in ms
+    attr_accessor :completion_time
+
+    # waiting time of route in ms
+    attr_accessor :waiting_time
+
     # array of activities
     attr_accessor :activities
 
@@ -37,6 +49,10 @@ module GraphHopper
     def self.attribute_map
       {
         :'vehicle_id' => :'vehicle_id',
+        :'distance' => :'distance',
+        :'transport_time' => :'transport_time',
+        :'completion_time' => :'completion_time',
+        :'waiting_time' => :'waiting_time',
         :'activities' => :'activities'
       }
     end
@@ -45,6 +61,10 @@ module GraphHopper
     def self.swagger_types
       {
         :'vehicle_id' => :'String',
+        :'distance' => :'Integer',
+        :'transport_time' => :'Integer',
+        :'completion_time' => :'Integer',
+        :'waiting_time' => :'Integer',
         :'activities' => :'Array<Activity>'
       }
     end
@@ -59,6 +79,22 @@ module GraphHopper
 
       if attributes.has_key?(:'vehicle_id')
         self.vehicle_id = attributes[:'vehicle_id']
+      end
+
+      if attributes.has_key?(:'distance')
+        self.distance = attributes[:'distance']
+      end
+
+      if attributes.has_key?(:'transport_time')
+        self.transport_time = attributes[:'transport_time']
+      end
+
+      if attributes.has_key?(:'completion_time')
+        self.completion_time = attributes[:'completion_time']
+      end
+
+      if attributes.has_key?(:'waiting_time')
+        self.waiting_time = attributes[:'waiting_time']
       end
 
       if attributes.has_key?(:'activities')
@@ -88,6 +124,10 @@ module GraphHopper
       return true if self.equal?(o)
       self.class == o.class &&
           vehicle_id == o.vehicle_id &&
+          distance == o.distance &&
+          transport_time == o.transport_time &&
+          completion_time == o.completion_time &&
+          waiting_time == o.waiting_time &&
           activities == o.activities
     end
 
@@ -100,7 +140,7 @@ module GraphHopper
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [vehicle_id, activities].hash
+      [vehicle_id, distance, transport_time, completion_time, waiting_time, activities].hash
     end
 
     # Builds the object from hash

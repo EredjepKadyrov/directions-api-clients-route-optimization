@@ -72,7 +72,7 @@ else
   create swift
   create objc
   create dart
-  create nodejs
+  create nodejs-server
   create qt5cpp
     
   # cannot make it working?

@@ -26,6 +26,8 @@ require 'date'
 module GraphHopper
 
   class Response
+    attr_accessor :copyrights
+
     # unique identify of job - which you get when posting your request to the large problem solver
     attr_accessor :job_id
 
@@ -66,6 +68,7 @@ module GraphHopper
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'copyrights' => :'copyrights',
         :'job_id' => :'job_id',
         :'status' => :'status',
         :'waiting_in_queue' => :'waiting_in_queue',
@@ -77,6 +80,7 @@ module GraphHopper
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'copyrights' => :'Array<String>',
         :'job_id' => :'String',
         :'status' => :'String',
         :'waiting_in_queue' => :'Integer',
@@ -92,6 +96,12 @@ module GraphHopper
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+
+      if attributes.has_key?(:'copyrights')
+        if (value = attributes[:'copyrights']).is_a?(Array)
+          self.copyrights = value
+        end
+      end
 
       if attributes.has_key?(:'job_id')
         self.job_id = attributes[:'job_id']
@@ -145,6 +155,7 @@ module GraphHopper
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          copyrights == o.copyrights &&
           job_id == o.job_id &&
           status == o.status &&
           waiting_in_queue == o.waiting_in_queue &&
@@ -161,7 +172,7 @@ module GraphHopper
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [job_id, status, waiting_in_queue, processing_time, solution].hash
+      [copyrights, job_id, status, waiting_in_queue, processing_time, solution].hash
     end
 
     # Builds the object from hash

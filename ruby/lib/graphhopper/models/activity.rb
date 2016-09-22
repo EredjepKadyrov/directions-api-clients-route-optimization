@@ -41,6 +41,21 @@ module GraphHopper
     # end time of and thus departure time at this activity
     attr_accessor :end_time
 
+    # waiting time at this activity in ms
+    attr_accessor :waiting_time
+
+    # cumulated distance from start to this activity in m
+    attr_accessor :distance
+
+    # driving time of driver in ms
+    attr_accessor :driving_time
+
+    # Array with size/capacity dimensions before this activity
+    attr_accessor :load_before
+
+    # Array with size/capacity dimensions after this activity
+    attr_accessor :load_after
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -70,7 +85,12 @@ module GraphHopper
         :'id' => :'id',
         :'location_id' => :'location_id',
         :'arr_time' => :'arr_time',
-        :'end_time' => :'end_time'
+        :'end_time' => :'end_time',
+        :'waiting_time' => :'waiting_time',
+        :'distance' => :'distance',
+        :'driving_time' => :'driving_time',
+        :'load_before' => :'load_before',
+        :'load_after' => :'load_after'
       }
     end
 
@@ -81,7 +101,12 @@ module GraphHopper
         :'id' => :'String',
         :'location_id' => :'String',
         :'arr_time' => :'Integer',
-        :'end_time' => :'Integer'
+        :'end_time' => :'Integer',
+        :'waiting_time' => :'Integer',
+        :'distance' => :'Integer',
+        :'driving_time' => :'Integer',
+        :'load_before' => :'Array<Integer>',
+        :'load_after' => :'Array<Integer>'
       }
     end
 
@@ -111,6 +136,30 @@ module GraphHopper
 
       if attributes.has_key?(:'end_time')
         self.end_time = attributes[:'end_time']
+      end
+
+      if attributes.has_key?(:'waiting_time')
+        self.waiting_time = attributes[:'waiting_time']
+      end
+
+      if attributes.has_key?(:'distance')
+        self.distance = attributes[:'distance']
+      end
+
+      if attributes.has_key?(:'driving_time')
+        self.driving_time = attributes[:'driving_time']
+      end
+
+      if attributes.has_key?(:'load_before')
+        if (value = attributes[:'load_before']).is_a?(Array)
+          self.load_before = value
+        end
+      end
+
+      if attributes.has_key?(:'load_after')
+        if (value = attributes[:'load_after']).is_a?(Array)
+          self.load_after = value
+        end
       end
 
     end
@@ -149,7 +198,12 @@ module GraphHopper
           id == o.id &&
           location_id == o.location_id &&
           arr_time == o.arr_time &&
-          end_time == o.end_time
+          end_time == o.end_time &&
+          waiting_time == o.waiting_time &&
+          distance == o.distance &&
+          driving_time == o.driving_time &&
+          load_before == o.load_before &&
+          load_after == o.load_after
     end
 
     # @see the `==` method
@@ -161,7 +215,7 @@ module GraphHopper
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [type, id, location_id, arr_time, end_time].hash
+      [type, id, location_id, arr_time, end_time, waiting_time, distance, driving_time, load_before, load_after].hash
     end
 
     # Builds the object from hash

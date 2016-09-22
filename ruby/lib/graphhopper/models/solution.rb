@@ -32,8 +32,20 @@ module GraphHopper
     # overall travel distance in meters
     attr_accessor :distance
 
-    # overall travel time in ms
+    # overall transport time in ms
     attr_accessor :time
+
+    # overall transport time in ms
+    attr_accessor :transport_time
+
+    # operation time of the longest route in ms
+    attr_accessor :max_operation_time
+
+    # total waiting time in ms
+    attr_accessor :waiting_time
+
+    # number of employed vehicles
+    attr_accessor :no_vehicles
 
     # number of jobs that could not be assigned to final solution
     attr_accessor :no_unassigned
@@ -50,6 +62,10 @@ module GraphHopper
         :'costs' => :'costs',
         :'distance' => :'distance',
         :'time' => :'time',
+        :'transport_time' => :'transport_time',
+        :'max_operation_time' => :'max_operation_time',
+        :'waiting_time' => :'waiting_time',
+        :'no_vehicles' => :'no_vehicles',
         :'no_unassigned' => :'no_unassigned',
         :'routes' => :'routes',
         :'unassigned' => :'unassigned'
@@ -62,6 +78,10 @@ module GraphHopper
         :'costs' => :'Integer',
         :'distance' => :'Integer',
         :'time' => :'Integer',
+        :'transport_time' => :'Integer',
+        :'max_operation_time' => :'Integer',
+        :'waiting_time' => :'Integer',
+        :'no_vehicles' => :'Integer',
         :'no_unassigned' => :'Integer',
         :'routes' => :'Array<Route>',
         :'unassigned' => :'SolutionUnassigned'
@@ -86,6 +106,22 @@ module GraphHopper
 
       if attributes.has_key?(:'time')
         self.time = attributes[:'time']
+      end
+
+      if attributes.has_key?(:'transport_time')
+        self.transport_time = attributes[:'transport_time']
+      end
+
+      if attributes.has_key?(:'max_operation_time')
+        self.max_operation_time = attributes[:'max_operation_time']
+      end
+
+      if attributes.has_key?(:'waiting_time')
+        self.waiting_time = attributes[:'waiting_time']
+      end
+
+      if attributes.has_key?(:'no_vehicles')
+        self.no_vehicles = attributes[:'no_vehicles']
       end
 
       if attributes.has_key?(:'no_unassigned')
@@ -125,6 +161,10 @@ module GraphHopper
           costs == o.costs &&
           distance == o.distance &&
           time == o.time &&
+          transport_time == o.transport_time &&
+          max_operation_time == o.max_operation_time &&
+          waiting_time == o.waiting_time &&
+          no_vehicles == o.no_vehicles &&
           no_unassigned == o.no_unassigned &&
           routes == o.routes &&
           unassigned == o.unassigned
@@ -139,7 +179,7 @@ module GraphHopper
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [costs, distance, time, no_unassigned, routes, unassigned].hash
+      [costs, distance, time, transport_time, max_operation_time, waiting_time, no_vehicles, no_unassigned, routes, unassigned].hash
     end
 
     # Builds the object from hash

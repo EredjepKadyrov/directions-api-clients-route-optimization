@@ -70,7 +70,12 @@ class Activity implements ArrayAccess
         'id' => 'string',
         'location_id' => 'string',
         'arr_time' => 'int',
-        'end_time' => 'int'
+        'end_time' => 'int',
+        'waiting_time' => 'int',
+        'distance' => 'int',
+        'driving_time' => 'int',
+        'load_before' => 'int[]',
+        'load_after' => 'int[]'
     );
 
     public static function swaggerTypes()
@@ -87,7 +92,12 @@ class Activity implements ArrayAccess
         'id' => 'id',
         'location_id' => 'location_id',
         'arr_time' => 'arr_time',
-        'end_time' => 'end_time'
+        'end_time' => 'end_time',
+        'waiting_time' => 'waiting_time',
+        'distance' => 'distance',
+        'driving_time' => 'driving_time',
+        'load_before' => 'load_before',
+        'load_after' => 'load_after'
     );
 
     public static function attributeMap()
@@ -104,7 +114,12 @@ class Activity implements ArrayAccess
         'id' => 'setId',
         'location_id' => 'setLocationId',
         'arr_time' => 'setArrTime',
-        'end_time' => 'setEndTime'
+        'end_time' => 'setEndTime',
+        'waiting_time' => 'setWaitingTime',
+        'distance' => 'setDistance',
+        'driving_time' => 'setDrivingTime',
+        'load_before' => 'setLoadBefore',
+        'load_after' => 'setLoadAfter'
     );
 
     public static function setters()
@@ -121,7 +136,12 @@ class Activity implements ArrayAccess
         'id' => 'getId',
         'location_id' => 'getLocationId',
         'arr_time' => 'getArrTime',
-        'end_time' => 'getEndTime'
+        'end_time' => 'getEndTime',
+        'waiting_time' => 'getWaitingTime',
+        'distance' => 'getDistance',
+        'driving_time' => 'getDrivingTime',
+        'load_before' => 'getLoadBefore',
+        'load_after' => 'getLoadAfter'
     );
 
     public static function getters()
@@ -174,6 +194,11 @@ class Activity implements ArrayAccess
         $this->container['location_id'] = isset($data['location_id']) ? $data['location_id'] : null;
         $this->container['arr_time'] = isset($data['arr_time']) ? $data['arr_time'] : null;
         $this->container['end_time'] = isset($data['end_time']) ? $data['end_time'] : null;
+        $this->container['waiting_time'] = isset($data['waiting_time']) ? $data['waiting_time'] : null;
+        $this->container['distance'] = isset($data['distance']) ? $data['distance'] : null;
+        $this->container['driving_time'] = isset($data['driving_time']) ? $data['driving_time'] : null;
+        $this->container['load_before'] = isset($data['load_before']) ? $data['load_before'] : null;
+        $this->container['load_after'] = isset($data['load_after']) ? $data['load_after'] : null;
     }
 
     /**
@@ -313,6 +338,111 @@ class Activity implements ArrayAccess
     public function setEndTime($end_time)
     {
         $this->container['end_time'] = $end_time;
+
+        return $this;
+    }
+
+    /**
+     * Gets waiting_time
+     * @return int
+     */
+    public function getWaitingTime()
+    {
+        return $this->container['waiting_time'];
+    }
+
+    /**
+     * Sets waiting_time
+     * @param int $waiting_time waiting time at this activity in ms
+     * @return $this
+     */
+    public function setWaitingTime($waiting_time)
+    {
+        $this->container['waiting_time'] = $waiting_time;
+
+        return $this;
+    }
+
+    /**
+     * Gets distance
+     * @return int
+     */
+    public function getDistance()
+    {
+        return $this->container['distance'];
+    }
+
+    /**
+     * Sets distance
+     * @param int $distance cumulated distance from start to this activity in m
+     * @return $this
+     */
+    public function setDistance($distance)
+    {
+        $this->container['distance'] = $distance;
+
+        return $this;
+    }
+
+    /**
+     * Gets driving_time
+     * @return int
+     */
+    public function getDrivingTime()
+    {
+        return $this->container['driving_time'];
+    }
+
+    /**
+     * Sets driving_time
+     * @param int $driving_time driving time of driver in ms
+     * @return $this
+     */
+    public function setDrivingTime($driving_time)
+    {
+        $this->container['driving_time'] = $driving_time;
+
+        return $this;
+    }
+
+    /**
+     * Gets load_before
+     * @return int[]
+     */
+    public function getLoadBefore()
+    {
+        return $this->container['load_before'];
+    }
+
+    /**
+     * Sets load_before
+     * @param int[] $load_before Array with size/capacity dimensions before this activity
+     * @return $this
+     */
+    public function setLoadBefore($load_before)
+    {
+        $this->container['load_before'] = $load_before;
+
+        return $this;
+    }
+
+    /**
+     * Gets load_after
+     * @return int[]
+     */
+    public function getLoadAfter()
+    {
+        return $this->container['load_after'];
+    }
+
+    /**
+     * Sets load_after
+     * @param int[] $load_after Array with size/capacity dimensions after this activity
+     * @return $this
+     */
+    public function setLoadAfter($load_after)
+    {
+        $this->container['load_after'] = $load_after;
 
         return $this;
     }

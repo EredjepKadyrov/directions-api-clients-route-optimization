@@ -33,6 +33,8 @@
 
 @interface SWGResponse : SWGObject
 
+
+@property(nonatomic) NSArray<NSString*>* varCopyrights;
 /* unique identify of job - which you get when posting your request to the large problem solver [optional]
  */
 @property(nonatomic) NSString* jobId;

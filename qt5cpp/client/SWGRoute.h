@@ -58,11 +58,23 @@ public:
 
     QString* getVehicleId();
     void setVehicleId(QString* vehicle_id);
+qint64 getDistance();
+    void setDistance(qint64 distance);
+qint64 getTransportTime();
+    void setTransportTime(qint64 transport_time);
+qint64 getCompletionTime();
+    void setCompletionTime(qint64 completion_time);
+qint64 getWaitingTime();
+    void setWaitingTime(qint64 waiting_time);
 QList<SWGActivity*>* getActivities();
     void setActivities(QList<SWGActivity*>* activities);
 
 private:
     QString* vehicle_id;
+qint64 distance;
+qint64 transport_time;
+qint64 completion_time;
+qint64 waiting_time;
 QList<SWGActivity*>* activities;
 };
 

@@ -69,6 +69,10 @@ class Solution implements ArrayAccess
         'costs' => 'int',
         'distance' => 'int',
         'time' => 'int',
+        'transport_time' => 'int',
+        'max_operation_time' => 'int',
+        'waiting_time' => 'int',
+        'no_vehicles' => 'int',
         'no_unassigned' => 'int',
         'routes' => '\Swagger\Client\Model\Route[]',
         'unassigned' => '\Swagger\Client\Model\SolutionUnassigned'
@@ -87,6 +91,10 @@ class Solution implements ArrayAccess
         'costs' => 'costs',
         'distance' => 'distance',
         'time' => 'time',
+        'transport_time' => 'transport_time',
+        'max_operation_time' => 'max_operation_time',
+        'waiting_time' => 'waiting_time',
+        'no_vehicles' => 'no_vehicles',
         'no_unassigned' => 'no_unassigned',
         'routes' => 'routes',
         'unassigned' => 'unassigned'
@@ -105,6 +113,10 @@ class Solution implements ArrayAccess
         'costs' => 'setCosts',
         'distance' => 'setDistance',
         'time' => 'setTime',
+        'transport_time' => 'setTransportTime',
+        'max_operation_time' => 'setMaxOperationTime',
+        'waiting_time' => 'setWaitingTime',
+        'no_vehicles' => 'setNoVehicles',
         'no_unassigned' => 'setNoUnassigned',
         'routes' => 'setRoutes',
         'unassigned' => 'setUnassigned'
@@ -123,6 +135,10 @@ class Solution implements ArrayAccess
         'costs' => 'getCosts',
         'distance' => 'getDistance',
         'time' => 'getTime',
+        'transport_time' => 'getTransportTime',
+        'max_operation_time' => 'getMaxOperationTime',
+        'waiting_time' => 'getWaitingTime',
+        'no_vehicles' => 'getNoVehicles',
         'no_unassigned' => 'getNoUnassigned',
         'routes' => 'getRoutes',
         'unassigned' => 'getUnassigned'
@@ -152,6 +168,10 @@ class Solution implements ArrayAccess
         $this->container['costs'] = isset($data['costs']) ? $data['costs'] : null;
         $this->container['distance'] = isset($data['distance']) ? $data['distance'] : null;
         $this->container['time'] = isset($data['time']) ? $data['time'] : null;
+        $this->container['transport_time'] = isset($data['transport_time']) ? $data['transport_time'] : null;
+        $this->container['max_operation_time'] = isset($data['max_operation_time']) ? $data['max_operation_time'] : null;
+        $this->container['waiting_time'] = isset($data['waiting_time']) ? $data['waiting_time'] : null;
+        $this->container['no_vehicles'] = isset($data['no_vehicles']) ? $data['no_vehicles'] : null;
         $this->container['no_unassigned'] = isset($data['no_unassigned']) ? $data['no_unassigned'] : null;
         $this->container['routes'] = isset($data['routes']) ? $data['routes'] : null;
         $this->container['unassigned'] = isset($data['unassigned']) ? $data['unassigned'] : null;
@@ -233,12 +253,96 @@ class Solution implements ArrayAccess
 
     /**
      * Sets time
-     * @param int $time overall travel time in ms
+     * @param int $time overall transport time in ms
      * @return $this
      */
     public function setTime($time)
     {
         $this->container['time'] = $time;
+
+        return $this;
+    }
+
+    /**
+     * Gets transport_time
+     * @return int
+     */
+    public function getTransportTime()
+    {
+        return $this->container['transport_time'];
+    }
+
+    /**
+     * Sets transport_time
+     * @param int $transport_time overall transport time in ms
+     * @return $this
+     */
+    public function setTransportTime($transport_time)
+    {
+        $this->container['transport_time'] = $transport_time;
+
+        return $this;
+    }
+
+    /**
+     * Gets max_operation_time
+     * @return int
+     */
+    public function getMaxOperationTime()
+    {
+        return $this->container['max_operation_time'];
+    }
+
+    /**
+     * Sets max_operation_time
+     * @param int $max_operation_time operation time of the longest route in ms
+     * @return $this
+     */
+    public function setMaxOperationTime($max_operation_time)
+    {
+        $this->container['max_operation_time'] = $max_operation_time;
+
+        return $this;
+    }
+
+    /**
+     * Gets waiting_time
+     * @return int
+     */
+    public function getWaitingTime()
+    {
+        return $this->container['waiting_time'];
+    }
+
+    /**
+     * Sets waiting_time
+     * @param int $waiting_time total waiting time in ms
+     * @return $this
+     */
+    public function setWaitingTime($waiting_time)
+    {
+        $this->container['waiting_time'] = $waiting_time;
+
+        return $this;
+    }
+
+    /**
+     * Gets no_vehicles
+     * @return int
+     */
+    public function getNoVehicles()
+    {
+        return $this->container['no_vehicles'];
+    }
+
+    /**
+     * Sets no_vehicles
+     * @param int $no_vehicles number of employed vehicles
+     * @return $this
+     */
+    public function setNoVehicles($no_vehicles)
+    {
+        $this->container['no_vehicles'] = $no_vehicles;
 
         return $this;
     }

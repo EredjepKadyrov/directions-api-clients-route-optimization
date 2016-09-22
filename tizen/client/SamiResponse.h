@@ -18,6 +18,7 @@ using namespace Tizen::Web::Json;
 
 
 #include "SamiSolution.h"
+using Tizen::Base::Collection::IList;
 using Tizen::Base::Long;
 using Tizen::Base::String;
 
@@ -42,6 +43,8 @@ public:
 
     SamiResponse* fromJson(String* obj);
 
+    IList* getPCopyrights();
+    void setPCopyrights(IList* pCopyrights);
     String* getPJobId();
     void setPJobId(String* pJob_id);
     String* getPStatus();
@@ -54,7 +57,8 @@ public:
     void setPSolution(SamiSolution* pSolution);
 
 private:
-    String* pJob_id;
+    IList* pCopyrights;
+String* pJob_id;
 String* pStatus;
 Long* pWaiting_in_queue;
 Long* pProcessing_time;

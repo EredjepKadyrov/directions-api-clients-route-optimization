@@ -201,6 +201,41 @@ __PACKAGE__->method_documentation({
     	format => '',
     	read_only => '',
     		},
+    'waiting_time' => {
+    	datatype => 'int',
+    	base_name => 'waiting_time',
+    	description => 'waiting time at this activity in ms',
+    	format => '',
+    	read_only => '',
+    		},
+    'distance' => {
+    	datatype => 'int',
+    	base_name => 'distance',
+    	description => 'cumulated distance from start to this activity in m',
+    	format => '',
+    	read_only => '',
+    		},
+    'driving_time' => {
+    	datatype => 'int',
+    	base_name => 'driving_time',
+    	description => 'driving time of driver in ms',
+    	format => '',
+    	read_only => '',
+    		},
+    'load_before' => {
+    	datatype => 'ARRAY[int]',
+    	base_name => 'load_before',
+    	description => 'Array with size/capacity dimensions before this activity',
+    	format => '',
+    	read_only => '',
+    		},
+    'load_after' => {
+    	datatype => 'ARRAY[int]',
+    	base_name => 'load_after',
+    	description => 'Array with size/capacity dimensions after this activity',
+    	format => '',
+    	read_only => '',
+    		},
 });
 
 __PACKAGE__->swagger_types( {
@@ -208,7 +243,12 @@ __PACKAGE__->swagger_types( {
     'id' => 'string',
     'location_id' => 'string',
     'arr_time' => 'int',
-    'end_time' => 'int'
+    'end_time' => 'int',
+    'waiting_time' => 'int',
+    'distance' => 'int',
+    'driving_time' => 'int',
+    'load_before' => 'ARRAY[int]',
+    'load_after' => 'ARRAY[int]'
 } );
 
 __PACKAGE__->attribute_map( {
@@ -216,7 +256,12 @@ __PACKAGE__->attribute_map( {
     'id' => 'id',
     'location_id' => 'location_id',
     'arr_time' => 'arr_time',
-    'end_time' => 'end_time'
+    'end_time' => 'end_time',
+    'waiting_time' => 'waiting_time',
+    'distance' => 'distance',
+    'driving_time' => 'driving_time',
+    'load_before' => 'load_before',
+    'load_after' => 'load_after'
 } );
 
 __PACKAGE__->mk_accessors(keys %{__PACKAGE__->attribute_map});

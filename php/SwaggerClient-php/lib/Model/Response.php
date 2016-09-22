@@ -66,6 +66,7 @@ class Response implements ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = array(
+        'copyrights' => 'string[]',
         'job_id' => 'string',
         'status' => 'string',
         'waiting_in_queue' => 'int',
@@ -83,6 +84,7 @@ class Response implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = array(
+        'copyrights' => 'copyrights',
         'job_id' => 'job_id',
         'status' => 'status',
         'waiting_in_queue' => 'waiting_in_queue',
@@ -100,6 +102,7 @@ class Response implements ArrayAccess
      * @var string[]
      */
     protected static $setters = array(
+        'copyrights' => 'setCopyrights',
         'job_id' => 'setJobId',
         'status' => 'setStatus',
         'waiting_in_queue' => 'setWaitingInQueue',
@@ -117,6 +120,7 @@ class Response implements ArrayAccess
      * @var string[]
      */
     protected static $getters = array(
+        'copyrights' => 'getCopyrights',
         'job_id' => 'getJobId',
         'status' => 'getStatus',
         'waiting_in_queue' => 'getWaitingInQueue',
@@ -161,6 +165,7 @@ class Response implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        $this->container['copyrights'] = isset($data['copyrights']) ? $data['copyrights'] : null;
         $this->container['job_id'] = isset($data['job_id']) ? $data['job_id'] : null;
         $this->container['status'] = isset($data['status']) ? $data['status'] : null;
         $this->container['waiting_in_queue'] = isset($data['waiting_in_queue']) ? $data['waiting_in_queue'] : null;
@@ -199,6 +204,27 @@ class Response implements ArrayAccess
         return true;
     }
 
+
+    /**
+     * Gets copyrights
+     * @return string[]
+     */
+    public function getCopyrights()
+    {
+        return $this->container['copyrights'];
+    }
+
+    /**
+     * Sets copyrights
+     * @param string[] $copyrights
+     * @return $this
+     */
+    public function setCopyrights($copyrights)
+    {
+        $this->container['copyrights'] = $copyrights;
+
+        return $this;
+    }
 
     /**
      * Gets job_id

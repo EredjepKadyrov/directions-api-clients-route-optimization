@@ -13,8 +13,16 @@ public class Solution: JSONEncodable {
     public var costs: Int32?
     /** overall travel distance in meters */
     public var distance: Int32?
-    /** overall travel time in ms */
+    /** overall transport time in ms */
     public var time: Int64?
+    /** overall transport time in ms */
+    public var transportTime: Int64?
+    /** operation time of the longest route in ms */
+    public var maxOperationTime: Int64?
+    /** total waiting time in ms */
+    public var waitingTime: Int64?
+    /** number of employed vehicles */
+    public var noVehicles: Int32?
     /** number of jobs that could not be assigned to final solution */
     public var noUnassigned: Int32?
     /** An array of routes */
@@ -29,6 +37,10 @@ public class Solution: JSONEncodable {
         nillableDictionary["costs"] = self.costs?.encodeToJSON()
         nillableDictionary["distance"] = self.distance?.encodeToJSON()
         nillableDictionary["time"] = self.time?.encodeToJSON()
+        nillableDictionary["transport_time"] = self.transportTime?.encodeToJSON()
+        nillableDictionary["max_operation_time"] = self.maxOperationTime?.encodeToJSON()
+        nillableDictionary["waiting_time"] = self.waitingTime?.encodeToJSON()
+        nillableDictionary["no_vehicles"] = self.noVehicles?.encodeToJSON()
         nillableDictionary["no_unassigned"] = self.noUnassigned?.encodeToJSON()
         nillableDictionary["routes"] = self.routes?.encodeToJSON()
         nillableDictionary["unassigned"] = self.unassigned?.encodeToJSON()

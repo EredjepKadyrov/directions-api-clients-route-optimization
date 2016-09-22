@@ -28,7 +28,8 @@ package io.swagger.client.model
 
 
 case class Response (
-  /* unique identify of job - which you get when posting your request to the large problem solver */
+  copyrights: List[String],
+/* unique identify of job - which you get when posting your request to the large problem solver */
   jobId: String,
 /* indicates the current status of the job */
   status: String,

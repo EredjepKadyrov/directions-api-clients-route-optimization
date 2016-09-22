@@ -104,13 +104,23 @@ namespace IO.Swagger.Model
         /// <param name="LocationId">id that refers to address.</param>
         /// <param name="ArrTime">arrival time at this activity in ms.</param>
         /// <param name="EndTime">end time of and thus departure time at this activity.</param>
-        public Activity(TypeEnum? Type = null, string Id = null, string LocationId = null, long? ArrTime = null, long? EndTime = null)
+        /// <param name="WaitingTime">waiting time at this activity in ms.</param>
+        /// <param name="Distance">cumulated distance from start to this activity in m.</param>
+        /// <param name="DrivingTime">driving time of driver in ms.</param>
+        /// <param name="LoadBefore">Array with size/capacity dimensions before this activity.</param>
+        /// <param name="LoadAfter">Array with size/capacity dimensions after this activity.</param>
+        public Activity(TypeEnum? Type = null, string Id = null, string LocationId = null, long? ArrTime = null, long? EndTime = null, long? WaitingTime = null, long? Distance = null, long? DrivingTime = null, List<int?> LoadBefore = null, List<int?> LoadAfter = null)
         {
             this.Type = Type;
             this.Id = Id;
             this.LocationId = LocationId;
             this.ArrTime = ArrTime;
             this.EndTime = EndTime;
+            this.WaitingTime = WaitingTime;
+            this.Distance = Distance;
+            this.DrivingTime = DrivingTime;
+            this.LoadBefore = LoadBefore;
+            this.LoadAfter = LoadAfter;
         }
         
         /// <summary>
@@ -138,6 +148,36 @@ namespace IO.Swagger.Model
         [DataMember(Name="end_time", EmitDefaultValue=false)]
         public long? EndTime { get; set; }
         /// <summary>
+        /// waiting time at this activity in ms
+        /// </summary>
+        /// <value>waiting time at this activity in ms</value>
+        [DataMember(Name="waiting_time", EmitDefaultValue=false)]
+        public long? WaitingTime { get; set; }
+        /// <summary>
+        /// cumulated distance from start to this activity in m
+        /// </summary>
+        /// <value>cumulated distance from start to this activity in m</value>
+        [DataMember(Name="distance", EmitDefaultValue=false)]
+        public long? Distance { get; set; }
+        /// <summary>
+        /// driving time of driver in ms
+        /// </summary>
+        /// <value>driving time of driver in ms</value>
+        [DataMember(Name="driving_time", EmitDefaultValue=false)]
+        public long? DrivingTime { get; set; }
+        /// <summary>
+        /// Array with size/capacity dimensions before this activity
+        /// </summary>
+        /// <value>Array with size/capacity dimensions before this activity</value>
+        [DataMember(Name="load_before", EmitDefaultValue=false)]
+        public List<int?> LoadBefore { get; set; }
+        /// <summary>
+        /// Array with size/capacity dimensions after this activity
+        /// </summary>
+        /// <value>Array with size/capacity dimensions after this activity</value>
+        [DataMember(Name="load_after", EmitDefaultValue=false)]
+        public List<int?> LoadAfter { get; set; }
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -150,6 +190,11 @@ namespace IO.Swagger.Model
             sb.Append("  LocationId: ").Append(LocationId).Append("\n");
             sb.Append("  ArrTime: ").Append(ArrTime).Append("\n");
             sb.Append("  EndTime: ").Append(EndTime).Append("\n");
+            sb.Append("  WaitingTime: ").Append(WaitingTime).Append("\n");
+            sb.Append("  Distance: ").Append(Distance).Append("\n");
+            sb.Append("  DrivingTime: ").Append(DrivingTime).Append("\n");
+            sb.Append("  LoadBefore: ").Append(LoadBefore).Append("\n");
+            sb.Append("  LoadAfter: ").Append(LoadAfter).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -210,6 +255,31 @@ namespace IO.Swagger.Model
                     this.EndTime == other.EndTime ||
                     this.EndTime != null &&
                     this.EndTime.Equals(other.EndTime)
+                ) && 
+                (
+                    this.WaitingTime == other.WaitingTime ||
+                    this.WaitingTime != null &&
+                    this.WaitingTime.Equals(other.WaitingTime)
+                ) && 
+                (
+                    this.Distance == other.Distance ||
+                    this.Distance != null &&
+                    this.Distance.Equals(other.Distance)
+                ) && 
+                (
+                    this.DrivingTime == other.DrivingTime ||
+                    this.DrivingTime != null &&
+                    this.DrivingTime.Equals(other.DrivingTime)
+                ) && 
+                (
+                    this.LoadBefore == other.LoadBefore ||
+                    this.LoadBefore != null &&
+                    this.LoadBefore.SequenceEqual(other.LoadBefore)
+                ) && 
+                (
+                    this.LoadAfter == other.LoadAfter ||
+                    this.LoadAfter != null &&
+                    this.LoadAfter.SequenceEqual(other.LoadAfter)
                 );
         }
 
@@ -234,6 +304,16 @@ namespace IO.Swagger.Model
                     hash = hash * 59 + this.ArrTime.GetHashCode();
                 if (this.EndTime != null)
                     hash = hash * 59 + this.EndTime.GetHashCode();
+                if (this.WaitingTime != null)
+                    hash = hash * 59 + this.WaitingTime.GetHashCode();
+                if (this.Distance != null)
+                    hash = hash * 59 + this.Distance.GetHashCode();
+                if (this.DrivingTime != null)
+                    hash = hash * 59 + this.DrivingTime.GetHashCode();
+                if (this.LoadBefore != null)
+                    hash = hash * 59 + this.LoadBefore.GetHashCode();
+                if (this.LoadAfter != null)
+                    hash = hash * 59 + this.LoadAfter.GetHashCode();
                 return hash;
             }
         }

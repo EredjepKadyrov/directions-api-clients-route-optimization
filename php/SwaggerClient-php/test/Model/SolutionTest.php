@@ -120,6 +120,38 @@ class SolutionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "transport_time"
+     */
+    public function testPropertyTransportTime()
+    {
+
+    }
+
+    /**
+     * Test attribute "max_operation_time"
+     */
+    public function testPropertyMaxOperationTime()
+    {
+
+    }
+
+    /**
+     * Test attribute "waiting_time"
+     */
+    public function testPropertyWaitingTime()
+    {
+
+    }
+
+    /**
+     * Test attribute "no_vehicles"
+     */
+    public function testPropertyNoVehicles()
+    {
+
+    }
+
+    /**
      * Test attribute "no_unassigned"
      */
     public function testPropertyNoUnassigned()

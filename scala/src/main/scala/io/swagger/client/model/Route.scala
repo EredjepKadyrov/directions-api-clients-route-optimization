@@ -30,5 +30,13 @@ package io.swagger.client.model
 case class Route (
   /* id of vehicle that operates route */
   vehicleId: String,
+/* distance of route in meter */
+  distance: Long,
+/* transport time of route in ms */
+  transportTime: Long,
+/* completion time of route in ms */
+  completionTime: Long,
+/* waiting time of route in ms */
+  waitingTime: Long,
 /* array of activities */
   activities: List[Activity])

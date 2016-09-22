@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"costs": @"costs", @"distance": @"distance", @"time": @"time", @"no_unassigned": @"noUnassigned", @"routes": @"routes", @"unassigned": @"unassigned" }];
+  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"costs": @"costs", @"distance": @"distance", @"time": @"time", @"transport_time": @"transportTime", @"max_operation_time": @"maxOperationTime", @"waiting_time": @"waitingTime", @"no_vehicles": @"noVehicles", @"no_unassigned": @"noUnassigned", @"routes": @"routes", @"unassigned": @"unassigned" }];
 }
 
 /**
@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[@"costs", @"distance", @"time", @"noUnassigned", @"routes", @"unassigned"];
+  NSArray *optionalProperties = @[@"costs", @"distance", @"time", @"transportTime", @"maxOperationTime", @"waitingTime", @"noVehicles", @"noUnassigned", @"routes", @"unassigned"];
   return [optionalProperties containsObject:propertyName];
 }
 

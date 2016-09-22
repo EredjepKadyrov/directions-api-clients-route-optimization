@@ -173,6 +173,34 @@ __PACKAGE__->method_documentation({
     	format => '',
     	read_only => '',
     		},
+    'distance' => {
+    	datatype => 'int',
+    	base_name => 'distance',
+    	description => 'distance of route in meter',
+    	format => '',
+    	read_only => '',
+    		},
+    'transport_time' => {
+    	datatype => 'int',
+    	base_name => 'transport_time',
+    	description => 'transport time of route in ms',
+    	format => '',
+    	read_only => '',
+    		},
+    'completion_time' => {
+    	datatype => 'int',
+    	base_name => 'completion_time',
+    	description => 'completion time of route in ms',
+    	format => '',
+    	read_only => '',
+    		},
+    'waiting_time' => {
+    	datatype => 'int',
+    	base_name => 'waiting_time',
+    	description => 'waiting time of route in ms',
+    	format => '',
+    	read_only => '',
+    		},
     'activities' => {
     	datatype => 'ARRAY[Activity]',
     	base_name => 'activities',
@@ -184,11 +212,19 @@ __PACKAGE__->method_documentation({
 
 __PACKAGE__->swagger_types( {
     'vehicle_id' => 'string',
+    'distance' => 'int',
+    'transport_time' => 'int',
+    'completion_time' => 'int',
+    'waiting_time' => 'int',
     'activities' => 'ARRAY[Activity]'
 } );
 
 __PACKAGE__->attribute_map( {
     'vehicle_id' => 'vehicle_id',
+    'distance' => 'distance',
+    'transport_time' => 'transport_time',
+    'completion_time' => 'completion_time',
+    'waiting_time' => 'waiting_time',
     'activities' => 'activities'
 } );
 

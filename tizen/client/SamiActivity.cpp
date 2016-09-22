@@ -27,6 +27,11 @@ pId = null;
 pLocation_id = null;
 pArr_time = null;
 pEnd_time = null;
+pWaiting_time = null;
+pDistance = null;
+pDriving_time = null;
+pLoad_before = null;
+pLoad_after = null;
 }
 
 void
@@ -55,6 +60,31 @@ if(pEnd_time != null) {
         
         delete pEnd_time;
         pEnd_time = null;
+    }
+if(pWaiting_time != null) {
+        
+        delete pWaiting_time;
+        pWaiting_time = null;
+    }
+if(pDistance != null) {
+        
+        delete pDistance;
+        pDistance = null;
+    }
+if(pDriving_time != null) {
+        
+        delete pDriving_time;
+        pDriving_time = null;
+    }
+if(pLoad_before != null) {
+        pLoad_before->RemoveAll(true);
+        delete pLoad_before;
+        pLoad_before = null;
+    }
+if(pLoad_after != null) {
+        pLoad_after->RemoveAll(true);
+        delete pLoad_after;
+        pLoad_after = null;
     }
 }
 
@@ -138,6 +168,51 @@ JsonString* pEnd_timeKey = new JsonString(L"end_time");
             jsonToValue(pEnd_time, pEnd_timeVal, L"Long", L"Long");
         }
         delete pEnd_timeKey;
+JsonString* pWaiting_timeKey = new JsonString(L"waiting_time");
+        IJsonValue* pWaiting_timeVal = null;
+        pJsonObject->GetValue(pWaiting_timeKey, pWaiting_timeVal);
+        if(pWaiting_timeVal != null) {
+            
+            pWaiting_time = new Long();
+            jsonToValue(pWaiting_time, pWaiting_timeVal, L"Long", L"Long");
+        }
+        delete pWaiting_timeKey;
+JsonString* pDistanceKey = new JsonString(L"distance");
+        IJsonValue* pDistanceVal = null;
+        pJsonObject->GetValue(pDistanceKey, pDistanceVal);
+        if(pDistanceVal != null) {
+            
+            pDistance = new Long();
+            jsonToValue(pDistance, pDistanceVal, L"Long", L"Long");
+        }
+        delete pDistanceKey;
+JsonString* pDriving_timeKey = new JsonString(L"driving_time");
+        IJsonValue* pDriving_timeVal = null;
+        pJsonObject->GetValue(pDriving_timeKey, pDriving_timeVal);
+        if(pDriving_timeVal != null) {
+            
+            pDriving_time = new Long();
+            jsonToValue(pDriving_time, pDriving_timeVal, L"Long", L"Long");
+        }
+        delete pDriving_timeKey;
+JsonString* pLoad_beforeKey = new JsonString(L"load_before");
+        IJsonValue* pLoad_beforeVal = null;
+        pJsonObject->GetValue(pLoad_beforeKey, pLoad_beforeVal);
+        if(pLoad_beforeVal != null) {
+            pLoad_before = new ArrayList();
+            
+            jsonToValue(pLoad_before, pLoad_beforeVal, L"IList", L"Integer");
+        }
+        delete pLoad_beforeKey;
+JsonString* pLoad_afterKey = new JsonString(L"load_after");
+        IJsonValue* pLoad_afterVal = null;
+        pJsonObject->GetValue(pLoad_afterKey, pLoad_afterVal);
+        if(pLoad_afterVal != null) {
+            pLoad_after = new ArrayList();
+            
+            jsonToValue(pLoad_after, pLoad_afterVal, L"IList", L"Integer");
+        }
+        delete pLoad_afterKey;
     }
 }
 
@@ -203,6 +278,21 @@ SamiActivity::asJsonObject() {
     JsonString *pEnd_timeKey = new JsonString(L"end_time");
     pJsonObject->Add(pEnd_timeKey, toJson(getPEndTime(), "Long", ""));
 
+    JsonString *pWaiting_timeKey = new JsonString(L"waiting_time");
+    pJsonObject->Add(pWaiting_timeKey, toJson(getPWaitingTime(), "Long", ""));
+
+    JsonString *pDistanceKey = new JsonString(L"distance");
+    pJsonObject->Add(pDistanceKey, toJson(getPDistance(), "Long", ""));
+
+    JsonString *pDriving_timeKey = new JsonString(L"driving_time");
+    pJsonObject->Add(pDriving_timeKey, toJson(getPDrivingTime(), "Long", ""));
+
+    JsonString *pLoad_beforeKey = new JsonString(L"load_before");
+    pJsonObject->Add(pLoad_beforeKey, toJson(getPLoadBefore(), "Integer", "array"));
+
+    JsonString *pLoad_afterKey = new JsonString(L"load_after");
+    pJsonObject->Add(pLoad_afterKey, toJson(getPLoadAfter(), "Integer", "array"));
+
     return pJsonObject;
 }
 
@@ -249,6 +339,51 @@ SamiActivity::getPEndTime() {
 void
 SamiActivity::setPEndTime(Long* pEnd_time) {
     this->pEnd_time = pEnd_time;
+}
+
+Long*
+SamiActivity::getPWaitingTime() {
+    return pWaiting_time;
+}
+void
+SamiActivity::setPWaitingTime(Long* pWaiting_time) {
+    this->pWaiting_time = pWaiting_time;
+}
+
+Long*
+SamiActivity::getPDistance() {
+    return pDistance;
+}
+void
+SamiActivity::setPDistance(Long* pDistance) {
+    this->pDistance = pDistance;
+}
+
+Long*
+SamiActivity::getPDrivingTime() {
+    return pDriving_time;
+}
+void
+SamiActivity::setPDrivingTime(Long* pDriving_time) {
+    this->pDriving_time = pDriving_time;
+}
+
+IList*
+SamiActivity::getPLoadBefore() {
+    return pLoad_before;
+}
+void
+SamiActivity::setPLoadBefore(IList* pLoad_before) {
+    this->pLoad_before = pLoad_before;
+}
+
+IList*
+SamiActivity::getPLoadAfter() {
+    return pLoad_after;
+}
+void
+SamiActivity::setPLoadAfter(IList* pLoad_after) {
+    this->pLoad_after = pLoad_after;
 }
 
 

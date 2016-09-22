@@ -22,7 +22,8 @@ SamiResponse::~SamiResponse() {
 
 void
 SamiResponse::init() {
-    pJob_id = null;
+    pCopyrights = null;
+pJob_id = null;
 pStatus = null;
 pWaiting_in_queue = null;
 pProcessing_time = null;
@@ -31,7 +32,12 @@ pSolution = null;
 
 void
 SamiResponse::cleanup() {
-    if(pJob_id != null) {
+    if(pCopyrights != null) {
+        pCopyrights->RemoveAll(true);
+        delete pCopyrights;
+        pCopyrights = null;
+    }
+if(pJob_id != null) {
         
         delete pJob_id;
         pJob_id = null;
@@ -93,7 +99,16 @@ SamiResponse::fromJsonObject(IJsonValue* pJson) {
     JsonObject* pJsonObject = static_cast< JsonObject* >(pJson);
 
     if(pJsonObject != null) {
-        JsonString* pJob_idKey = new JsonString(L"job_id");
+        JsonString* pCopyrightsKey = new JsonString(L"copyrights");
+        IJsonValue* pCopyrightsVal = null;
+        pJsonObject->GetValue(pCopyrightsKey, pCopyrightsVal);
+        if(pCopyrightsVal != null) {
+            pCopyrights = new ArrayList();
+            
+            jsonToValue(pCopyrights, pCopyrightsVal, L"IList", L"String");
+        }
+        delete pCopyrightsKey;
+JsonString* pJob_idKey = new JsonString(L"job_id");
         IJsonValue* pJob_idVal = null;
         pJsonObject->GetValue(pJob_idKey, pJob_idVal);
         if(pJob_idVal != null) {
@@ -188,6 +203,9 @@ SamiResponse::asJsonObject() {
     JsonObject *pJsonObject = new JsonObject();
     pJsonObject->Construct();
 
+    JsonString *pCopyrightsKey = new JsonString(L"copyrights");
+    pJsonObject->Add(pCopyrightsKey, toJson(getPCopyrights(), "String", "array"));
+
     JsonString *pJob_idKey = new JsonString(L"job_id");
     pJsonObject->Add(pJob_idKey, toJson(getPJobId(), "String", ""));
 
@@ -204,6 +222,15 @@ SamiResponse::asJsonObject() {
     pJsonObject->Add(pSolutionKey, toJson(getPSolution(), "SamiSolution", ""));
 
     return pJsonObject;
+}
+
+IList*
+SamiResponse::getPCopyrights() {
+    return pCopyrights;
+}
+void
+SamiResponse::setPCopyrights(IList* pCopyrights) {
+    this->pCopyrights = pCopyrights;
 }
 
 String*

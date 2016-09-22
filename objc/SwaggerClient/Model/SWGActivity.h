@@ -47,5 +47,20 @@
 /* end time of and thus departure time at this activity [optional]
  */
 @property(nonatomic) NSNumber* endTime;
+/* waiting time at this activity in ms [optional]
+ */
+@property(nonatomic) NSNumber* waitingTime;
+/* cumulated distance from start to this activity in m [optional]
+ */
+@property(nonatomic) NSNumber* distance;
+/* driving time of driver in ms [optional]
+ */
+@property(nonatomic) NSNumber* drivingTime;
+/* Array with size/capacity dimensions before this activity [optional]
+ */
+@property(nonatomic) NSArray<NSNumber*>* loadBefore;
+/* Array with size/capacity dimensions after this activity [optional]
+ */
+@property(nonatomic) NSArray<NSNumber*>* loadAfter;
 
 @end

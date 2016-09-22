@@ -77,6 +77,14 @@ namespace IO.Swagger.Test
         }
 
         /// <summary>
+        /// Test the property 'Copyrights'
+        /// </summary>
+        [Test]
+        public void CopyrightsTest()
+        {
+            // TODO unit test for the property 'Copyrights'
+        }
+        /// <summary>
         /// Test the property 'JobId'
         /// </summary>
         [Test]

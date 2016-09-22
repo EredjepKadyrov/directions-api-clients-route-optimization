@@ -17,6 +17,8 @@
 using namespace Tizen::Web::Json;
 
 
+using Tizen::Base::Collection::IList;
+using Tizen::Base::Integer;
 using Tizen::Base::Long;
 using Tizen::Base::String;
 
@@ -51,6 +53,16 @@ public:
     void setPArrTime(Long* pArr_time);
     Long* getPEndTime();
     void setPEndTime(Long* pEnd_time);
+    Long* getPWaitingTime();
+    void setPWaitingTime(Long* pWaiting_time);
+    Long* getPDistance();
+    void setPDistance(Long* pDistance);
+    Long* getPDrivingTime();
+    void setPDrivingTime(Long* pDriving_time);
+    IList* getPLoadBefore();
+    void setPLoadBefore(IList* pLoad_before);
+    IList* getPLoadAfter();
+    void setPLoadAfter(IList* pLoad_after);
 
 private:
     String* pType;
@@ -58,6 +70,11 @@ String* pId;
 String* pLocation_id;
 Long* pArr_time;
 Long* pEnd_time;
+Long* pWaiting_time;
+Long* pDistance;
+Long* pDriving_time;
+IList* pLoad_before;
+IList* pLoad_after;
 };
 
 } /* namespace Swagger */

@@ -14,6 +14,7 @@ public class Response: JSONEncodable {
         case Processing = "processing"
         case Finished = "finished"
     }
+    public var copyrights: [String]?
     /** unique identify of job - which you get when posting your request to the large problem solver */
     public var jobId: String?
     /** indicates the current status of the job */
@@ -30,6 +31,7 @@ public class Response: JSONEncodable {
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
+        nillableDictionary["copyrights"] = self.copyrights?.encodeToJSON()
         nillableDictionary["job_id"] = self.jobId
         nillableDictionary["status"] = self.status?.rawValue
         nillableDictionary["waiting_in_queue"] = self.waitingInQueue?.encodeToJSON()

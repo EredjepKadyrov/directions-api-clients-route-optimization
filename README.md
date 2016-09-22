@@ -18,7 +18,7 @@ scala     |  yes     | no     |
 swift     |  yes     | no     |
 objc      |  yes     | no     |
 tizen     |  yes     | no     |
-nodejs    |  yes     | no     |
+nodejs-server  |  yes     | no     |
 dart      |  yes     | no     |
 go        |  no      | -      |
 clojure   |  no      | -      |

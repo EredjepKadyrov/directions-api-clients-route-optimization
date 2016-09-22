@@ -34,6 +34,7 @@
 #include <QJsonObject>
 
 
+#include <QList>
 #include <QString>
 
 #include "SWGObject.h"
@@ -64,6 +65,16 @@ qint64 getArrTime();
     void setArrTime(qint64 arr_time);
 qint64 getEndTime();
     void setEndTime(qint64 end_time);
+qint64 getWaitingTime();
+    void setWaitingTime(qint64 waiting_time);
+qint64 getDistance();
+    void setDistance(qint64 distance);
+qint64 getDrivingTime();
+    void setDrivingTime(qint64 driving_time);
+QList<qint32>* getLoadBefore();
+    void setLoadBefore(QList<qint32>* load_before);
+QList<qint32>* getLoadAfter();
+    void setLoadAfter(QList<qint32>* load_after);
 
 private:
     QString* type;
@@ -71,6 +82,11 @@ QString* id;
 QString* location_id;
 qint64 arr_time;
 qint64 end_time;
+qint64 waiting_time;
+qint64 distance;
+qint64 driving_time;
+QList<qint32>* load_before;
+QList<qint32>* load_after;
 };
 
 } /* namespace Swagger */

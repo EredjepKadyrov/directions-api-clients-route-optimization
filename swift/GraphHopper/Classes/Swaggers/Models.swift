@@ -150,6 +150,11 @@ class Decoders {
                 instance.locationId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["location_id"])
                 instance.arrTime = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["arr_time"])
                 instance.endTime = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["end_time"])
+                instance.waitingTime = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["waiting_time"])
+                instance.distance = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["distance"])
+                instance.drivingTime = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["driving_time"])
+                instance.loadBefore = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["load_before"])
+                instance.loadAfter = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["load_after"])
                 return instance
             }
 
@@ -286,6 +291,7 @@ class Decoders {
             Decoders.addDecoder(clazz: Response.self) { (source: AnyObject) -> Response in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Response()
+                instance.copyrights = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["copyrights"])
                 instance.jobId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["job_id"])
                 instance.status = Response.Status(rawValue: (sourceDictionary["status"] as? String) ?? "") 
                 instance.waitingInQueue = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["waiting_in_queue"])
@@ -304,6 +310,10 @@ class Decoders {
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Route()
                 instance.vehicleId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["vehicle_id"])
+                instance.distance = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["distance"])
+                instance.transportTime = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["transport_time"])
+                instance.completionTime = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["completion_time"])
+                instance.waitingTime = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["waiting_time"])
                 instance.activities = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["activities"])
                 return instance
             }
@@ -362,6 +372,10 @@ class Decoders {
                 instance.costs = Decoders.decodeOptional(clazz: Int32.self, source: sourceDictionary["costs"])
                 instance.distance = Decoders.decodeOptional(clazz: Int32.self, source: sourceDictionary["distance"])
                 instance.time = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["time"])
+                instance.transportTime = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["transport_time"])
+                instance.maxOperationTime = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["max_operation_time"])
+                instance.waitingTime = Decoders.decodeOptional(clazz: Int64.self, source: sourceDictionary["waiting_time"])
+                instance.noVehicles = Decoders.decodeOptional(clazz: Int32.self, source: sourceDictionary["no_vehicles"])
                 instance.noUnassigned = Decoders.decodeOptional(clazz: Int32.self, source: sourceDictionary["no_unassigned"])
                 instance.routes = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["routes"])
                 instance.unassigned = Decoders.decodeOptional(clazz: SolutionUnassigned.self, source: sourceDictionary["unassigned"])

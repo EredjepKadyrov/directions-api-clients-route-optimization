@@ -50,7 +50,8 @@ SWGResponse::~SWGResponse() {
 
 void
 SWGResponse::init() {
-    job_id = new QString("");
+    copyrights = new QList<QString*>();
+job_id = new QString("");
 status = new QString("");
 waiting_in_queue = 0L;
 processing_time = 0L;
@@ -59,7 +60,14 @@ solution = new SWGSolution();
 
 void
 SWGResponse::cleanup() {
-    if(job_id != NULL) {
+    if(copyrights != NULL) {
+        QList<QString*>* arr = copyrights;
+        foreach(QString* o, *arr) {
+            delete o;
+        }
+        delete copyrights;
+    }
+if(job_id != NULL) {
         delete job_id;
     }
 if(status != NULL) {
@@ -83,7 +91,8 @@ SWGResponse::fromJson(QString &json) {
 
 void
 SWGResponse::fromJsonObject(QJsonObject &pJson) {
-    setValue(&job_id, pJson["job_id"], "QString", "QString");
+    setValue(&copyrights, pJson["copyrights"], "QList", "QString");
+setValue(&job_id, pJson["job_id"], "QString", "QString");
 setValue(&status, pJson["status"], "QString", "QString");
 setValue(&waiting_in_queue, pJson["waiting_in_queue"], "qint64", "");
 setValue(&processing_time, pJson["processing_time"], "qint64", "");
@@ -105,6 +114,14 @@ SWGResponse::asJsonObject() {
     QJsonObject* obj = new QJsonObject();
     
     
+    QList<QString*>* copyrightsList = copyrights;
+    QJsonArray copyrightsJsonArray;
+    toJsonArray((QList<void*>*)copyrights, &copyrightsJsonArray, "copyrights", "QString");
+
+    obj->insert("copyrights", copyrightsJsonArray);
+    
+
+    
     toJsonValue(QString("job_id"), job_id, obj, QString("QString"));
     
         
@@ -122,6 +139,15 @@ obj->insert("processing_time", QJsonValue(processing_time));
         
 
     return obj;
+}
+
+QList<QString*>*
+SWGResponse::getCopyrights() {
+    return copyrights;
+}
+void
+SWGResponse::setCopyrights(QList<QString*>* copyrights) {
+    this->copyrights = copyrights;
 }
 
 QString*

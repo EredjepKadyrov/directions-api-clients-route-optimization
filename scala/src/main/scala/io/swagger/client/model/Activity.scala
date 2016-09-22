@@ -37,4 +37,14 @@ case class Activity (
 /* arrival time at this activity in ms */
   arrTime: Long,
 /* end time of and thus departure time at this activity */
-  endTime: Long)
+  endTime: Long,
+/* waiting time at this activity in ms */
+  waitingTime: Long,
+/* cumulated distance from start to this activity in m */
+  distance: Long,
+/* driving time of driver in ms */
+  drivingTime: Long,
+/* Array with size/capacity dimensions before this activity */
+  loadBefore: List[Integer],
+/* Array with size/capacity dimensions after this activity */
+  loadAfter: List[Integer])

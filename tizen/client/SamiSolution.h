@@ -50,6 +50,14 @@ public:
     void setPDistance(Integer* pDistance);
     Long* getPTime();
     void setPTime(Long* pTime);
+    Long* getPTransportTime();
+    void setPTransportTime(Long* pTransport_time);
+    Long* getPMaxOperationTime();
+    void setPMaxOperationTime(Long* pMax_operation_time);
+    Long* getPWaitingTime();
+    void setPWaitingTime(Long* pWaiting_time);
+    Integer* getPNoVehicles();
+    void setPNoVehicles(Integer* pNo_vehicles);
     Integer* getPNoUnassigned();
     void setPNoUnassigned(Integer* pNo_unassigned);
     IList* getPRoutes();
@@ -61,6 +69,10 @@ private:
     Integer* pCosts;
 Integer* pDistance;
 Long* pTime;
+Long* pTransport_time;
+Long* pMax_operation_time;
+Long* pWaiting_time;
+Integer* pNo_vehicles;
 Integer* pNo_unassigned;
 IList* pRoutes;
 SamiSolution_unassigned* pUnassigned;

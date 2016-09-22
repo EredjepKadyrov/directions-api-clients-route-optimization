@@ -104,6 +104,38 @@ class RouteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "distance"
+     */
+    public function testPropertyDistance()
+    {
+
+    }
+
+    /**
+     * Test attribute "transport_time"
+     */
+    public function testPropertyTransportTime()
+    {
+
+    }
+
+    /**
+     * Test attribute "completion_time"
+     */
+    public function testPropertyCompletionTime()
+    {
+
+    }
+
+    /**
+     * Test attribute "waiting_time"
+     */
+    public function testPropertyWaitingTime()
+    {
+
+    }
+
+    /**
      * Test attribute "activities"
      */
     public function testPropertyActivities()

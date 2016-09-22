@@ -53,6 +53,10 @@ SWGSolution::init() {
     costs = 0;
 distance = 0;
 time = 0L;
+transport_time = 0L;
+max_operation_time = 0L;
+waiting_time = 0L;
+no_vehicles = 0;
 no_unassigned = 0;
 routes = new QList<SWGRoute*>();
 unassigned = new SWGSolution_unassigned();
@@ -61,6 +65,10 @@ unassigned = new SWGSolution_unassigned();
 void
 SWGSolution::cleanup() {
     
+
+
+
+
 
 
 
@@ -90,6 +98,10 @@ SWGSolution::fromJsonObject(QJsonObject &pJson) {
     setValue(&costs, pJson["costs"], "qint32", "");
 setValue(&distance, pJson["distance"], "qint32", "");
 setValue(&time, pJson["time"], "qint64", "");
+setValue(&transport_time, pJson["transport_time"], "qint64", "");
+setValue(&max_operation_time, pJson["max_operation_time"], "qint64", "");
+setValue(&waiting_time, pJson["waiting_time"], "qint64", "");
+setValue(&no_vehicles, pJson["no_vehicles"], "qint32", "");
 setValue(&no_unassigned, pJson["no_unassigned"], "qint32", "");
 setValue(&routes, pJson["routes"], "QList", "SWGRoute");
 setValue(&unassigned, pJson["unassigned"], "SWGSolution_unassigned", "SWGSolution_unassigned");
@@ -111,6 +123,10 @@ SWGSolution::asJsonObject() {
     obj->insert("costs", QJsonValue(costs));
 obj->insert("distance", QJsonValue(distance));
 obj->insert("time", QJsonValue(time));
+obj->insert("transport_time", QJsonValue(transport_time));
+obj->insert("max_operation_time", QJsonValue(max_operation_time));
+obj->insert("waiting_time", QJsonValue(waiting_time));
+obj->insert("no_vehicles", QJsonValue(no_vehicles));
 obj->insert("no_unassigned", QJsonValue(no_unassigned));
 
     
@@ -154,6 +170,42 @@ SWGSolution::getTime() {
 void
 SWGSolution::setTime(qint64 time) {
     this->time = time;
+}
+
+qint64
+SWGSolution::getTransportTime() {
+    return transport_time;
+}
+void
+SWGSolution::setTransportTime(qint64 transport_time) {
+    this->transport_time = transport_time;
+}
+
+qint64
+SWGSolution::getMaxOperationTime() {
+    return max_operation_time;
+}
+void
+SWGSolution::setMaxOperationTime(qint64 max_operation_time) {
+    this->max_operation_time = max_operation_time;
+}
+
+qint64
+SWGSolution::getWaitingTime() {
+    return waiting_time;
+}
+void
+SWGSolution::setWaitingTime(qint64 waiting_time) {
+    this->waiting_time = waiting_time;
+}
+
+qint32
+SWGSolution::getNoVehicles() {
+    return no_vehicles;
+}
+void
+SWGSolution::setNoVehicles(qint32 no_vehicles) {
+    this->no_vehicles = no_vehicles;
 }
 
 qint32

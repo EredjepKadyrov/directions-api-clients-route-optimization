@@ -36,7 +36,7 @@ import java.util.List;
 /**
  * Relation
  */
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-09-20T15:55:03.557+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-09-22T09:15:07.913+02:00")
 public class Relation   {
   @SerializedName("type")
   private String type = null;

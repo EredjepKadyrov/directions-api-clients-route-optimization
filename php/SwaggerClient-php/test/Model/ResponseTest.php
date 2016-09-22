@@ -96,6 +96,14 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "copyrights"
+     */
+    public function testPropertyCopyrights()
+    {
+
+    }
+
+    /**
      * Test attribute "job_id"
      */
     public function testPropertyJobId()

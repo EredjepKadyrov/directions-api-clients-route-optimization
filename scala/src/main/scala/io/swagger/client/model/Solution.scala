@@ -32,8 +32,16 @@ case class Solution (
   costs: Integer,
 /* overall travel distance in meters */
   distance: Integer,
-/* overall travel time in ms */
+/* overall transport time in ms */
   time: Long,
+/* overall transport time in ms */
+  transportTime: Long,
+/* operation time of the longest route in ms */
+  maxOperationTime: Long,
+/* total waiting time in ms */
+  waitingTime: Long,
+/* number of employed vehicles */
+  noVehicles: Integer,
 /* number of jobs that could not be assigned to final solution */
   noUnassigned: Integer,
 /* An array of routes */

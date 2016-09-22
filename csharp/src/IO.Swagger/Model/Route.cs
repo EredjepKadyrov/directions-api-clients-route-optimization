@@ -43,10 +43,18 @@ namespace IO.Swagger.Model
         /// Initializes a new instance of the <see cref="Route" /> class.
         /// </summary>
         /// <param name="VehicleId">id of vehicle that operates route.</param>
+        /// <param name="Distance">distance of route in meter.</param>
+        /// <param name="TransportTime">transport time of route in ms.</param>
+        /// <param name="CompletionTime">completion time of route in ms.</param>
+        /// <param name="WaitingTime">waiting time of route in ms.</param>
         /// <param name="Activities">array of activities.</param>
-        public Route(string VehicleId = null, List<Activity> Activities = null)
+        public Route(string VehicleId = null, long? Distance = null, long? TransportTime = null, long? CompletionTime = null, long? WaitingTime = null, List<Activity> Activities = null)
         {
             this.VehicleId = VehicleId;
+            this.Distance = Distance;
+            this.TransportTime = TransportTime;
+            this.CompletionTime = CompletionTime;
+            this.WaitingTime = WaitingTime;
             this.Activities = Activities;
         }
         
@@ -56,6 +64,30 @@ namespace IO.Swagger.Model
         /// <value>id of vehicle that operates route</value>
         [DataMember(Name="vehicle_id", EmitDefaultValue=false)]
         public string VehicleId { get; set; }
+        /// <summary>
+        /// distance of route in meter
+        /// </summary>
+        /// <value>distance of route in meter</value>
+        [DataMember(Name="distance", EmitDefaultValue=false)]
+        public long? Distance { get; set; }
+        /// <summary>
+        /// transport time of route in ms
+        /// </summary>
+        /// <value>transport time of route in ms</value>
+        [DataMember(Name="transport_time", EmitDefaultValue=false)]
+        public long? TransportTime { get; set; }
+        /// <summary>
+        /// completion time of route in ms
+        /// </summary>
+        /// <value>completion time of route in ms</value>
+        [DataMember(Name="completion_time", EmitDefaultValue=false)]
+        public long? CompletionTime { get; set; }
+        /// <summary>
+        /// waiting time of route in ms
+        /// </summary>
+        /// <value>waiting time of route in ms</value>
+        [DataMember(Name="waiting_time", EmitDefaultValue=false)]
+        public long? WaitingTime { get; set; }
         /// <summary>
         /// array of activities
         /// </summary>
@@ -71,6 +103,10 @@ namespace IO.Swagger.Model
             var sb = new StringBuilder();
             sb.Append("class Route {\n");
             sb.Append("  VehicleId: ").Append(VehicleId).Append("\n");
+            sb.Append("  Distance: ").Append(Distance).Append("\n");
+            sb.Append("  TransportTime: ").Append(TransportTime).Append("\n");
+            sb.Append("  CompletionTime: ").Append(CompletionTime).Append("\n");
+            sb.Append("  WaitingTime: ").Append(WaitingTime).Append("\n");
             sb.Append("  Activities: ").Append(Activities).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -114,6 +150,26 @@ namespace IO.Swagger.Model
                     this.VehicleId.Equals(other.VehicleId)
                 ) && 
                 (
+                    this.Distance == other.Distance ||
+                    this.Distance != null &&
+                    this.Distance.Equals(other.Distance)
+                ) && 
+                (
+                    this.TransportTime == other.TransportTime ||
+                    this.TransportTime != null &&
+                    this.TransportTime.Equals(other.TransportTime)
+                ) && 
+                (
+                    this.CompletionTime == other.CompletionTime ||
+                    this.CompletionTime != null &&
+                    this.CompletionTime.Equals(other.CompletionTime)
+                ) && 
+                (
+                    this.WaitingTime == other.WaitingTime ||
+                    this.WaitingTime != null &&
+                    this.WaitingTime.Equals(other.WaitingTime)
+                ) && 
+                (
                     this.Activities == other.Activities ||
                     this.Activities != null &&
                     this.Activities.SequenceEqual(other.Activities)
@@ -133,6 +189,14 @@ namespace IO.Swagger.Model
                 // Suitable nullity checks etc, of course :)
                 if (this.VehicleId != null)
                     hash = hash * 59 + this.VehicleId.GetHashCode();
+                if (this.Distance != null)
+                    hash = hash * 59 + this.Distance.GetHashCode();
+                if (this.TransportTime != null)
+                    hash = hash * 59 + this.TransportTime.GetHashCode();
+                if (this.CompletionTime != null)
+                    hash = hash * 59 + this.CompletionTime.GetHashCode();
+                if (this.WaitingTime != null)
+                    hash = hash * 59 + this.WaitingTime.GetHashCode();
                 if (this.Activities != null)
                     hash = hash * 59 + this.Activities.GetHashCode();
                 return hash;

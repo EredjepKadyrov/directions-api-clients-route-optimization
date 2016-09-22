@@ -55,6 +55,11 @@ id = new QString("");
 location_id = new QString("");
 arr_time = 0L;
 end_time = 0L;
+waiting_time = 0L;
+distance = 0L;
+driving_time = 0L;
+load_before = new QList<qint32>();
+load_after = new QList<qint32>();
 }
 
 void
@@ -68,6 +73,11 @@ if(id != NULL) {
 if(location_id != NULL) {
         delete location_id;
     }
+
+
+
+
+
 
 
 }
@@ -88,6 +98,11 @@ setValue(&id, pJson["id"], "QString", "QString");
 setValue(&location_id, pJson["location_id"], "QString", "QString");
 setValue(&arr_time, pJson["arr_time"], "qint64", "");
 setValue(&end_time, pJson["end_time"], "qint64", "");
+setValue(&waiting_time, pJson["waiting_time"], "qint64", "");
+setValue(&distance, pJson["distance"], "qint64", "");
+setValue(&driving_time, pJson["driving_time"], "qint64", "");
+setValue(&load_before, pJson["load_before"], "QList", "");
+setValue(&load_after, pJson["load_after"], "QList", "");
 }
 
 QString
@@ -120,6 +135,11 @@ SWGActivity::asJsonObject() {
         
 obj->insert("arr_time", QJsonValue(arr_time));
 obj->insert("end_time", QJsonValue(end_time));
+obj->insert("waiting_time", QJsonValue(waiting_time));
+obj->insert("distance", QJsonValue(distance));
+obj->insert("driving_time", QJsonValue(driving_time));
+obj->insert("load_before", QJsonValue(load_before));
+obj->insert("load_after", QJsonValue(load_after));
 
     return obj;
 }
@@ -167,6 +187,51 @@ SWGActivity::getEndTime() {
 void
 SWGActivity::setEndTime(qint64 end_time) {
     this->end_time = end_time;
+}
+
+qint64
+SWGActivity::getWaitingTime() {
+    return waiting_time;
+}
+void
+SWGActivity::setWaitingTime(qint64 waiting_time) {
+    this->waiting_time = waiting_time;
+}
+
+qint64
+SWGActivity::getDistance() {
+    return distance;
+}
+void
+SWGActivity::setDistance(qint64 distance) {
+    this->distance = distance;
+}
+
+qint64
+SWGActivity::getDrivingTime() {
+    return driving_time;
+}
+void
+SWGActivity::setDrivingTime(qint64 driving_time) {
+    this->driving_time = driving_time;
+}
+
+QList<qint32>*
+SWGActivity::getLoadBefore() {
+    return load_before;
+}
+void
+SWGActivity::setLoadBefore(QList<qint32>* load_before) {
+    this->load_before = load_before;
+}
+
+QList<qint32>*
+SWGActivity::getLoadAfter() {
+    return load_after;
+}
+void
+SWGActivity::setLoadAfter(QList<qint32>* load_after) {
+    this->load_after = load_after;
 }
 
 

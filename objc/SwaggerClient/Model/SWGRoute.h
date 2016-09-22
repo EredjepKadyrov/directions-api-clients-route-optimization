@@ -36,6 +36,18 @@
 /* id of vehicle that operates route [optional]
  */
 @property(nonatomic) NSString* vehicleId;
+/* distance of route in meter [optional]
+ */
+@property(nonatomic) NSNumber* distance;
+/* transport time of route in ms [optional]
+ */
+@property(nonatomic) NSNumber* transportTime;
+/* completion time of route in ms [optional]
+ */
+@property(nonatomic) NSNumber* completionTime;
+/* waiting time of route in ms [optional]
+ */
+@property(nonatomic) NSNumber* waitingTime;
 /* array of activities [optional]
  */
 @property(nonatomic) NSArray<SWGActivity>* activities;

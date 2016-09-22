@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**copyrights** | **string[]** |  | [optional] 
 **job_id** | **string** | unique identify of job - which you get when posting your request to the large problem solver | [optional] 
 **status** | **string** | indicates the current status of the job | [optional] 
 **waiting_in_queue** | **int** | waiting time in ms | [optional] 

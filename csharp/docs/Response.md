@@ -3,6 +3,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Copyrights** | **List&lt;string&gt;** |  | [optional] 
 **JobId** | **string** | unique identify of job - which you get when posting your request to the large problem solver | [optional] 
 **Status** | **string** | indicates the current status of the job | [optional] 
 **WaitingInQueue** | **long?** | waiting time in ms | [optional] 
