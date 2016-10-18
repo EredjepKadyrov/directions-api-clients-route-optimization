@@ -11,7 +11,7 @@ javascript|  no | -      | Use the [official client](https://github.com/graphhop
 python    |  yes     | no     |
 csharp    |  yes     | no     | [contributed client](https://github.com/Schuby80/WpfGraphHopper)
 ruby      |  yes     | [yes](https://github.com/graphhopper/directions-api-clients-route-optimization/issues/3)   |
-sinatra (ruby)| [no](https://github.com/swagger-api/swagger-codegen/issues/3846)  | no     |
+sinatra (ruby)| yes  | no     |
 php       |  yes     | [yes](https://github.com/graphhopper/directions-api-clients-route-optimization/issues/4)     |
 perl      |  yes     | no     |
 scala     |  yes     | no     |
@@ -19,7 +19,7 @@ swift     |  yes     | no     |
 objc      |  yes     | no     |
 tizen     |  yes     | no     |
 nodejs-server  | yes | no     |
-dart      |  [no](https://github.com/swagger-api/swagger-codegen/issues/3846)     | no     |
+dart      |  yes     | no     |
 go        |  yes     | no     |
 clojure   |  yes     | no     |
 qt5cpp    |  yes     | no     |
