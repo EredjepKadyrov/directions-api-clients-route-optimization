@@ -31,9 +31,9 @@ public class VrpAPI: APIBase {
      - API Key:
        - type: apiKey key (QUERY)
        - name: api_key
-     - examples: [{example={
+     - examples: [{contentType=application/json, example={
   "job_id" : "aeiou"
-}, contentType=application/json}]
+}}]
      
      - parameter key: (query) your API key 
      - parameter body: (body) Request object that contains the problem to be solved 

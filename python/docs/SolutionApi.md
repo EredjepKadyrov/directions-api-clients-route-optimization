@@ -16,6 +16,7 @@ This endpoint returns the solution of a large problems. You can fetch it with th
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swagger_client
 from swagger_client.rest import ApiException
@@ -36,7 +37,7 @@ try:
     api_response = api_instance.get_solution(key, job_id)
     pprint(api_response)
 except ApiException as e:
-    print "Exception when calling SolutionApi->get_solution: %s\n" % e
+    print("Exception when calling SolutionApi->get_solution: %s\n" % e)
 ```
 
 ### Parameters

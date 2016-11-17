@@ -16,6 +16,7 @@ This endpoint for solving vehicle routing problems, i.e. traveling salesman or v
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swagger_client
 from swagger_client.rest import ApiException
@@ -36,7 +37,7 @@ try:
     api_response = api_instance.post_vrp(key, body)
     pprint(api_response)
 except ApiException as e:
-    print "Exception when calling VrpApi->post_vrp: %s\n" % e
+    print("Exception when calling VrpApi->post_vrp: %s\n" % e)
 ```
 
 ### Parameters

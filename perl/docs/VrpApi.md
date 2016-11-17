@@ -22,6 +22,8 @@ This endpoint for solving vehicle routing problems, i.e. traveling salesman or v
 ### Example 
 ```perl
 use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::VrpApi;
 
 # Configure API key authorization: api_key
 $WWW::SwaggerClient::Configuration::api_key->{'key'} = 'YOUR_API_KEY';

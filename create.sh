@@ -4,7 +4,7 @@ SPEC=https://graphhopper.com/api/1/vrp/swagger.json
 DIR=.
 
 VERSION=0.8-SNAPSHOT
-SW_VERSION=2.2.1
+SW_VERSION=master
 FILE=swagger-codegen-cli-$SW_VERSION.jar
 
 if [[ ! -f $FILE ]]; then

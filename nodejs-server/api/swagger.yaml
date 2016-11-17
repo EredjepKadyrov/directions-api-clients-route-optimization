@@ -11,6 +11,8 @@ schemes:
 - "https"
 produces:
 - "application/json"
+security:
+- api_key: []
 paths:
   /optimize:
     post:
@@ -582,5 +584,3 @@ definitions:
         items:
           type: "string"
           description: "id of unassigned shipments"
-securityRequirement:
-- api_key: []

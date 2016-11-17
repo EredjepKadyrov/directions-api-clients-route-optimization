@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"earliest": @"earliest", @"latest": @"latest" }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"earliest": @"earliest", @"latest": @"latest" }];
 }
 
 /**

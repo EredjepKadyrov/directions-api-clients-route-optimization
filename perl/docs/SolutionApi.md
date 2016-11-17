@@ -22,6 +22,8 @@ This endpoint returns the solution of a large problems. You can fetch it with th
 ### Example 
 ```perl
 use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::SolutionApi;
 
 # Configure API key authorization: api_key
 $WWW::SwaggerClient::Configuration::api_key->{'key'} = 'YOUR_API_KEY';

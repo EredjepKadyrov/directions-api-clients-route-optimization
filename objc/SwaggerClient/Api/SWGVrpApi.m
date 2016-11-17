@@ -1,7 +1,7 @@
 #import "SWGVrpApi.h"
 #import "SWGQueryParamCollection.h"
-#import "SWGRequest.h"
 #import "SWGJobId.h"
+#import "SWGRequest.h"
 
 
 @interface SWGVrpApi ()
