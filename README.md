@@ -9,7 +9,7 @@ language  |  created?| tested?| alternative
 java      |  yes     | yes    | Use the [official client](https://github.com/graphhopper/directions-api-java-client)
 javascript|  no | -      | Use the [official client](https://github.com/graphhopper/directions-api-js-client) or nodejs-server
 python    |  yes     | no     |
-csharp    |  yes     | no     | [contributed client](https://github.com/Schuby80/WpfGraphHopper)
+csharp    |  yes     | no     |
 ruby      |  yes     | [yes](https://github.com/graphhopper/directions-api-clients-route-optimization/issues/3)   |
 sinatra (ruby)| yes  | no     |
 php       |  yes     | [yes](https://github.com/graphhopper/directions-api-clients-route-optimization/issues/4)     |
